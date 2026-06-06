@@ -27,11 +27,15 @@ CREATE TABLE IF NOT EXISTS recipes (
   image_url TEXT,
   category_id UUID REFERENCES categories(id),
   created_by UUID REFERENCES profiles(id),
+  country TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
 -- Alter table to make created_by nullable (for existing tables)
 ALTER TABLE recipes ALTER COLUMN created_by DROP NOT NULL;
+
+-- Add country column to recipes table (for existing tables)
+ALTER TABLE recipes ADD COLUMN IF NOT EXISTS country TEXT;
 
 -- Ingredients table
 CREATE TABLE IF NOT EXISTS ingredients (

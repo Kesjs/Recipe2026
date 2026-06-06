@@ -72,7 +72,7 @@ export default function AuthPage() {
                 <div className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center">
                   <ChefHat className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-2xl font-semibold tracking-tight">Cooking Recipe</span>
+                <span className="text-2xl font-semibold tracking-tight">Naya : Mangez mieux, vivez mieux.</span>
               </div>
               <h2 className="text-4xl font-semibold mb-4 tracking-tight">
                 Prenez le contrôle de votre nutrition avec les saines saveurs de chez nous.

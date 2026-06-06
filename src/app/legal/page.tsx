@@ -10,14 +10,14 @@ export default function LegalPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">1. Acceptation des conditions</h2>
             <p className="text-slate-600">
-              En accédant à Cooking Recipe, vous acceptez les présentes conditions d&apos;utilisation. Si vous n&apos;acceptez pas ces conditions, veuillez ne pas utiliser ce site.
+              En accédant à Naya : Mangez mieux, vivez mieux., vous acceptez les présentes conditions d&apos;utilisation. Si vous n&apos;acceptez pas ces conditions, veuillez ne pas utiliser ce site.
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">2. Utilisation du site</h2>
             <p className="text-slate-600">
-              Cooking Recipe est une plateforme de partage de recettes culinaires. Vous vous engagez à utiliser ce site de manière responsable et à ne pas publier de contenu illégal, offensant ou inapproprié.
+              Naya : Mangez mieux, vivez mieux. est une plateforme de partage de recettes culinaires. Vous vous engagez à utiliser ce site de manière responsable et à ne pas publier de contenu illégal, offensant ou inapproprié.
             </p>
           </section>
 
@@ -31,21 +31,21 @@ export default function LegalPage() {
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">4. Contenu utilisateur</h2>
             <p className="text-slate-600">
-              En publiant du contenu sur Cooking Recipe, vous garantissez que vous en êtes l&apos;auteur ou que vous disposez des droits nécessaires pour le partager. Vous nous accordez une licence mondiale, non exclusive et gratuite pour utiliser, afficher et distribuer votre contenu.
+              En publiant du contenu sur Naya : Mangez mieux, vivez mieux., vous garantissez que vous en êtes l&apos;auteur ou que vous disposez des droits nécessaires pour le partager. Vous nous accordez une licence mondiale, non exclusive et gratuite pour utiliser, afficher et distribuer votre contenu.
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">5. Propriété intellectuelle</h2>
             <p className="text-slate-600">
-              Tous les éléments de Cooking Recipe (design, texte, images, logos) sont protégés par les lois sur la propriété intellectuelle. Toute reproduction non autorisée est interdite.
+              Tous les éléments de Naya : Mangez mieux, vivez mieux. (design, texte, images, logos) sont protégés par les lois sur la propriété intellectuelle. Toute reproduction non autorisée est interdite.
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-semibold text-slate-900 mb-3">6. Limitation de responsabilité</h2>
             <p className="text-slate-600">
-              Cooking Recipe ne peut être tenu responsable des dommages directs ou indirects résultant de l&apos;utilisation de ce site ou de l&apos;impossibilité de l&apos;utiliser.
+              Naya : Mangez mieux, vivez mieux. ne peut être tenu responsable des dommages directs ou indirects résultant de l&apos;utilisation de ce site ou de l&apos;impossibilité de l&apos;utiliser.
             </p>
           </section>
 

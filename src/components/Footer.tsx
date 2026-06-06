@@ -11,7 +11,7 @@ export default function Footer() {
               <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
                 <ChefHat className="w-5 h-5 text-white" />
               </div>
-              <span className="font-semibold text-zinc-900 text-lg">Cooking Recipe</span>
+              <span className="font-semibold text-zinc-900 text-lg">Naya : Mangez mieux, vivez mieux.</span>
             </div>
             <p className="text-slate-500 text-sm">
               Découvrez, partagez et créez des recettes saines et nutritives qui célèbrent les richesses culinaires africaines.
@@ -64,7 +64,7 @@ export default function Footer() {
 
         <div className="border-t border-slate-200 mt-8 pt-8 text-center">
           <p className="text-slate-400 text-sm">
-            © 2024 Cooking Recipe. Tous droits réservés.
+            © 2024 Naya : Mangez mieux, vivez mieux. Tous droits réservés.
           </p>
         </div>
       </div>

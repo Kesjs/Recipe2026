@@ -6,7 +6,7 @@ import { QueryProvider } from "@/lib/query-client";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Cooking Recipe - Équilibre & Tradition",
+  title: "Naya : Mangez mieux, vivez mieux.",
   description: "Plateforme culinaire haut de gamme dédiée à l&apos;équilibre alimentaire et aux patrimoines culinaires africains",
 };
 
