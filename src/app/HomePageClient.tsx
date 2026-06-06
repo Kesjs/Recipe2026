@@ -5,6 +5,7 @@ import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import RecipeCard from "@/components/RecipeCard";
 import { RecipeCardSkeleton } from "@/components/Skeleton";
+import Footer from "@/components/Footer";
 import { Recipe } from "@/lib/types";
 
 const categoryContent: Record<string, { title: string; description: string; category: string }> = {
@@ -178,6 +179,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
           )}
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

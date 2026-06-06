@@ -18,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={inter.className}>
+        <div className="h-20" />
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
