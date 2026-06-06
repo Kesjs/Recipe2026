@@ -1,3 +1,11 @@
+-- Insert categories
+INSERT INTO categories (id, name, title, description) VALUES
+('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'Tout', 'Toutes les Recettes', 'Explorez notre collection complète de recettes saines et nutritives du monde entier.'),
+('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'Afrique', 'Patrimoine Culinaires Africains', 'Découvrez les saveurs authentiques et diététiques du continent : Amiwo, Tilapia au four, Aloco et bien d''autres.'),
+('cccccccc-cccc-cccc-cccc-cccccccccccc', 'Rapide', 'Recettes Rapides', 'Des plats prêts en moins de 30 minutes pour les journées chargées.'),
+('dddddddd-dddd-dddd-dddd-dddddddddddd', 'International', 'Cuisine du Monde', 'Voyagez à travers les saveurs internationales avec nos recettes du monde entier.')
+ON CONFLICT (name) DO NOTHING;
+
 -- Insert sample ingredients
 INSERT INTO ingredients (name, calories_per_100g, proteins, carbs, lipids) VALUES
 ('Riz', 130, 2.7, 28.0, 0.3),
@@ -23,15 +31,10 @@ INSERT INTO ingredients (name, calories_per_100g, proteins, carbs, lipids) VALUE
 ON CONFLICT (name) DO NOTHING;
 
 -- Insert sample recipes (African dishes)
--- First, we need a profile for the recipes
-INSERT INTO profiles (id, name, email) VALUES
-('00000000-0000-0000-0000-000000000001', 'Chef Africa', 'chef@example.com')
-ON CONFLICT DO NOTHING;
-
 -- Amiwo au Poulet
-INSERT INTO recipes (id, title, instructions, prep_time, image_url, created_by) VALUES
+INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by) VALUES
 ('11111111-1111-1111-1111-111111111111', 
- 'Amiwo au Poulet', 
+ 'Amiwo au Poulet',
  '1. Faire cuire le riz avec de l''eau salée pendant 20 minutes.
 2. Couper le poulet en morceaux et le faire mariner avec l''ail, le gingembre et le piment.
 3. Dans une marmite, faire chauffer l''huile de palme et y faire revenir les oignons.
@@ -39,14 +42,15 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, created_by) 
 5. Ajouter les tomates concassées et laisser mijoter 10 minutes.
 6. Incorporer le riz cuit et mélanger délicatement.
 7. Ajouter de l''eau si nécessaire et laisser cuire 5 minutes supplémentaires.
-8. Servir chaud.', 
- 45, 
+8. Servir chaud.',
+ 45,
  'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&q=80',
- '00000000-0000-0000-0000-000000000001')
+ 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+ NULL)
 ON CONFLICT DO NOTHING;
 
 -- Thiéboudienne
-INSERT INTO recipes (id, title, instructions, prep_time, image_url, created_by) VALUES
+INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by) VALUES
 ('22222222-2222-2222-2222-222222222222', 
  'Thiéboudienne', 
  '1. Laver et couper le poisson en morceaux.
@@ -61,11 +65,12 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, created_by) 
 10. Servir avec le poisson et les légumes.', 
  60, 
  'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80',
- '00000000-0000-0000-0000-000000000001')
+ 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+ NULL)
 ON CONFLICT DO NOTHING;
 
 -- Aloco
-INSERT INTO recipes (id, title, instructions, prep_time, image_url, created_by) VALUES
+INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by) VALUES
 ('33333333-3333-3333-3333-333333333333', 
  'Aloco (Bananes Plantains Frites)', 
  '1. Éplucher les bananes plantains bien mûres.
@@ -78,11 +83,12 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, created_by) 
 8. Accompagner de piment si désiré.', 
  25, 
  'https://images.unsplash.com/photo-1600335895229-6e75511892c8?w=800&q=80',
- '00000000-0000-0000-0000-000000000001')
+ 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+ NULL)
 ON CONFLICT DO NOTHING;
 
 -- Tilapia au Four
-INSERT INTO recipes (id, title, instructions, prep_time, image_url, created_by) VALUES
+INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by) VALUES
 ('44444444-4444-4444-4444-444444444444', 
  'Tilapia au Four', 
  '1. Préchauffer le four à 200°C.
@@ -96,11 +102,12 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, created_by) 
 9. Servir avec du riz ou des légumes.', 
  35, 
  'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80',
- '00000000-0000-0000-0000-000000000001')
+ 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+ NULL)
 ON CONFLICT DO NOTHING;
 
 -- Garba
-INSERT INTO recipes (id, title, instructions, prep_time, image_url, created_by) VALUES
+INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by) VALUES
 ('55555555-5555-5555-5555-555555555555', 
  'Garba (Attieké au Poisson)', 
  '1. Rincer l''attieké à l''eau tiède et l''égrainer.
@@ -113,7 +120,8 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, created_by) 
 8. Accompagner de piment si désiré.', 
  30, 
  'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80',
- '00000000-0000-0000-0000-000000000001')
+ 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+ NULL)
 ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Amiwo

@@ -8,31 +8,28 @@ import { RecipeCardSkeleton } from "@/components/Skeleton";
 import Footer from "@/components/Footer";
 import { Recipe } from "@/lib/types";
 
-const categoryContent: Record<string, { title: string; description: string; category: string }> = {
-  "Tout": {
-    title: "Toutes les Recettes",
-    description: "Explorez notre collection complète de recettes saines et nutritives du monde entier.",
-    category: "Recette"
-  },
-  "Afrique": {
-    title: "Patrimoine Culinaires Africains",
-    description: "Découvrez les saveurs authentiques et diététiques du continent : Amiwo, Tilapia au four, Aloco et bien d&apos;autres.",
-    category: "Afrique"
-  },
-  "Recettes Rapides": {
-    title: "Recettes Rapides",
-    description: "Des plats prêts en moins de 30 minutes pour les journées chargées.",
-    category: "Rapide"
-  },
-  "Cuisine du Monde": {
-    title: "Cuisine du Monde",
-    description: "Voyagez à travers les saveurs internationales avec nos recettes du monde entier.",
-    category: "International"
-  }
-};
+interface Category {
+  id: string;
+  name: string;
+  title: string;
+  description: string;
+}
 
 interface HomePageClientProps {
   initialRecipes: Recipe[];
+}
+
+async function fetchCategories(): Promise<Category[]> {
+  const { supabase } = await import("@/lib/supabase");
+  if (!supabase) return [];
+
+  const { data, error } = await supabase
+    .from("categories")
+    .select("*")
+    .order("name");
+
+  if (error) throw error;
+  return data || [];
 }
 
 async function fetchRecipes({ pageParam }: { pageParam: number }) {
@@ -70,7 +67,12 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("Tout");
 
-  const tabs = ["Tout", "Afrique", "Recettes Rapides", "Cuisine du Monde"];
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
+
+  const tabs = categories?.map(c => c.name) || ["Tout"];
 
   const {
     data,
@@ -102,18 +104,13 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
     );
   }
 
-  if (activeTab === "Afrique") {
-    const africanRecipes = ["Amiwo", "Thiéboudienne", "Aloco", "Tilapia", "Garba", "Attieké"];
-    filteredRecipes = filteredRecipes.filter((recipe) =>
-      africanRecipes.some((keyword) =>
-        recipe.title.toLowerCase().includes(keyword.toLowerCase())
-      )
-    );
-  } else if (activeTab === "Recettes Rapides") {
-    filteredRecipes = filteredRecipes.filter((recipe) => recipe.prep_time <= 30);
-  }
+  const activeCategory = categories?.find(c => c.name === activeTab);
 
-  const currentContent = categoryContent[activeTab];
+  if (activeCategory && activeCategory.name !== "Tout") {
+    filteredRecipes = filteredRecipes.filter((recipe) =>
+      recipe.category_id === activeCategory.id
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
@@ -140,8 +137,8 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
 
         <div className="mb-8">
           <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-8 transition-all duration-300">
-            <h2 className="text-xl font-semibold text-slate-900 mb-2">{currentContent.title}</h2>
-            <p className="text-slate-600">{currentContent.description}</p>
+            <h2 className="text-xl font-semibold text-slate-900 mb-2">{activeCategory?.title || "Toutes les Recettes"}</h2>
+            <p className="text-slate-600">{activeCategory?.description || "Explorez notre collection complète de recettes saines et nutritives du monde entier."}</p>
           </div>
         </div>
 
@@ -160,7 +157,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {filteredRecipes.map((recipe, index) => (
-                  <RecipeCard key={recipe.id} recipe={recipe} category={currentContent.category} priority={index < 4} />
+                  <RecipeCard key={recipe.id} recipe={recipe} category={activeCategory?.name || "Recette"} priority={index < 4} />
                 ))}
               </div>
 

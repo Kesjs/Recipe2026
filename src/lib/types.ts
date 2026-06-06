@@ -27,6 +27,7 @@ export interface Recipe {
   instructions: string;
   prep_time: number;
   image_url: string;
+  category_id?: string;
   created_by: string;
   created_at?: string;
   recipe_ingredients?: RecipeIngredient[];
