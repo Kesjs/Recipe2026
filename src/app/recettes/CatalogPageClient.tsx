@@ -23,6 +23,8 @@ interface CatalogPageClientProps {
 
 async function fetchRecipes() {
   const { supabase } = await import("@/lib/supabase");
+  if (!supabase) return [];
+  
   const { data, error } = await supabase
     .from("recipes")
     .select(`
@@ -90,21 +92,21 @@ export default function CatalogPageClient({ initialRecipes }: CatalogPageClientP
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50">
+    <div className="min-h-screen bg-slate-50">
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-zinc-900 mb-6">Catalogue des Recettes</h1>
+          <h1 className="text-3xl font-bold text-slate-900 mb-6">Catalogue des Recettes</h1>
           
           <div className="relative mb-6">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
             <input
               type="text"
               placeholder="Rechercher une recette..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-white border border-zinc-200/80 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900 placeholder-zinc-400"
+              className="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900 placeholder-slate-400"
             />
           </div>
 
@@ -113,10 +115,10 @@ export default function CatalogPageClient({ initialRecipes }: CatalogPageClientP
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
+                className={`px-4 py-2 rounded-xl font-medium whitespace-nowrap transition-colors ${
                   activeTab === tab
                     ? "bg-emerald-600 text-white"
-                    : "bg-white text-zinc-600 hover:bg-zinc-100 border border-zinc-200/80"
+                    : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
                 }`}
               >
                 {tab}
@@ -126,17 +128,17 @@ export default function CatalogPageClient({ initialRecipes }: CatalogPageClientP
         </div>
 
         {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...Array(6)].map((_, i) => (
               <CardSkeleton key={i} />
             ))}
           </div>
         ) : filteredRecipes.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-zinc-500 text-lg">Aucune recette trouvée</p>
+            <p className="text-slate-500 text-lg">Aucune recette trouvée</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredRecipes.map((recipe, index) => (
               <RecipeCard key={recipe.id} recipe={recipe} priority={index < 6} />
             ))}

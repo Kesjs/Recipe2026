@@ -47,6 +47,11 @@ export default function CreateRecipePage() {
     async function checkAuth() {
       try {
         const { supabase } = await import("@/lib/supabase");
+        if (!supabase) {
+          router.push("/auth");
+          return;
+        }
+        
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) {
           router.push("/auth");
@@ -112,6 +117,9 @@ export default function CreateRecipePage() {
       }
 
       const { supabase } = await import("@/lib/supabase");
+      if (!supabase) {
+        throw new Error("Supabase is not configured");
+      }
 
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
@@ -197,18 +205,18 @@ export default function CreateRecipePage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50">
+    <div className="min-h-screen bg-slate-50">
       <Navbar />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Link href="/" className="inline-flex items-center text-zinc-600 hover:text-zinc-950 mb-6">
+        <Link href="/" className="inline-flex items-center text-slate-600 hover:text-slate-900 mb-6">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Retour
         </Link>
 
-        <div className="bg-white rounded-2xl border border-zinc-200/80 shadow-sm p-8">
-          <h1 className="text-2xl font-semibold text-zinc-900 mb-2 tracking-tight">Créer une nouvelle recette</h1>
-          <p className="text-zinc-500 mb-8">Partagez votre création avec la communauté</p>
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
+          <h1 className="text-2xl font-semibold text-slate-900 mb-2 tracking-tight">Créer une nouvelle recette</h1>
+          <p className="text-slate-500 mb-8">Partagez votre création avec la communauté</p>
 
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
@@ -224,21 +232,21 @@ export default function CreateRecipePage() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
+              <label className="block text-sm font-medium text-slate-700 mb-2">
                 Titre de la recette *
               </label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900 placeholder-zinc-400"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900 placeholder-slate-400"
                 placeholder="Ex: Amiwo au Poulet"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
+              <label className="block text-sm font-medium text-slate-700 mb-2">
                 Description *
               </label>
               <textarea
@@ -253,13 +261,13 @@ export default function CreateRecipePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Catégorie
                 </label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900"
                 >
                   <option value="">Sélectionner</option>
                   <option value="africa">Afrique</option>
@@ -269,14 +277,14 @@ export default function CreateRecipePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Temps (min) *
                 </label>
                 <input
                   type="number"
                   value={prepTime}
                   onChange={(e) => setPrepTime(e.target.value)}
-                  className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900 placeholder-zinc-400"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900 placeholder-slate-400"
                   placeholder="30"
                   required
                   min="1"
@@ -284,13 +292,13 @@ export default function CreateRecipePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                   Difficulté *
                 </label>
                 <select
                   value={difficulty}
                   onChange={(e) => setDifficulty(e.target.value)}
-                  className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900"
                   required
                 >
                   <option value="">Sélectionner</option>
@@ -302,20 +310,20 @@ export default function CreateRecipePage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
-                URL de l'image (optionnel)
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                URL de l&apos;image (optionnel)
               </label>
               <input
                 type="url"
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
-                className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900 placeholder-zinc-400"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900 placeholder-slate-400"
                 placeholder="https://example.com/image.jpg"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
+              <label className="block text-sm font-medium text-slate-700 mb-2">
                 Ingrédients *
               </label>
               <div className="space-y-3">
@@ -324,7 +332,7 @@ export default function CreateRecipePage() {
                     <select
                       value={ing.name}
                       onChange={(e) => updateIngredient(ing.id, "name", e.target.value)}
-                      className="flex-1 px-4 py-3 bg-zinc-50 border border-zinc-200/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900"
+                      className="flex-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900"
                     >
                       <option value="">Sélectionner un aliment</option>
                       {localFoodDictionary.map((food) => (
@@ -335,17 +343,17 @@ export default function CreateRecipePage() {
                       type="number"
                       value={ing.amount}
                       onChange={(e) => updateIngredient(ing.id, "amount", e.target.value)}
-                      className="w-24 px-4 py-3 bg-zinc-50 border border-zinc-200/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900 placeholder-zinc-400"
+                      className="w-24 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900 placeholder-slate-400"
                       placeholder="100"
                       min="0"
                       step="0.1"
                     />
-                    <span className="text-zinc-500 text-sm">g</span>
+                    <span className="text-slate-500 text-sm">g</span>
                     {ingredients.length > 1 && (
                       <button
                         type="button"
                         onClick={() => removeIngredient(ing.id)}
-                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                        className="p-2 text-slate-600 hover:bg-slate-50 rounded-xl transition-colors"
                       >
                         <Trash2 className="w-5 h-5" />
                       </button>
@@ -363,8 +371,8 @@ export default function CreateRecipePage() {
               </div>
 
               {totalCalories > 0 && (
-                <div className="mt-4 p-4 bg-emerald-50 border border-emerald-100 rounded-lg">
-                  <p className="text-sm text-zinc-700">
+                <div className="mt-4 p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                  <p className="text-sm text-slate-700">
                     <span className="font-semibold">Total estimé:</span> {totalCalories} kcal
                   </p>
                 </div>
@@ -372,7 +380,7 @@ export default function CreateRecipePage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">
+              <label className="block text-sm font-medium text-slate-700 mb-2">
                 Instructions de préparation *
               </label>
               <textarea
@@ -388,7 +396,7 @@ export default function CreateRecipePage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 bg-emerald-600 text-white font-medium rounded-xl hover:bg-emerald-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? "Création en cours..." : "Publier la recette"}
             </button>

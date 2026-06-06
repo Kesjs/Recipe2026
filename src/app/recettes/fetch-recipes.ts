@@ -3,6 +3,8 @@ import { supabase } from "@/lib/supabase";
 export const revalidate = 300; // Revalidate every 5 minutes
 
 export async function fetchRecipes() {
+  if (!supabase) return [];
+  
   const { data, error } = await supabase
     .from("recipes")
     .select(`
@@ -27,6 +29,8 @@ export async function fetchRecipes() {
 }
 
 export async function fetchRecipeById(id: string) {
+  if (!supabase) return null;
+  
   const { data, error } = await supabase
     .from("recipes")
     .select(`

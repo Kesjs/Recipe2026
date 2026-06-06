@@ -14,12 +14,12 @@ function MacroGauge({ label, value, target, color }: MacroGaugeProps) {
   const percentage = Math.min((value / target) * 100, 100);
   
   return (
-    <div className="bg-white rounded-xl border border-zinc-200/80 shadow-sm p-6">
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-sm font-medium text-zinc-700">{label}</span>
-        <span className="text-sm font-semibold text-zinc-900">{value}g / {target}g</span>
+        <span className="text-sm font-medium text-slate-700">{label}</span>
+        <span className="text-sm font-semibold text-slate-900">{value}g / {target}g</span>
       </div>
-      <div className="w-full bg-zinc-100 rounded-full h-2">
+      <div className="w-full bg-slate-100 rounded-full h-2">
         <div
           className={`h-2 rounded-full transition-all duration-500 ${color}`}
           style={{ width: `${percentage}%` }}
@@ -95,40 +95,40 @@ export default function NutritionPage() {
   );
 
   return (
-    <div className="min-h-screen bg-zinc-50">
+    <div className="min-h-screen bg-slate-50">
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-12">
-          <h1 className="text-3xl font-semibold text-zinc-900 mb-2 tracking-tight">Calculateur Nutritionnel</h1>
-          <p className="text-zinc-600">Calculez vos besoins caloriques quotidiens avec la formule Mifflin-St Jeor</p>
+          <h1 className="text-3xl font-semibold text-slate-900 mb-2 tracking-tight">Calculateur Nutritionnel</h1>
+          <p className="text-slate-600">Calculez vos besoins caloriques quotidiens avec la formule Mifflin-St Jeor</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-          <div className="bg-white rounded-xl border border-zinc-200/80 shadow-sm p-8">
-            <h2 className="text-xl font-semibold text-zinc-900 mb-6 tracking-tight">Vos Paramètres</h2>
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
+            <h2 className="text-xl font-semibold text-slate-900 mb-6 tracking-tight">Vos Paramètres</h2>
             
             <div className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">Âge</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Âge</label>
                 <input
                   type="number"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
-                  className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900 placeholder-zinc-400"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900 placeholder-slate-400"
                   placeholder="25"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">Sexe</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Sexe</label>
                 <div className="flex space-x-4">
                   <button
                     onClick={() => setGender("male")}
                     className={`flex-1 px-4 py-3 rounded-lg font-medium transition-colors ${
                       gender === "male"
                         ? "bg-emerald-600 text-white"
-                        : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
+                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                     }`}
                   >
                     Homme
@@ -138,7 +138,7 @@ export default function NutritionPage() {
                     className={`flex-1 px-4 py-3 rounded-lg font-medium transition-colors ${
                       gender === "female"
                         ? "bg-emerald-600 text-white"
-                        : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
+                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                     }`}
                   >
                     Femme
@@ -148,35 +148,35 @@ export default function NutritionPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-zinc-700 mb-2">Poids (kg)</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Poids (kg)</label>
                   <input
                     type="number"
                     value={weight}
                     onChange={(e) => setWeight(e.target.value)}
-                    className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900 placeholder-zinc-400"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900 placeholder-slate-400"
                     placeholder="70"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-zinc-700 mb-2">Taille (cm)</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Taille (cm)</label>
                   <input
                     type="number"
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
-                    className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900 placeholder-zinc-400"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900 placeholder-slate-400"
                     placeholder="175"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">Niveau d'activité</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Niveau d&apos;activité</label>
                 <select
                   value={activityLevel}
                   onChange={(e) => setActivityLevel(e.target.value)}
-                  className="w-full px-4 py-3 bg-zinc-50 border border-zinc-200/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900"
                 >
-                  <option value="sedentary">Sédentaire (peu ou pas d'exercice)</option>
+                  <option value="sedentary">Sédentaire (peu ou pas d&apos;exercice)</option>
                   <option value="light">Légèrement actif (1-3 jours/semaine)</option>
                   <option value="moderate">Modérément actif (3-5 jours/semaine)</option>
                   <option value="active">Très actif (6-7 jours/semaine)</option>
@@ -185,14 +185,14 @@ export default function NutritionPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">Objectif</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">Objectif</label>
                 <div className="flex space-x-4">
                   <button
                     onClick={() => setGoal("lose")}
                     className={`flex-1 px-4 py-3 rounded-lg font-medium transition-colors ${
                       goal === "lose"
                         ? "bg-emerald-600 text-white"
-                        : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
+                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                     }`}
                   >
                     Perdre
@@ -202,7 +202,7 @@ export default function NutritionPage() {
                     className={`flex-1 px-4 py-3 rounded-lg font-medium transition-colors ${
                       goal === "maintain"
                         ? "bg-emerald-600 text-white"
-                        : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
+                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                     }`}
                   >
                     Maintenir
@@ -212,7 +212,7 @@ export default function NutritionPage() {
                     className={`flex-1 px-4 py-3 rounded-lg font-medium transition-colors ${
                       goal === "gain"
                         ? "bg-emerald-600 text-white"
-                        : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200"
+                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                     }`}
                   >
                     Prendre
@@ -222,7 +222,7 @@ export default function NutritionPage() {
 
               <button
                 onClick={calculateCalories}
-                className="w-full py-3 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 transition-colors"
+                className="w-full py-3 bg-emerald-600 text-white font-medium rounded-xl hover:bg-emerald-700 transition-colors"
               >
                 Calculer
               </button>
@@ -232,10 +232,10 @@ export default function NutritionPage() {
           <div className="space-y-6">
             {calculated && (
               <>
-                <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-8 text-center">
-                  <h3 className="text-lg font-semibold text-zinc-900 mb-2">Vos Besoins Quotidiens</h3>
+                <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-8 text-center">
+                  <h3 className="text-lg font-semibold text-slate-900 mb-2">Vos Besoins Quotidiens</h3>
                   <p className="text-5xl font-bold text-emerald-600 mb-2">{dailyCalories}</p>
-                  <p className="text-zinc-600">calories par jour</p>
+                  <p className="text-slate-600">calories par jour</p>
                 </div>
 
                 <MacroGauge label="Protéines" value={macros.proteins} target={macros.proteins} color="bg-emerald-600" />
@@ -245,15 +245,15 @@ export default function NutritionPage() {
             )}
 
             {!calculated && (
-              <div className="bg-white rounded-xl border border-zinc-200/80 shadow-sm p-8 flex items-center justify-center h-full">
-                <p className="text-zinc-500 text-center">Remplissez vos paramètres et cliquez sur "Calculer" pour voir vos besoins nutritionnels.</p>
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 flex items-center justify-center h-full">
+                <p className="text-slate-500 text-center">Remplissez vos paramètres et cliquez sur &quot;Calculer&quot; pour voir vos besoins nutritionnels.</p>
               </div>
             )}
           </div>
         </div>
 
         <div className="mb-12">
-          <h2 className="text-2xl font-semibold text-zinc-900 mb-6 tracking-tight">Dictionnaire des Aliments Locaux</h2>
+          <h2 className="text-2xl font-semibold text-slate-900 mb-6 tracking-tight">Dictionnaire des Aliments Locaux</h2>
           
           <div className="mb-6">
             <input
@@ -261,29 +261,29 @@ export default function NutritionPage() {
               placeholder="Rechercher un aliment..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full max-w-md px-4 py-3 bg-white border border-zinc-200/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-zinc-900 placeholder-zinc-400"
+              className="w-full max-w-md px-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900 placeholder-slate-400"
             />
           </div>
 
-          <div className="bg-white rounded-xl border border-zinc-200/80 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
             <table className="w-full">
-              <thead className="bg-zinc-50 border-b border-zinc-200/80">
+              <thead className="bg-slate-50 border-b border-slate-200">
                 <tr>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-zinc-900">Aliment</th>
-                  <th className="px-6 py-4 text-right text-sm font-semibold text-zinc-900">Calories</th>
-                  <th className="px-6 py-4 text-right text-sm font-semibold text-zinc-900">Protéines</th>
-                  <th className="px-6 py-4 text-right text-sm font-semibold text-zinc-900">Glucides</th>
-                  <th className="px-6 py-4 text-right text-sm font-semibold text-zinc-900">Lipides</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">Aliment</th>
+                  <th className="px-6 py-4 text-right text-sm font-semibold text-slate-900">Calories</th>
+                  <th className="px-6 py-4 text-right text-sm font-semibold text-slate-900">Protéines</th>
+                  <th className="px-6 py-4 text-right text-sm font-semibold text-slate-900">Glucides</th>
+                  <th className="px-6 py-4 text-right text-sm font-semibold text-slate-900">Lipides</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-100">
+              <tbody className="divide-y divide-slate-100">
                 {filteredDictionary.map((food, index) => (
-                  <tr key={index} className="hover:bg-zinc-50 transition-colors">
-                    <td className="px-6 py-4 text-sm font-medium text-zinc-900">{food.name}</td>
-                    <td className="px-6 py-4 text-sm text-zinc-600 text-right">{food.calories} kcal</td>
-                    <td className="px-6 py-4 text-sm text-zinc-600 text-right">{food.proteins}g</td>
-                    <td className="px-6 py-4 text-sm text-zinc-600 text-right">{food.carbs}g</td>
-                    <td className="px-6 py-4 text-sm text-zinc-600 text-right">{food.lipids}g</td>
+                  <tr key={index} className="hover:bg-slate-50 transition-colors">
+                    <td className="px-6 py-4 text-sm font-medium text-slate-900">{food.name}</td>
+                    <td className="px-6 py-4 text-sm text-slate-600 text-right">{food.calories} kcal</td>
+                    <td className="px-6 py-4 text-sm text-slate-600 text-right">{food.proteins}g</td>
+                    <td className="px-6 py-4 text-sm text-slate-600 text-right">{food.carbs}g</td>
+                    <td className="px-6 py-4 text-sm text-slate-600 text-right">{food.lipids}g</td>
                   </tr>
                 ))}
               </tbody>

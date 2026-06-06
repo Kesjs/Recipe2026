@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Cooking Recipe - Équilibre & Tradition",
-  description: "Plateforme culinaire haut de gamme dédiée à l'équilibre alimentaire et aux patrimoines culinaires africains",
+  description: "Plateforme culinaire haut de gamme dédiée à l&apos;équilibre alimentaire et aux patrimoines culinaires africains",
 };
 
 export default function RootLayout({
