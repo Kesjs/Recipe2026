@@ -32,14 +32,14 @@ async function fetchCategories(): Promise<Category[]> {
   return data || [];
 }
 
-async function fetchRecipes({ pageParam }: { pageParam: number }) {
+async function fetchRecipes({ pageParam, categoryId }: { pageParam: number; categoryId?: string }) {
   const { supabase } = await import("@/lib/supabase");
   if (!supabase) return [];
   
   const PAGE_SIZE = 12;
   const offset = (pageParam - 1) * PAGE_SIZE;
   
-  const { data, error } = await supabase
+  let query = supabase
     .from("recipes")
     .select(`
       *,
@@ -55,7 +55,13 @@ async function fetchRecipes({ pageParam }: { pageParam: number }) {
           lipids
         )
       )
-    `)
+    `);
+
+  if (categoryId) {
+    query = query.eq("category_id", categoryId);
+  }
+
+  const { data, error } = await query
     .order("created_at", { ascending: false })
     .range(offset, offset + PAGE_SIZE - 1);
 
@@ -74,6 +80,8 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
 
   const tabs = categories?.map(c => c.name) || ["Tout"];
 
+  const activeCategory = categories?.find(c => c.name === activeTab);
+
   const {
     data,
     isLoading,
@@ -81,8 +89,8 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
     hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: ["recipes", "home"],
-    queryFn: fetchRecipes,
+    queryKey: ["recipes", "home", activeCategory?.id],
+    queryFn: ({ pageParam }) => fetchRecipes({ pageParam, categoryId: activeCategory?.id }),
     initialPageParam: 1,
     initialData: {
       pages: [initialRecipes],
@@ -104,14 +112,6 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
     );
   }
 
-  const activeCategory = categories?.find(c => c.name === activeTab);
-
-  if (activeCategory && activeCategory.name !== "Tout") {
-    filteredRecipes = filteredRecipes.filter((recipe) =>
-      recipe.category_id === activeCategory.id
-    );
-  }
-
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
       <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
@@ -123,7 +123,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`px-6 py-2 rounded-lg font-medium transition-colors min-w-[100px] ${
                   activeTab === tab
                     ? "bg-emerald-600 text-white"
                     : "text-slate-600 hover:text-slate-900"
