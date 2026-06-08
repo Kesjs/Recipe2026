@@ -2,6 +2,15 @@ export interface Profile {
   id: string;
   name: string;
   email: string;
+  created_at?: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  title: string;
+  description?: string;
+  created_at?: string;
 }
 
 export interface Ingredient {
@@ -26,11 +35,23 @@ export interface Recipe {
   title: string;
   instructions: string;
   prep_time: number;
-  image_url: string;
+  image_url?: string;
   category_id?: string;
-  created_by: string;
+  created_by?: string;
+  country?: string;
+  description?: string;
+  difficulty?: string;
   created_at?: string;
   recipe_ingredients?: RecipeIngredient[];
+  categories?: Category;
+}
+
+export interface Favorite {
+  id: string;
+  user_id: string;
+  recipe_id: string;
+  created_at?: string;
+  recipes?: Recipe;
 }
 
 export interface NutritionInfo {

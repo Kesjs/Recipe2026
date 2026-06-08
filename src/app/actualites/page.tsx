@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { Wheat, Fish, Leaf, Droplets, Utensils, Carrot, Flame, Sparkles, Search } from "lucide-react";
 
@@ -172,12 +173,15 @@ export default function ActualitesPage() {
                   <p className="text-slate-700 leading-relaxed mb-6">
                     {getExcerpt(article.content, isHero ? 300 : 150)}
                   </p>
-                  <button className="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
+                  <Link
+                    href={`/actualites/${article.id}`}
+                    className="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition-colors"
+                  >
                     Lire la suite
                     <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </button>
+                  </Link>
                 </div>
               </article>
             );

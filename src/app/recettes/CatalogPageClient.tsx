@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import RecipeCard from "@/components/RecipeCard";
@@ -14,7 +14,15 @@ interface Recipe {
   prep_time: number;
   image_url: string;
   created_by: string;
+  category_id?: string;
   recipe_ingredients?: any[];
+}
+
+interface Category {
+  id: string;
+  name: string;
+  title: string;
+  description?: string;
 }
 
 interface CatalogPageClientProps {
@@ -24,7 +32,7 @@ interface CatalogPageClientProps {
 async function fetchRecipes() {
   const { supabase } = await import("@/lib/supabase");
   if (!supabase) return [];
-  
+
   const { data, error } = await supabase
     .from("recipes")
     .select(`
@@ -51,13 +59,38 @@ async function fetchRecipes() {
 export default function CatalogPageClient({ initialRecipes }: CatalogPageClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("Tout");
+  const [categories, setCategories] = useState<Category[]>([]);
 
-  const tabs = ["Tout", "Cuisine du Monde", "Recettes Rapides", "Petit-Déjeuner", "Afrique"];
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const { supabase } = await import("@/lib/supabase");
+        if (!supabase) return;
+
+        const { data } = await supabase
+          .from("categories")
+          .select("*")
+          .order("name");
+
+        if (data) {
+          setCategories([{ id: "all", name: "all", title: "Tout" }, ...data]);
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    }
+
+    fetchCategories();
+  }, []);
+
+  const tabs = categories.map(cat => cat.title);
 
   const { data: recipes = initialRecipes, isLoading } = useQuery({
     queryKey: ["recipes"],
     queryFn: fetchRecipes,
     initialData: initialRecipes,
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
   });
 
   let filteredRecipes = recipes;
@@ -68,27 +101,13 @@ export default function CatalogPageClient({ initialRecipes }: CatalogPageClientP
     );
   }
 
-  if (activeTab === "Afrique") {
-    const africanRecipes = [
-      "Amiwo",
-      "Thiéboudienne",
-      "Aloco",
-      "Tilapia",
-      "Garba",
-      "Attieké",
-    ];
-    filteredRecipes = filteredRecipes.filter((recipe) =>
-      africanRecipes.some((keyword) =>
-        recipe.title.toLowerCase().includes(keyword.toLowerCase())
-      )
-    );
-  } else if (activeTab === "Recettes Rapides") {
-    filteredRecipes = filteredRecipes.filter((recipe) => recipe.prep_time <= 30);
-  } else if (activeTab === "Petit-Déjeuner") {
-    filteredRecipes = filteredRecipes.filter((recipe) =>
-      recipe.title.toLowerCase().includes("petit") ||
-      recipe.title.toLowerCase().includes("breakfast")
-    );
+  if (activeTab !== "Tout") {
+    const category = categories.find(cat => cat.title === activeTab);
+    if (category && category.id !== "all") {
+      filteredRecipes = filteredRecipes.filter((recipe) =>
+        recipe.category_id === category.id
+      );
+    }
   }
 
   return (

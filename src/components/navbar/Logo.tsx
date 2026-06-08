@@ -1,6 +1,6 @@
 "use client";
 
-import { ChefHat } from "lucide-react";
+import { Leaf } from "lucide-react";
 
 interface LogoProps {
   onLogoClick: () => void;
@@ -8,11 +8,11 @@ interface LogoProps {
 
 export default function Logo({ onLogoClick }: LogoProps) {
   return (
-    <button onClick={onLogoClick} className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-      <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
-        <ChefHat className="w-5 h-5 text-white" />
+    <button onClick={onLogoClick} className="flex items-center space-x-2 group cursor-pointer hover:opacity-80 transition-all">
+      <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:rotate-6 transition-transform">
+        <Leaf className="w-6 h-6" />
       </div>
-      <span className="font-semibold text-zinc-900 text-lg">Naya : Mangez mieux, vivez mieux.</span>
+      <span className="font-bold text-2xl tracking-tighter text-emerald-900">Naya</span>
     </button>
   );
 }

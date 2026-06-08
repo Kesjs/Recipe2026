@@ -37,6 +37,10 @@ ALTER TABLE recipes ALTER COLUMN created_by DROP NOT NULL;
 -- Add country column to recipes table (for existing tables)
 ALTER TABLE recipes ADD COLUMN IF NOT EXISTS country TEXT;
 
+-- Add missing columns for recipe creation
+ALTER TABLE recipes ADD COLUMN IF NOT EXISTS description TEXT;
+ALTER TABLE recipes ADD COLUMN IF NOT EXISTS difficulty TEXT;
+
 -- Ingredients table
 CREATE TABLE IF NOT EXISTS ingredients (
   id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -55,11 +59,22 @@ CREATE TABLE IF NOT EXISTS recipe_ingredients (
   PRIMARY KEY (recipe_id, ingredient_id)
 );
 
+-- Favorites table
+CREATE TABLE IF NOT EXISTS favorites (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE NOT NULL,
+  recipe_id UUID REFERENCES recipes(id) ON DELETE CASCADE NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  UNIQUE (user_id, recipe_id)
+);
+
 -- Create indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_recipes_created_by ON recipes(created_by);
 CREATE INDEX IF NOT EXISTS idx_recipes_created_at ON recipes(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_recipe_ingredients_recipe_id ON recipe_ingredients(recipe_id);
 CREATE INDEX IF NOT EXISTS idx_recipe_ingredients_ingredient_id ON recipe_ingredients(ingredient_id);
+CREATE INDEX IF NOT EXISTS idx_favorites_user_id ON favorites(user_id);
+CREATE INDEX IF NOT EXISTS idx_favorites_recipe_id ON favorites(recipe_id);
 
 -- Row Level Security (RLS) policies
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
@@ -67,6 +82,7 @@ ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
 ALTER TABLE recipes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE ingredients ENABLE ROW LEVEL SECURITY;
 ALTER TABLE recipe_ingredients ENABLE ROW LEVEL SECURITY;
+ALTER TABLE favorites ENABLE ROW LEVEL SECURITY;
 
 -- Profiles policies
 DROP POLICY IF EXISTS "Users can view all profiles" ON profiles;
@@ -80,13 +96,18 @@ CREATE POLICY "Users can update their own profile" ON profiles FOR UPDATE USING 
 DROP POLICY IF EXISTS "Anyone can view categories" ON categories;
 CREATE POLICY "Anyone can view categories" ON categories FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Authenticated users can create categories" ON categories;
-CREATE POLICY "Authenticated users can create categories" ON categories FOR INSERT WITH CHECK (auth.uid() IS NOT NULL);
+CREATE POLICY "Admins can create categories" ON categories FOR INSERT WITH CHECK (
+  EXISTS (
+    SELECT 1 FROM profiles 
+    WHERE profiles.id = auth.uid() AND profiles.email LIKE '%@admin.com'
+  )
+);
 
 -- Recipes policies
 DROP POLICY IF EXISTS "Anyone can view recipes" ON recipes;
 CREATE POLICY "Anyone can view recipes" ON recipes FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Authenticated users can create recipes" ON recipes;
-CREATE POLICY "Authenticated users can create recipes" ON recipes FOR INSERT WITH CHECK (auth.uid() = created_by);
+CREATE POLICY "Authenticated users can create recipes" ON recipes FOR INSERT WITH CHECK (auth.uid() = created_by AND created_by IS NOT NULL);
 DROP POLICY IF EXISTS "Users can update their own recipes" ON recipes;
 CREATE POLICY "Users can update their own recipes" ON recipes FOR UPDATE USING (auth.uid() = created_by);
 DROP POLICY IF EXISTS "Users can delete their own recipes" ON recipes;
@@ -115,6 +136,14 @@ CREATE POLICY "Users can delete recipe ingredients for their recipes" ON recipe_
     SELECT 1 FROM recipes WHERE recipes.id = recipe_ingredients.recipe_id AND recipes.created_by = auth.uid()
   )
 );
+
+-- Favorites policies
+DROP POLICY IF EXISTS "Users can view their own favorites" ON favorites;
+CREATE POLICY "Users can view their own favorites" ON favorites FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can insert their own favorites" ON favorites;
+CREATE POLICY "Users can insert their own favorites" ON favorites FOR INSERT WITH CHECK (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Users can delete their own favorites" ON favorites;
+CREATE POLICY "Users can delete their own favorites" ON favorites FOR DELETE USING (auth.uid() = user_id);
 
 -- Function to handle new user signup
 CREATE OR REPLACE FUNCTION public.handle_new_user()

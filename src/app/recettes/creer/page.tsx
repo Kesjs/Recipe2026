@@ -5,25 +5,13 @@ import { useRouter } from "next/navigation";
 import { Plus, Trash2, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import { localFoodDictionary } from "@/lib/food-dictionary";
 
 interface IngredientRow {
   id: string;
   name: string;
   amount: string;
 }
-
-const localFoodDictionary = [
-  { name: "Manioc", calories_per_100g: 160, proteins: 1.4, carbs: 38, lipids: 0.3 },
-  { name: "Attiéké", calories_per_100g: 150, proteins: 2.0, carbs: 35, lipids: 0.5 },
-  { name: "Yam", calories_per_100g: 118, proteins: 1.5, carbs: 28, lipids: 0.2 },
-  { name: "Poisson Grillé", calories_per_100g: 140, proteins: 22, carbs: 0, lipids: 5 },
-  { name: "Poulet", calories_per_100g: 165, proteins: 31, carbs: 0, lipids: 3.6 },
-  { name: "Gombo", calories_per_100g: 33, proteins: 1.9, carbs: 7, lipids: 0.2 },
-  { name: "Moringa", calories_per_100g: 64, proteins: 9.4, carbs: 8.3, lipids: 1.4 },
-  { name: "Riz", calories_per_100g: 130, proteins: 2.7, carbs: 28, lipids: 0.3 },
-  { name: "Tomate", calories_per_100g: 18, proteins: 0.9, carbs: 3.9, lipids: 0.2 },
-  { name: "Oignon", calories_per_100g: 40, proteins: 1.1, carbs: 9.3, lipids: 0.1 },
-];
 
 export default function CreateRecipePage() {
   const router = useRouter();
@@ -126,6 +114,17 @@ export default function CreateRecipePage() {
         throw new Error("Vous devez être connecté pour créer une recette");
       }
 
+      // Récupérer ou créer l'ID de catégorie
+      let categoryId = null;
+      if (category) {
+        const categoryMap: Record<string, string> = {
+          'africa': 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
+          'world': 'dddddddd-dddd-dddd-dddd-dddddddddddd',
+          'quick': 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+        };
+        categoryId = categoryMap[category] || null;
+      }
+
       const { data: recipe, error: recipeError } = await supabase
         .from("recipes")
         .insert({
@@ -134,6 +133,10 @@ export default function CreateRecipePage() {
           prep_time: parseInt(prepTime),
           image_url: imageUrl || null,
           created_by: user.id,
+          category_id: categoryId,
+          description,
+          difficulty,
+          country: 'Bénin',
         })
         .select()
         .single();
@@ -219,8 +222,20 @@ export default function CreateRecipePage() {
           <p className="text-slate-500 mb-8">Partagez votre création avec la communauté</p>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
-              {error}
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <div className="flex items-start">
+                <span className="text-red-500 mr-2">⚠️</span>
+                <div>
+                  <p className="text-red-700 font-medium">Erreur</p>
+                  <p className="text-red-600 text-sm mt-1">
+                    {error.includes('duplicate')
+                      ? 'Cette recette existe déjà'
+                      : error.includes('auth')
+                      ? 'Erreur d\'authentification'
+                      : error}
+                  </p>
+                </div>
+              </div>
             </div>
           )}
 

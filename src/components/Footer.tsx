@@ -1,71 +1,70 @@
 import Link from "next/link";
-import { ChefHat, Mail } from "lucide-react";
+import { Leaf, Instagram, Twitter, Heart } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
-                <ChefHat className="w-5 h-5 text-white" />
+    <footer className="bg-zinc-950 text-zinc-400 py-24 px-6 border-t border-zinc-800/50">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+          <div className="md:col-span-5">
+            <div className="flex items-center space-x-2 mb-8 group cursor-pointer">
+              <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-lg transition-transform">
+                <Leaf className="w-6 h-6" />
               </div>
-              <span className="font-semibold text-zinc-900 text-lg">Naya : Mangez mieux, vivez mieux.</span>
+              <span className="font-bold text-3xl tracking-tighter text-white">Naya</span>
             </div>
-            <p className="text-slate-500 text-sm">
-              Découvrez, partagez et créez des recettes saines et nutritives qui célèbrent les richesses culinaires africaines.
+            <p className="text-zinc-500 text-lg leading-relaxed max-w-sm mb-10">
+              Mangez mieux, vivez mieux. Découvrez, partagez et créez des recettes saines qui célèbrent les richesses culinaires africaines.
             </p>
+            <div className="flex items-center space-x-5">
+              <a href="#" className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-white hover:bg-emerald-600 transition-colors">
+                <Instagram className="w-6 h-6" />
+              </a>
+              <a href="#" className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-white hover:bg-emerald-600 transition-colors">
+                <Twitter className="w-6 h-6" />
+              </a>
+              <a href="#" className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-white hover:bg-emerald-600 transition-colors">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.966 1.406-5.966s-.359-.72-.359-1.781c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345c-.097.405-.312 1.266-.355 1.439-.058.229-.19.278-.44.161-1.64-.763-2.666-3.16-2.666-5.087 0-4.14 3.007-7.941 8.671-7.941 4.552 0 8.089 3.243 8.089 7.582 0 4.522-2.851 8.164-6.807 8.164-1.33 0-2.581-.691-3.008-1.503 0 0-.658 2.503-.818 3.118-.296 1.134-1.096 2.557-1.63 3.424 1.127.348 2.321.536 3.559.536 6.62 0 11.987-5.367 11.987-11.987C24.004 5.367 18.637 0 12.017 0z"/></svg>
+              </a>
+            </div>
           </div>
 
-          <div>
-            <h3 className="font-semibold text-slate-900 mb-4">Navigation</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/recettes" className="text-slate-500 hover:text-slate-900 text-sm transition-colors">
-                  Recettes
-                </Link>
-              </li>
-              <li>
-                <Link href="/nutrition" className="text-slate-500 hover:text-slate-900 text-sm transition-colors">
-                  Nutrition
-                </Link>
-              </li>
-              <li>
-                <Link href="/actualites" className="text-slate-500 hover:text-slate-900 text-sm transition-colors">
-                  Actualités
-                </Link>
-              </li>
+          <div className="md:col-span-2">
+            <h4 className="text-white font-bold mb-8 uppercase tracking-widest text-xs">Navigation</h4>
+            <ul className="space-y-4 text-zinc-300 text-sm">
+              <li><Link href="/recettes" className="hover:text-emerald-400 transition-colors">Recettes</Link></li>
+              <li><Link href="/nutrition" className="hover:text-emerald-500 transition-colors">Nutrition</Link></li>
+              <li><Link href="/actualites" className="hover:text-emerald-500 transition-colors">Actualités</Link></li>
+              <li><Link href="/aide" className="hover:text-emerald-500 transition-colors">Aide</Link></li>
             </ul>
           </div>
 
-          <div>
-            <h3 className="font-semibold text-slate-900 mb-4">Aide</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/aide" className="text-slate-500 hover:text-slate-900 text-sm transition-colors">
-                  Centre d&apos;aide
-                </Link>
-              </li>
-              <li>
-                <Link href="/legal" className="text-slate-500 hover:text-slate-900 text-sm transition-colors">
-                  Conditions d&apos;utilisation
-                </Link>
-              </li>
-              <li>
-                <a href="mailto:support@cookingrecipe.com" className="flex items-center space-x-2 text-slate-500 hover:text-slate-900 text-sm transition-colors">
-                  <Mail className="w-4 h-4" />
-                  <span>support@cookingrecipe.com</span>
-                </a>
-              </li>
+          <div className="md:col-span-2">
+            <h4 className="text-white font-bold mb-8 uppercase tracking-widest text-xs">Entreprise</h4>
+            <ul className="space-y-4 text-zinc-300 text-sm">
+              <li><Link href="/aide" className="hover:text-emerald-400 transition-colors">À propos</Link></li>
+              <li><Link href="/legal" className="hover:text-emerald-500 transition-colors">Confidentialité</Link></li>
+              <li><Link href="/legal" className="hover:text-emerald-500 transition-colors">CGU</Link></li>
+              <li><Link href="/aide" className="hover:text-emerald-500 transition-colors">Contact</Link></li>
+            </ul>
+          </div>
+
+          <div className="md:col-span-3">
+            <h4 className="text-white font-bold mb-8 uppercase tracking-widest text-xs">Contact</h4>
+            <ul className="space-y-4 text-zinc-300 text-sm">
+              <li><a href="mailto:support@cookingrecipe.com" className="hover:text-emerald-400 transition-colors">support@cookingrecipe.com</a></li>
+              <li className="text-zinc-500">Mangez mieux, vivez mieux.</li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-slate-200 mt-8 pt-8 text-center">
-          <p className="text-slate-400 text-sm">
-            © 2024 Naya : Mangez mieux, vivez mieux. Tous droits réservés.
-          </p>
+        <div className="pt-12 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-zinc-600 text-xs uppercase tracking-widest">© 2024 Naya Cooking. Tous droits réservés.</p>
+          <div className="flex items-center space-x-2 text-zinc-600 text-xs">
+            <span>Conçu avec</span>
+            <Heart className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
+            <span>pour mieux manger</span>
+          </div>
         </div>
       </div>
     </footer>

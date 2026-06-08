@@ -1,8 +1,7 @@
 "use client";
 
-import { User, Globe, Plus, LogOut } from "lucide-react";
+import { User, Plus, LogOut, ChevronDown } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface UserActionsProps {
@@ -21,91 +20,40 @@ export default function UserActions({
   onCreateRecipe,
 }: UserActionsProps) {
   const [showDropdown, setShowDropdown] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <div className="flex items-center space-x-4">
-      {user && (
-        <Link
-          href="/dashboard"
-          className="flex items-center space-x-2 px-4 py-2 bg-slate-100 text-slate-700 rounded-xl hover:bg-slate-200 transition-colors font-medium"
-        >
-          <User className="w-4 h-4" />
-          <span>Dashboard</span>
-        </Link>
-      )}
-
-      <>
-        <button className="p-2 text-slate-600 hover:text-slate-900 transition-colors">
-          <Globe className="w-5 h-5" />
-        </button>
-
-        <div className="relative">
-          <button
-            onClick={onCreateRecipe}
-            onMouseEnter={() => setShowTooltip(true)}
-            onMouseLeave={() => setShowTooltip(false)}
-            className="p-2 text-slate-600 hover:text-slate-900 transition-colors"
-          >
-            <Plus className="w-5 h-5" />
+    <div className={`flex items-center space-x-4 transition-all duration-300 ${isSearchExpanded ? 'opacity-0 invisible' : 'opacity-100 visible'}`}>
+      {user ? (
+        <div className="relative" onMouseEnter={() => setShowDropdown(true)} onMouseLeave={() => setShowDropdown(false)}>
+          <button className="flex items-center space-x-2 px-6 py-2.5 bg-emerald-600 text-white rounded-full text-sm font-bold hover:bg-emerald-700 transition-all shadow-md active:scale-95">
+            <User className="w-4 h-4" />
+            <span>{user.user_metadata?.name || "Compte"}</span>
+            <ChevronDown className={`w-4 h-4 transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
           </button>
-
-          {showTooltip && (
-            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1.5 bg-zinc-900 text-white text-xs rounded-lg whitespace-nowrap opacity-0 animate-in fade-in slide-in-from-top-2 duration-200">
-              Publier une recette
+          
+          {showDropdown && (
+            <div className="absolute right-0 mt-2 w-48 bg-white/80 backdrop-blur-xl border border-white/40 rounded-2xl shadow-xl py-2 z-50 overflow-hidden ring-1 ring-black/5">
+              <Link href="/dashboard" className="flex items-center space-x-2 px-4 py-2 text-zinc-900 hover:bg-emerald-50 transition-colors font-medium">
+                <User className="w-4 h-4 text-emerald-600" />
+                <span>Dashboard</span>
+              </Link>
+              <button onClick={onCreateRecipe} className="flex items-center space-x-2 w-full text-left px-4 py-2 text-zinc-900 hover:bg-emerald-50 transition-colors font-medium">
+                <Plus className="w-4 h-4 text-emerald-600" />
+                <span>Créer une recette</span>
+              </button>
+              <div className="border-t border-zinc-100 my-1" />
+              <button onClick={onLogout} className="flex items-center space-x-2 w-full text-left px-4 py-2 text-zinc-600 hover:bg-red-50 hover:text-red-600 transition-colors font-medium">
+                <LogOut className="w-4 h-4" />
+                <span>Déconnexion</span>
+              </button>
             </div>
           )}
         </div>
-      </>
-
-      <div
-        className="relative"
-        onMouseEnter={() => setShowDropdown(true)}
-        onMouseLeave={() => setShowDropdown(false)}
-      >
-        {user ? (
-          <>
-            <button className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-colors">
-              <User className="w-4 h-4" />
-              <span className="font-medium">{user.user_metadata?.name || "Mon compte"}</span>
-            </button>
-
-            {showDropdown && (
-              <div className="absolute right-0 mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-lg py-2 z-50">
-                <Link href="/recettes/creer" className="block px-4 py-2 text-slate-900 hover:bg-slate-50 font-medium">
-                  Créer une recette
-                </Link>
-                <div className="border-t border-slate-200 my-2" />
-                <button
-                  onClick={onLogout}
-                  className="block w-full text-left px-4 py-2 text-slate-600 hover:bg-slate-50 font-medium"
-                >
-                  Déconnexion
-                </button>
-              </div>
-            )}
-          </>
-        ) : (
-          <>
-            <button className="flex items-center space-x-2 px-4 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 transition-colors">
-              <User className="w-4 h-4" />
-              <span className="font-medium">Se connecter</span>
-            </button>
-
-            {showDropdown && (
-              <div className="absolute right-0 mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-lg py-2 z-50">
-                <Link href="/auth" className="block px-4 py-2 text-slate-900 hover:bg-slate-50 font-medium">
-                  Inscription
-                </Link>
-                <div className="border-t border-slate-200 my-2" />
-                <Link href="/aide" className="block px-4 py-2 text-slate-600 hover:bg-slate-50">
-                  Centre d&apos;aide
-                </Link>
-              </div>
-            )}
-          </>
-        )}
-      </div>
+      ) : (
+        <Link href="/auth" className="hidden sm:flex items-center space-x-2 px-6 py-2.5 bg-zinc-900 text-white rounded-full text-sm font-bold hover:bg-emerald-900 transition-all shadow-md active:scale-95">
+          <span>Se connecter</span>
+        </Link>
+      )}
     </div>
   );
 }
