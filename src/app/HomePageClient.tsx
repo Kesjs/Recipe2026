@@ -142,7 +142,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
       <main className="flex-grow">
         {/* Header/Hero Section */}
         <header className="relative w-full px-4 sm:px-6 pt-20 sm:pt-24">
-          <div className="relative w-full min-h-[560px] md:min-h-[640px] lg:h-[720px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
+          <div className="relative w-full min-h-[480px] md:min-h-[560px] lg:h-[640px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
             {heroRecipe?.image_url ? (
               <Image 
                 src={heroRecipe.image_url} 
@@ -158,7 +158,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
             <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/10 to-transparent md:from-white/30 md:via-transparent" />
             
             <div className="relative h-full max-w-7xl mx-auto px-6 md:px-16 py-10 md:py-0 flex items-center">
-              <div className="glass max-w-xl p-8 sm:p-10 md:p-14 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl animate-fade-in animate-slide-in-left">
+              <div className="glass max-w-xl p-6 sm:p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl animate-fade-in animate-slide-in-left">
                 <div className="flex items-center space-x-2 mb-6">
                   <span className="px-4 py-1.5 bg-emerald-600 text-white text-[10px] font-bold tracking-[0.2em] uppercase rounded-full">Recette du jour</span>
                 </div>
@@ -189,17 +189,17 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                   )}
                 </div>
                 
-                <div className="flex flex-col sm:flex-row gap-5">
+                <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href={heroRecipe ? `/recettes/${heroRecipe.id}` : "/recettes"}
-                    className="px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl transition-all shadow-xl hover:shadow-emerald-200/50 flex items-center justify-center space-x-2 group focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200"
+                    className="px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl transition-all shadow-xl hover:shadow-emerald-200/50 flex items-center justify-center space-x-2 group focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200"
                   >
                     <span>Voir la recette</span>
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                   <button
                     type="button"
-                    className="px-10 py-4 bg-white/60 hover:bg-white text-emerald-950 font-bold rounded-2xl border border-white/50 transition-all flex items-center justify-center space-x-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200"
+                    className="px-8 py-3 bg-white/60 hover:bg-white text-emerald-950 font-bold rounded-2xl border border-white/50 transition-all flex items-center justify-center space-x-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200"
                   >
                     <Bookmark className="w-5 h-5" />
                     <span>Enregistrer</span>
@@ -222,14 +222,14 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                   type="button"
                   aria-pressed={isActive}
                   onClick={() => setActiveTab(tab)}
-                  className={`h-20 shrink-0 flex items-center space-x-4 px-12 transition-all rounded-[2rem] active:scale-95 snap-start focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 ${
+                  className={`h-16 shrink-0 flex items-center space-x-4 px-12 transition-all rounded-[2rem] active:scale-95 snap-start focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 ${
                     isActive
                       ? "bg-zinc-900 text-white shadow-2xl shadow-zinc-400/20 ring-4 ring-zinc-900/10"
                       : "border-2 border-zinc-100 bg-white text-zinc-500 hover:border-emerald-200 hover:text-emerald-900 shadow-sm hover:shadow-md"
                   }`}
                 >
                   <Icon className={`w-8 h-8 ${isActive ? "text-emerald-400" : "text-emerald-600"}`} />
-                  <span className="font-bold text-lg">{tab}</span>
+                  <span className="font-bold text-base">{tab}</span>
                 </button>
               );
             })}
@@ -291,9 +291,9 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
         </div>
 
         {/* Newsletter Section */}
-        <section className="max-w-7xl mx-auto px-6 py-24">
+        <section className="max-w-7xl mx-auto px-6 py-16">
           <div className="flex flex-col lg:flex-row rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl border border-white">
-            <div className="lg:w-1/2 bg-emerald-100 p-10 md:p-16 lg:p-20 flex flex-col justify-center relative overflow-hidden">
+            <div className="lg:w-1/2 bg-emerald-100 p-8 md:p-12 lg:p-16 flex flex-col justify-center relative overflow-hidden">
               <div className="absolute -top-24 -left-24 w-64 h-64 bg-emerald-200/50 rounded-full blur-3xl" aria-hidden="true"></div>
               <div className="relative z-10">
                 <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-emerald-950 leading-tight mb-8">
@@ -320,7 +320,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                   </div>
                   <button
                     type="submit"
-                    className="w-full sm:w-auto px-10 py-5 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-emerald-900 transition-all shadow-lg active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200"
+                    className="w-full sm:w-auto px-8 py-4 bg-zinc-900 text-white font-bold rounded-2xl hover:bg-emerald-900 transition-all shadow-lg active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200"
                   >
                     S&apos;abonner
                   </button>
