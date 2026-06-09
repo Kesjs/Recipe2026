@@ -129,25 +129,17 @@ export default function AuthPage() {
       <div className="absolute bottom-20 right-10 w-48 h-48 bg-emerald-600/10 rounded-full blur-3xl animate-pulse delay-1000" />
 
       {/* Main Content */}
-      <main className="relative z-10 min-h-screen flex items-center justify-center px-6 py-12">
-        <div className="w-full max-w-md">
-          {/* Logo */}
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-600/30">
-                <Leaf className="w-6 h-6 text-white" />
-              </div>
-              <span className={`${playfair.className} text-2xl font-bold tracking-tight`}>Naya</span>
-            </div>
-            <Link 
-              href="/"
-              className="flex items-center space-x-2 text-zinc-400 hover:text-white transition-colors text-sm font-medium"
-            >
-              <Home className="w-4 h-4" />
-              <span>Accueil</span>
-            </Link>
-          </div>
+      <main className="relative z-10 min-h-screen flex items-center justify-center px-6">
+        {/* Accueil Link - Positionné en haut à gauche */}
+        <Link 
+          href="/"
+          className="absolute top-6 left-6 flex items-center space-x-2 text-zinc-400 hover:text-white transition-colors text-sm font-medium z-20"
+        >
+          <Home className="w-4 h-4" />
+          <span>Accueil</span>
+        </Link>
 
+        <div className="w-full max-w-md">
           {/* Glassmorphism Card */}
           <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
             <header className="mb-8 text-center">
