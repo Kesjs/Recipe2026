@@ -18,7 +18,7 @@ export default function NavLinks({ isScrolled, isSearchExpanded }: NavLinksProps
   ];
 
   return (
-    <div className={`hidden md:flex items-center space-x-10 transition-all duration-300 ${isSearchExpanded ? 'opacity-0 invisible' : 'opacity-100 visible'}`}>
+    <div className="hidden md:flex items-center space-x-10">
       {links.map((link) => (
         <Link 
           key={link.href}

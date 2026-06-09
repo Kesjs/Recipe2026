@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "**.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "img.over-blog-kiwi.com",
+      },
     ],
 
     // ✅ Tailles d'images adaptées aux breakpoints du projet

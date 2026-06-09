@@ -214,41 +214,42 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
           <div className="relative w-full h-[75vh] min-h-[420px] max-h-[680px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
             {heroRecipe?.image_url ? (
               <Image
-                src={heroRecipe.image_url}
+                src="https://img.over-blog-kiwi.com/0/69/73/66/20150728/ob_153ab0_amiwo-au-poulet2-benin.jpg"
                 alt={heroRecipe.title}
                 fill
-                className="object-cover"
-                // ✅ priority + fetchpriority="high" → image LCP chargée en premier
+                className="object-cover object-center"
                 priority
                 fetchPriority="high"
                 sizes="100vw"
               />
             ) : (
-              <div className="absolute inset-0 bg-emerald-100" aria-hidden="true" />
+              <Image
+                src="https://img.over-blog-kiwi.com/0/69/73/66/20150728/ob_153ab0_amiwo-au-poulet2-benin.jpg"
+                alt="Amiwo au poulet — recette béninoise"
+                fill
+                className="object-cover object-center"
+                priority
+                fetchPriority="high"
+                sizes="100vw"
+              />
             )}
 
             {/* Overlay lisibilité — décoratif */}
             <div
-              className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/10 to-transparent md:from-white/30 md:via-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"
               aria-hidden="true"
             />
 
             <div className="relative h-full max-w-7xl mx-auto px-6 md:px-16 py-10 md:py-0 flex items-center">
-              <div className="glass max-w-xl p-6 sm:p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl animate-slide-in-left">
+              <div className="glass max-w-xl p-6 sm:p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl animate-slide-in-left bg-black/30 backdrop-blur-sm border border-white/10">
 
                 <div className="flex items-center space-x-2 mb-6">
-                  {/* ✅ text-[10px] → text-xs (12px) : respect taille minimale mobile */}
                   <span className="px-4 py-1.5 bg-emerald-600 text-white text-xs font-bold tracking-[0.2em] uppercase rounded-full">
                     Recette du jour
                   </span>
                 </div>
 
-                {/*
-                  ✅ h1 unique sur la page — le logo dans Navbar
-                     doit être un <span> ou <p>, pas un <h1>.
-                     Vérifie Logo.tsx pour t'en assurer.
-                */}
-                <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-emerald-950 leading-[1.1] mb-8 max-w-2xl">
+                <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1] mb-8 max-w-2xl drop-shadow-md">
                   {heroRecipe?.title
                     .split(" ")
                     .map((word: string, i: number, arr: string[]) => {
@@ -267,7 +268,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                     }) || "Naya Cuisine"}
                 </h1>
 
-                <div className="flex items-center space-x-8 text-emerald-900/80 mb-10">
+                <div className="flex items-center space-x-8 text-white/80 mb-10">
                   <div className="flex items-center space-x-2.5">
                     <Clock className="w-6 h-6 text-emerald-600" aria-hidden="true" />
                     <span className="text-sm font-bold tracking-tight uppercase">
@@ -303,7 +304,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                   <button
                     type="button"
                     aria-label="Enregistrer cette recette"
-                    className="px-8 py-3.5 bg-white/60 hover:bg-white text-emerald-950 font-bold rounded-2xl border border-white/50 transition-all flex items-center justify-center space-x-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 [will-change:transform] active:scale-95"
+                    className="px-8 py-3.5 bg-white/20 hover:bg-white/30 text-white font-bold rounded-2xl border border-white/30 transition-all flex items-center justify-center space-x-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 [will-change:transform] active:scale-95"
                   >
                     <Bookmark className="w-5 h-5" aria-hidden="true" />
                     <span>Enregistrer</span>

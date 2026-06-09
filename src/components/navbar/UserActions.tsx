@@ -22,7 +22,7 @@ export default function UserActions({
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
-    <div className={`flex items-center space-x-4 transition-all duration-300 ${isSearchExpanded ? 'opacity-0 invisible' : 'opacity-100 visible'}`}>
+    <div className="flex items-center space-x-4">
       {user ? (
         <div className="relative" onMouseEnter={() => setShowDropdown(true)} onMouseLeave={() => setShowDropdown(false)}>
           <button className="flex items-center space-x-2 px-6 py-2.5 bg-emerald-600 text-white rounded-full text-sm font-bold hover:bg-emerald-700 transition-all shadow-md active:scale-95">
