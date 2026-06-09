@@ -1,19 +1,34 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { Leaf, Instagram, Twitter, Heart } from "lucide-react";
+import { Leaf, Instagram, Twitter, Heart, ArrowRight } from "lucide-react";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 3000);
+    setEmail("");
+    setMessage("");
+  };
+
   return (
     <footer className="bg-zinc-950 text-zinc-400 py-24 px-6 border-t border-zinc-800/50">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
-          <div className="md:col-span-5">
+          <div className="md:col-span-4">
             <div className="flex items-center space-x-2 mb-8 group cursor-pointer">
               <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-lg transition-transform">
                 <Leaf className="w-6 h-6" />
               </div>
               <span className="font-bold text-3xl tracking-tighter text-white">Naya</span>
             </div>
-            <p className="text-zinc-500 text-lg leading-relaxed max-w-sm mb-10">
+            <p className="text-zinc-500 text-base leading-relaxed max-w-sm mb-10">
               Mangez mieux, vivez mieux. Découvrez, partagez et créez des recettes saines qui célèbrent les richesses culinaires africaines.
             </p>
             <div className="flex items-center space-x-5">
@@ -35,26 +50,44 @@ export default function Footer() {
               <li><Link href="/recettes" className="hover:text-emerald-400 transition-colors">Recettes</Link></li>
               <li><Link href="/nutrition" className="hover:text-emerald-500 transition-colors">Nutrition</Link></li>
               <li><Link href="/actualites" className="hover:text-emerald-500 transition-colors">Actualités</Link></li>
-              <li><Link href="/aide" className="hover:text-emerald-500 transition-colors">Aide</Link></li>
             </ul>
           </div>
 
           <div className="md:col-span-2">
             <h4 className="text-white font-bold mb-8 uppercase tracking-widest text-xs">Entreprise</h4>
             <ul className="space-y-4 text-zinc-300 text-sm">
-              <li><Link href="/aide" className="hover:text-emerald-400 transition-colors">À propos</Link></li>
               <li><Link href="/legal" className="hover:text-emerald-500 transition-colors">Confidentialité</Link></li>
               <li><Link href="/legal" className="hover:text-emerald-500 transition-colors">CGU</Link></li>
-              <li><Link href="/aide" className="hover:text-emerald-500 transition-colors">Contact</Link></li>
             </ul>
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-4">
             <h4 className="text-white font-bold mb-8 uppercase tracking-widest text-xs">Contact</h4>
-            <ul className="space-y-4 text-zinc-300 text-sm">
-              <li><a href="mailto:support@cookingrecipe.com" className="hover:text-emerald-400 transition-colors">support@cookingrecipe.com</a></li>
-              <li className="text-zinc-500">Mangez mieux, vivez mieux.</li>
-            </ul>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Votre email"
+                required
+                className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-600 transition-all text-sm"
+              />
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Votre message"
+                required
+                rows={3}
+                className="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-600 transition-all text-sm resize-none"
+              />
+              <button
+                type="submit"
+                className="w-full px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all flex items-center justify-center space-x-2 active:scale-95"
+              >
+                <span>{submitted ? "Envoyé !" : "Envoyer"}</span>
+                {!submitted && <ArrowRight className="w-4 h-4" />}
+              </button>
+            </form>
           </div>
         </div>
 

@@ -116,10 +116,10 @@ export default function ActualitesPage() {
         <header className="mb-32">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 border-b border-zinc-200 pb-16">
             <div className="max-w-4xl">
-              <h1 className={`${playfair.className} text-5xl md:text-6xl lg:text-7xl text-zinc-950 mb-12 leading-[1.1] tracking-tighter`}>
+              <h1 className={`${playfair.className} text-3xl md:text-4xl lg:text-5xl text-zinc-950 mb-12 leading-[1.1] tracking-tighter`}>
                 Chroniques <br /> <span className="italic font-normal text-emerald-900 underline decoration-emerald-500/10 decoration-[16px] underline-offset-[24px]">Culinaire.</span>
               </h1>
-              <p className="text-zinc-500 text-2xl lg:text-3xl font-medium leading-relaxed max-w-2xl">
+              <p className="text-zinc-500 text-lg lg:text-xl font-medium leading-relaxed max-w-2xl">
                 L&apos;actualité de la nutrition saine et des saveurs locales, racontée avec l&apos;élégance d&apos;un magazine de cuisine.
               </p>
             </div>
@@ -130,9 +130,9 @@ export default function ActualitesPage() {
                 placeholder="Rechercher une chronique..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-16 pr-10 py-7 bg-white border border-zinc-200 rounded-[2.5rem] shadow-sm hover:shadow-xl focus:outline-none focus:ring-8 focus:ring-emerald-50 focus:border-emerald-200 transition-all text-zinc-950 font-bold text-xl placeholder:text-zinc-200"
+                className="w-full pl-16 pr-10 py-4 bg-white border border-zinc-200 rounded-[2rem] shadow-sm hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-emerald-50 focus:border-emerald-200 transition-all text-zinc-950 font-bold text-base placeholder:text-zinc-200"
               />
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-7 h-7 text-zinc-200 group-focus-within:text-emerald-600 transition-all" />
+              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-200 group-focus-within:text-emerald-600 transition-all" />
             </div>
           </div>
 
@@ -158,7 +158,7 @@ export default function ActualitesPage() {
           {filteredArticles[0] && (
             <section className="relative group">
               <Link href={`/actualites/${filteredArticles[0].id}`}>
-                <div className="relative w-full h-[700px] lg:h-[900px] rounded-[5rem] overflow-hidden shadow-[0_80px_120px_-32px_rgba(0,0,0,0.3)] ring-1 ring-zinc-200/50">
+                <div className="relative w-full h-[500px] lg:h-[600px] rounded-[3rem] overflow-hidden shadow-[0_80px_120px_-32px_rgba(0,0,0,0.3)] ring-1 ring-zinc-200/50">
                   <Image 
                     src={filteredArticles[0].image} 
                     alt={filteredArticles[0].title} 
@@ -167,8 +167,8 @@ export default function ActualitesPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent" />
                   
-                  <div className="absolute inset-x-0 bottom-0 p-8 lg:p-16">
-                    <div className="bg-white/10 backdrop-blur-3xl border border-white/20 p-8 lg:p-12 rounded-[4rem] max-w-4xl animate-in fade-in slide-in-from-bottom-12 duration-1000 relative overflow-hidden group/card">
+                  <div className="absolute inset-x-0 bottom-0 p-6 lg:p-10">
+                    <div className="bg-white/10 backdrop-blur-3xl border border-white/20 p-6 lg:p-10 rounded-[3rem] max-w-4xl animate-in fade-in slide-in-from-bottom-12 duration-1000 relative overflow-hidden group/card">
                       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-700" />
                       
                       <div className="relative z-10">
@@ -180,10 +180,10 @@ export default function ActualitesPage() {
                           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">{filteredArticles[0].category}</span>
                         </div>
                         
-                        <h2 className={`${playfair.className} text-3xl md:text-4xl lg:text-5xl text-white mb-8 leading-[1.1] tracking-tight`}>
+                        <h2 className={`${playfair.className} text-xl md:text-2xl lg:text-3xl text-white mb-6 leading-[1.1] tracking-tight`}>
                           {filteredArticles[0].title}
                         </h2>
-                        <p className="text-zinc-300 text-2xl font-medium mb-12 line-clamp-2 max-w-2xl leading-relaxed">{filteredArticles[0].subtitle}</p>
+                        <p className="text-zinc-300 text-lg font-medium mb-8 line-clamp-2 max-w-2xl leading-relaxed">{filteredArticles[0].subtitle}</p>
                         
                         <div className="flex items-center space-x-6 text-emerald-400 font-black uppercase tracking-[0.3em] text-[10px] group-hover:gap-8 transition-all">
                           <span>Commencer la lecture</span>
@@ -204,11 +204,11 @@ export default function ActualitesPage() {
               return (
                 <div key={article.id} className={isWide ? "lg:col-span-12 xl:col-span-8 lg:mx-auto" : "lg:col-span-6"}>
                   <Link href={`/actualites/${article.id}`} className="group block">
-                    <div className="relative aspect-[16/9] rounded-[4rem] overflow-hidden mb-12 shadow-2xl ring-1 ring-zinc-100 transition-all duration-700 group-hover:translate-y-[-12px]">
+                    <div className="relative aspect-[16/9] rounded-[3rem] overflow-hidden mb-8 shadow-2xl ring-1 ring-zinc-100 transition-all duration-700 group-hover:translate-y-[-8px]">
                       <Image src={article.image} alt={article.title} fill className="object-cover transition-transform duration-[1500ms] group-hover:scale-105" />
-                      <div className="absolute top-10 left-10">
-                        <div className="w-20 h-20 bg-white/95 backdrop-blur-2xl rounded-3xl flex items-center justify-center shadow-[0_24px_48px_-12px_rgba(0,0,0,0.15)] ring-1 ring-white/50 group-hover:rotate-6 transition-all duration-500">
-                          <article.icon className="w-8 h-8 text-zinc-950" />
+                      <div className="absolute top-6 left-6">
+                        <div className="w-16 h-16 bg-white/95 backdrop-blur-2xl rounded-2xl flex items-center justify-center shadow-[0_24px_48px_-12px_rgba(0,0,0,0.15)] ring-1 ring-white/50 group-hover:rotate-6 transition-all duration-500">
+                          <article.icon className="w-6 h-6 text-zinc-950" />
                         </div>
                       </div>
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
@@ -220,11 +220,11 @@ export default function ActualitesPage() {
                         <div className="h-[1px] w-8 bg-zinc-200" />
                       </div>
                       
-                      <h3 className={`${playfair.className} text-2xl md:text-3xl lg:text-4xl text-zinc-950 mb-6 group-hover:text-emerald-950 transition-colors leading-[1.2] tracking-tight italic`}>
+                      <h3 className={`${playfair.className} text-xl md:text-2xl lg:text-3xl text-zinc-950 mb-4 group-hover:text-emerald-950 transition-colors leading-[1.2] tracking-tight italic`}>
                         {article.title}
                       </h3>
                       
-                      <p className="text-zinc-500 text-xl font-medium leading-relaxed line-clamp-3 mb-12 max-w-2xl">
+                      <p className="text-zinc-500 text-base font-medium leading-relaxed line-clamp-3 mb-8 max-w-2xl">
                         {article.subtitle}
                       </p>
                       
@@ -244,12 +244,12 @@ export default function ActualitesPage() {
       <footer className="bg-zinc-950 text-zinc-500 py-32 px-12 relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-24">
           <div className="flex flex-col gap-6">
-            <div className={`${playfair.className} text-5xl text-white italic`}>Naya Cooking</div>
+            <div className={`${playfair.className} text-2xl text-white italic`}>Naya Cooking</div>
             <p className="text-zinc-600 font-bold uppercase tracking-[0.5em] text-[9px]">L&apos;excellence & Chroniques culinaires africaines</p>
           </div>
           <div className="flex items-center space-x-16">
             <div className="flex flex-col items-center">
-              <span className="text-4xl text-white font-black tracking-tighter italic">2024</span>
+              <span className="text-xl text-white font-black tracking-tighter italic">2024</span>
               <span className="text-[9px] font-black text-zinc-700 uppercase tracking-[0.5em] mt-3">EDITION PREMIÈRE</span>
             </div>
           </div>

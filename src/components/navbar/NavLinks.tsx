@@ -15,7 +15,6 @@ export default function NavLinks({ isScrolled, isSearchExpanded }: NavLinksProps
     { name: "Recettes", href: "/recettes" },
     { name: "Nutrition", href: "/nutrition" },
     { name: "Actualités", href: "/actualites" },
-    { name: "À Propos", href: "/aide" },
   ];
 
   return (

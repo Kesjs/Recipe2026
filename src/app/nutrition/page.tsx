@@ -140,10 +140,10 @@ export default function NutritionPage() {
         <header className="mb-32">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 border-b border-zinc-200 pb-16">
             <div className="max-w-4xl">
-              <h1 className={`${playfair.className} text-5xl md:text-6xl lg:text-7xl text-zinc-950 mb-10 leading-[1.1] tracking-tighter`}>
+              <h1 className={`${playfair.className} text-3xl md:text-4xl lg:text-5xl text-zinc-950 mb-10 leading-[1.1] tracking-tighter`}>
                 L&apos;Intelligence <br /> <span className="italic font-normal text-emerald-900 underline decoration-emerald-500/10 decoration-[16px] underline-offset-[20px]">Nutritive.</span>
               </h1>
-              <p className="text-zinc-500 text-2xl lg:text-3xl font-medium leading-relaxed max-w-2xl">
+              <p className="text-zinc-500 text-lg lg:text-xl font-medium leading-relaxed max-w-2xl">
                 Décryptez les besoins de votre corps et transformez votre alimentation en un art de vivre.
               </p>
             </div>
@@ -159,7 +159,7 @@ export default function NutritionPage() {
                 <div className="w-12 h-12 bg-emerald-600 rounded-2xl flex items-center justify-center text-white shadow-lg">
                   <Target className="w-6 h-6" />
                 </div>
-                <h2 className={`${playfair.className} text-4xl text-zinc-950 italic`}>Votre Profil</h2>
+                <h2 className={`${playfair.className} text-2xl text-zinc-950 italic`}>Votre Profil</h2>
               </div>
               
               <div className="space-y-10">
@@ -269,10 +269,10 @@ export default function NutritionPage() {
                     <div className="h-[1px] w-12 bg-emerald-400/30" />
                   </div>
                   <div className="flex items-baseline justify-center space-x-6 mb-8">
-                    <p className="text-6xl lg:text-8xl font-black tracking-tighter leading-none">{dailyCalories}</p>
-                    <span className="text-3xl font-black uppercase tracking-[0.3em] text-zinc-500">kcal</span>
+                    <p className="text-4xl lg:text-6xl font-black tracking-tighter leading-none">{dailyCalories}</p>
+                    <span className="text-xl font-black uppercase tracking-[0.3em] text-zinc-500">kcal</span>
                   </div>
-                  <p className="text-zinc-400 text-2xl font-medium tracking-tight max-w-lg mx-auto">Calories quotidiennes recommandées pour atteindre votre objectif de santé.</p>
+                  <p className="text-zinc-400 text-lg font-medium tracking-tight max-w-lg mx-auto">Calories quotidiennes recommandées pour atteindre votre objectif de santé.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -299,8 +299,8 @@ export default function NutritionPage() {
         <section className="mb-48">
           <header className="flex flex-col md:flex-row md:items-end justify-between gap-16 mb-24 border-b border-zinc-200 pb-16">
             <div className="max-w-3xl">
-              <h2 className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl text-zinc-950 mb-8 italic tracking-tighter`}>La Bibliothèque <br /> <span className="text-emerald-900 not-italic">des Aliments.</span></h2>
-              <p className="text-zinc-400 text-xl font-medium max-w-xl leading-relaxed">
+              <h2 className={`${playfair.className} text-2xl md:text-3xl lg:text-4xl text-zinc-950 mb-8 italic tracking-tighter`}>La Bibliothèque <br /> <span className="text-emerald-900 not-italic">des Aliments.</span></h2>
+              <p className="text-zinc-400 text-base font-medium max-w-xl leading-relaxed">
                 Une exploration encyclopédique des nutriments contenus dans nos trésors culinaires locaux.
               </p>
             </div>
@@ -311,9 +311,9 @@ export default function NutritionPage() {
                 placeholder="Rechercher un ingrédient..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-16 pr-10 py-7 bg-white border border-zinc-200 rounded-[2.5rem] shadow-sm hover:shadow-xl focus:outline-none focus:ring-8 focus:ring-emerald-50 focus:border-emerald-200 transition-all text-zinc-950 font-bold text-xl placeholder:text-zinc-200"
+                className="w-full pl-16 pr-10 py-4 bg-white border border-zinc-200 rounded-[2rem] shadow-sm hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-emerald-50 focus:border-emerald-200 transition-all text-zinc-950 font-bold text-base placeholder:text-zinc-200"
               />
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-7 h-7 text-zinc-200 group-focus-within:text-emerald-600 transition-all" />
+              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-200 group-focus-within:text-emerald-600 transition-all" />
             </div>
           </header>
 
@@ -321,33 +321,33 @@ export default function NutritionPage() {
             <table className="w-full text-left">
               <thead>
                 <tr className="border-b border-zinc-100">
-                  <th className="px-16 py-12 text-[11px] font-black uppercase tracking-[0.5em] text-zinc-300">Ingrédient Principal</th>
-                  <th className="px-10 py-12 text-right text-[11px] font-black uppercase tracking-[0.5em] text-zinc-300">Énergie</th>
-                  <th className="px-10 py-12 text-right text-[11px] font-black uppercase tracking-[0.5em] text-zinc-300">Protéines</th>
-                  <th className="px-10 py-12 text-right text-[11px] font-black uppercase tracking-[0.5em] text-zinc-300">Glucides</th>
-                  <th className="px-16 py-12 text-right text-[11px] font-black uppercase tracking-[0.5em] text-zinc-300">Lipides</th>
+                  <th className="px-8 py-6 text-[10px] font-black uppercase tracking-[0.4em] text-zinc-300">Ingrédient Principal</th>
+                  <th className="px-6 py-6 text-right text-[10px] font-black uppercase tracking-[0.4em] text-zinc-300">Énergie</th>
+                  <th className="px-6 py-6 text-right text-[10px] font-black uppercase tracking-[0.4em] text-zinc-300">Protéines</th>
+                  <th className="px-6 py-6 text-right text-[10px] font-black uppercase tracking-[0.4em] text-zinc-300">Glucides</th>
+                  <th className="px-8 py-6 text-right text-[10px] font-black uppercase tracking-[0.4em] text-zinc-300">Lipides</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-50">
                 {filteredDictionary.map((food, index) => (
                   <tr key={index} className="hover:bg-zinc-50/70 transition-all duration-500 group">
-                    <td className="px-16 py-10">
-                      <span className={`${playfair.className} text-3xl lg:text-4xl text-zinc-950 italic group-hover:text-emerald-950 group-hover:pl-4 transition-all duration-700`}>{food.name}</span>
+                    <td className="px-8 py-6">
+                      <span className={`${playfair.className} text-lg lg:text-xl text-zinc-950 italic group-hover:text-emerald-950 group-hover:pl-2 transition-all duration-700`}>{food.name}</span>
                     </td>
-                    <td className="px-10 py-10 text-right">
+                    <td className="px-6 py-6 text-right">
                       <div className="flex flex-col items-end group-hover:scale-110 transition-transform duration-500">
-                        <span className="text-3xl font-black text-zinc-950 tracking-tighter leading-none">{food.calories}</span>
+                        <span className="text-xl font-black text-zinc-950 tracking-tighter leading-none">{food.calories}</span>
                         <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mt-1">kcal</span>
                       </div>
                     </td>
-                    <td className="px-10 py-10 text-right">
-                      <span className="text-xl font-bold text-zinc-400 group-hover:text-emerald-600 transition-colors tracking-tighter">{food.proteins}g</span>
+                    <td className="px-6 py-6 text-right">
+                      <span className="text-base font-bold text-zinc-400 group-hover:text-emerald-600 transition-colors tracking-tighter">{food.proteins}g</span>
                     </td>
-                    <td className="px-10 py-10 text-right">
-                      <span className="text-xl font-bold text-zinc-400 group-hover:text-amber-600 transition-colors tracking-tighter">{food.carbs}g</span>
+                    <td className="px-6 py-6 text-right">
+                      <span className="text-base font-bold text-zinc-400 group-hover:text-amber-600 transition-colors tracking-tighter">{food.carbs}g</span>
                     </td>
-                    <td className="px-16 py-10 text-right">
-                      <span className="text-xl font-bold text-zinc-400 group-hover:text-blue-600 transition-colors tracking-tighter">{food.lipids}g</span>
+                    <td className="px-8 py-6 text-right">
+                      <span className="text-base font-bold text-zinc-400 group-hover:text-blue-600 transition-colors tracking-tighter">{food.lipids}g</span>
                     </td>
                   </tr>
                 ))}
@@ -360,12 +360,12 @@ export default function NutritionPage() {
       <footer className="bg-zinc-950 text-zinc-500 py-32 px-12 relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16 border-t border-white/5 pt-24">
           <div className="flex flex-col gap-4">
-            <div className={`${playfair.className} text-4xl text-white italic`}>Naya Cooking</div>
+            <div className={`${playfair.className} text-2xl text-white italic`}>Naya Cooking</div>
             <p className="text-zinc-600 font-bold uppercase tracking-[0.4em] text-[10px]">L&apos;excellence culinaire africaine</p>
           </div>
           <div className="flex items-center space-x-12">
             <div className="flex flex-col items-center">
-              <span className="text-3xl text-white font-black">2024</span>
+              <span className="text-xl text-white font-black">2024</span>
               <span className="text-[8px] font-black text-zinc-600 uppercase tracking-[0.6em] mt-2">© Copyright</span>
             </div>
             <div className="h-16 w-[1px] bg-white/10" />

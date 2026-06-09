@@ -18,6 +18,7 @@ import {
   CookingPot,
   Cookie,
   LucideIcon,
+  Plus,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,6 +33,52 @@ interface Category {
 
 interface HomePageClientProps {
   initialRecipes: Recipe[];
+}
+
+const faqs = [
+  {
+    question: "Comment créer une recette ?",
+    answer: "Pour créer une recette, connectez-vous à votre compte et cliquez sur le bouton \"+\" dans la barre de navigation, puis sélectionnez \"Créer une recette\". Vous pourrez alors renseigner le titre, les instructions et les ingrédients locaux nécessaires."
+  },
+  {
+    question: "Comment ajouter une recette aux favoris ?",
+    answer: "Sur chaque fiche recette, vous trouverez un bouton coeur (♥) pour ajouter la recette à vos favoris. Vous pouvez retrouver toutes vos recettes favorites dans votre dashboard personnel."
+  },
+  {
+    question: "Comment modifier mon profil ?",
+    answer: "Accédez à votre dashboard en cliquant sur votre profil dans le menu utilisateur de la barre de navigation. Vous pourrez y modifier vos informations personnelles, votre photo de profil et vos préférences alimentaires."
+  },
+  {
+    question: "Besoin de plus d'aide ?",
+    answer: "Si vous ne trouvez pas la réponse à votre question, n'hésitez pas à nous contacter directement. Notre équipe de nutritionnistes et passionnés de cuisine est à votre disposition."
+  }
+];
+
+function FAQItem({ question, answer, index }: { question: string; answer: string; index: number }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div 
+      className="border-b border-zinc-200 py-8 group"
+    >
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between text-left group/btn"
+      >
+        <h3 className="font-serif text-lg md:text-xl text-zinc-900 group-hover:text-emerald-900 transition-all duration-300 leading-[1.2]">
+          {question}
+        </h3>
+        <div className={`w-12 h-12 rounded-full border-2 border-zinc-100 flex items-center justify-center shrink-0 ml-6 transition-all duration-300 ${isOpen ? 'bg-zinc-900 border-zinc-900 text-white rotate-[135deg]' : 'bg-white text-zinc-300 group-hover:border-emerald-600 group-hover:text-emerald-600'}`}>
+          <Plus className="w-5 h-5" />
+        </div>
+      </button>
+      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[500px] mt-6 opacity-100' : 'max-h-0 opacity-0'}`}>
+        <p className="text-zinc-500 text-base leading-relaxed max-w-3xl">
+          {answer}
+        </p>
+      </div>
+    </div>
+  );
 }
 
 async function fetchCategories(): Promise<Category[]> {
@@ -459,6 +506,25 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                 aria-hidden="true"
               />
             </div>
+          </div>
+        </section>
+        {/* ─────────────────────────────────────────────────────────────── */}
+
+        {/* ─── FAQ Section ───────────────────────────────────────────────── */}
+        <section className="max-w-7xl mx-auto px-6 py-20">
+          <div className="text-center mb-16">
+            <h2 className="font-serif text-3xl md:text-4xl text-zinc-900 mb-4">
+              Questions Fréquentes
+            </h2>
+            <p className="text-zinc-500 text-base max-w-2xl mx-auto">
+              L'essentiel pour naviguer dans l'écosystème Naya avec aisance.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            {faqs.map((faq, index) => (
+              <FAQItem key={index} index={index} question={faq.question} answer={faq.answer} />
+            ))}
           </div>
         </section>
         {/* ─────────────────────────────────────────────────────────────── */}

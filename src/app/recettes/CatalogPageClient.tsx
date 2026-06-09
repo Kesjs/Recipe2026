@@ -63,13 +63,9 @@ async function fetchRecipes() {
 
 const CATEGORY_ICONS: Record<string, any> = {
   "Tout": BookOpen,
-  "Petit-déjeuner": Utensils,
-  "Déjeuner": Utensils,
-  "Dîner": ChefHat,
-  "Goûter": Utensils,
   "Patrimoine Culinaires Africains": Globe,
-  "Cuisine du Monde": Globe,
   "Recettes Rapides": Utensils,
+  "Cuisine du Monde": Globe,
 };
 
 export default function CatalogPageClient({ initialRecipes }: CatalogPageClientProps) {

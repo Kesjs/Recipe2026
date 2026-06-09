@@ -39,7 +39,7 @@ function FAQItem({ question, answer, index }: { question: string; answer: string
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between text-left group/btn"
       >
-        <h3 className={`${playfair.className} text-2xl md:text-3xl lg:text-4xl text-zinc-950 group-hover:text-emerald-950 transition-all duration-700 leading-[1.2] tracking-tighter italic`}>
+        <h3 className={`${playfair.className} text-lg md:text-xl lg:text-2xl text-zinc-950 group-hover:text-emerald-950 transition-all duration-700 leading-[1.2] tracking-tighter italic`}>
           {question}
         </h3>
         <div className={`w-16 h-16 lg:w-20 lg:h-20 rounded-full border-[3px] border-zinc-100 flex items-center justify-center shrink-0 ml-10 transition-all duration-700 ${isOpen ? 'bg-zinc-950 border-zinc-950 text-white rotate-[135deg]' : 'bg-white text-zinc-300 group-hover:border-emerald-600 group-hover:text-emerald-600 group-hover:scale-110'}`}>
@@ -47,7 +47,7 @@ function FAQItem({ question, answer, index }: { question: string; answer: string
         </div>
       </button>
       <div className={`overflow-hidden transition-all duration-1000 ease-in-out ${isOpen ? 'max-h-[600px] mt-12 opacity-100' : 'max-h-0 opacity-0'}`}>
-        <p className="text-zinc-500 text-2xl lg:text-3xl font-medium leading-relaxed max-w-4xl tracking-tight">
+        <p className="text-zinc-500 text-base lg:text-lg font-medium leading-relaxed max-w-4xl tracking-tight">
           {answer}
         </p>
       </div>
@@ -67,10 +67,10 @@ export default function AidePage() {
         <header className="mb-32">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 border-b border-zinc-200 pb-16">
             <div className="max-w-5xl">
-              <h1 className={`${playfair.className} text-5xl md:text-6xl lg:text-7xl text-zinc-950 mb-12 leading-[1.1] tracking-tighter`}>
+              <h1 className={`${playfair.className} text-3xl md:text-4xl lg:text-5xl text-zinc-950 mb-12 leading-[1.1] tracking-tighter`}>
                 Soutien <br /> <span className="italic font-normal text-emerald-900 underline decoration-emerald-500/10 decoration-[16px] underline-offset-[24px]">& Philosophie.</span>
               </h1>
-              <p className="text-zinc-500 text-2xl lg:text-3xl font-medium leading-relaxed max-w-3xl">
+              <p className="text-zinc-500 text-lg lg:text-xl font-medium leading-relaxed max-w-3xl">
                 Nous sommes ici pour accompagner chaque étape de votre voyage culinaire. Explorez nos ressources ou contactez-nous.
               </p>
             </div>
@@ -83,10 +83,10 @@ export default function AidePage() {
           <div className="lg:col-span-4">
             <div className="sticky top-40">
               <div className="w-24 h-[6px] bg-emerald-600 mb-12" />
-              <h2 className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl text-zinc-950 italic leading-[1.1] mb-14 tracking-tighter`}>
+              <h2 className={`${playfair.className} text-2xl md:text-3xl lg:text-4xl text-zinc-950 italic leading-[1.1] mb-14 tracking-tighter`}>
                 Questions <br /> Fréquentes.
               </h2>
-              <p className="text-zinc-400 text-2xl font-medium leading-relaxed mb-16 max-w-[280px]">
+              <p className="text-zinc-400 text-base font-medium leading-relaxed mb-16 max-w-[280px]">
                 L&apos;essentiel pour naviguer dans l&apos;écosystème Naya avec aisance.
               </p>
               
@@ -120,10 +120,10 @@ export default function AidePage() {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(5,150,105,0.2),transparent)] opacity-60 group-hover:opacity-100 transition-opacity duration-[2000ms]" />
               
               <div className="relative z-10">
-                <h2 className={`${playfair.className} text-3xl md:text-4xl lg:text-5xl italic text-white mb-10 leading-[1.1] tracking-tighter`}>
+                <h2 className={`${playfair.className} text-xl md:text-2xl lg:text-3xl italic text-white mb-8 leading-[1.1] tracking-tighter`}>
                   Rédigez votre <br /> propre <span className="text-emerald-400">Histoire.</span>
                 </h2>
-                <p className="text-zinc-400 text-2xl lg:text-3xl font-medium max-w-2xl mx-auto mb-16 leading-relaxed">
+                <p className="text-zinc-400 text-lg lg:text-xl font-medium max-w-2xl mx-auto mb-12 leading-relaxed">
                   L&apos;art de la cuisine commence par une intention. Rejoignez-nous et créez vos premières recettes.
                 </p>
                 <Link 
@@ -142,7 +142,7 @@ export default function AidePage() {
       <footer className="bg-zinc-950 text-zinc-500 py-32 px-12 relative z-10 border-t border-white/5">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-24">
           <div className="flex flex-col gap-6">
-            <div className={`${playfair.className} text-5xl text-white italic`}>Naya Cooking</div>
+            <div className={`${playfair.className} text-2xl text-white italic`}>Naya Cooking</div>
             <div className="flex items-center gap-8 text-[11px] font-black uppercase tracking-[0.5em] text-zinc-600">
               <Link href="/" className="hover:text-emerald-500 transition-colors">Explorer</Link>
               <Link href="/nutrition" className="hover:text-emerald-500 transition-colors">Nutrition</Link>
