@@ -55,7 +55,7 @@ async function fetchRecipes({
   const { supabase } = await import("@/lib/supabase");
   if (!supabase) return [];
 
-  const PAGE_SIZE = 13;
+  const PAGE_SIZE = 6;
   const offset = (pageParam - 1) * PAGE_SIZE;
 
   let query = supabase.from("recipes").select(`
@@ -122,7 +122,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
       pageParams: [1],
     },
     getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.length === 0) return undefined;
+      if (lastPage.length === 0 || lastPage.length < 6) return undefined;
       return allPages.length + 1;
     },
   });

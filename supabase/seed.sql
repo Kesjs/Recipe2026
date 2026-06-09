@@ -53,7 +53,7 @@ ON CONFLICT (name) DO NOTHING;
 -- Insert sample recipes (African dishes)
 -- Amiwo au Poulet
 INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
-('11111111-1111-1111-1111-111111111111', 
+('a1b2c3d4-e5f6-7890-abcd-ef1234567890',
  'Amiwo au Poulet',
  '1. Faire cuire le riz avec de l''eau salée pendant 20 minutes.
 2. Couper le poulet en morceaux et le faire mariner avec l''ail, le gingembre et le piment.
@@ -64,7 +64,7 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id,
 7. Ajouter de l''eau si nécessaire et laisser cuire 5 minutes supplémentaires.
 8. Servir chaud.',
  45,
- 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&q=80',
+ 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=80',
  'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
  NULL,
  'Bénin')
@@ -72,8 +72,8 @@ ON CONFLICT DO NOTHING;
 
 -- Thiéboudienne
 INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
-('22222222-2222-2222-2222-222222222222', 
- 'Thiéboudienne', 
+('b2c3d4e5-f6a7-8901-bcde-f12345678901',
+ 'Thiéboudienne',
  '1. Laver et couper le poisson en morceaux.
 2. Préparer la marinade avec l''ail, le piment, le persil et le citron.
 3. Faire mariner le poisson pendant 30 minutes.
@@ -83,9 +83,9 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id,
 7. Retirer le poisson et réserver.
 8. Ajouter le riz lavé et l''eau, laisser cuire.
 9. Ajouter les légumes (carottes, chou, aubergine) coupés en morceaux.
-10. Servir avec le poisson et les légumes.', 
- 60, 
- 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80',
+10. Servir avec le poisson et les légumes.',
+ 60,
+ 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&q=80',
  'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
  NULL,
  'Sénégal')
@@ -93,8 +93,8 @@ ON CONFLICT DO NOTHING;
 
 -- Aloco
 INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
-('33333333-3333-3333-3333-333333333333', 
- 'Aloco (Bananes Plantains Frites)', 
+('c3d4e5f6-a7b8-9012-cdef-123456789012',
+ 'Aloco (Bananes Plantains Frites)',
  '1. Éplucher les bananes plantains bien mûres.
 2. Couper les bananes en rondelles épaisses.
 3. Dans une poêle, chauffer l''huile de palme.
@@ -102,8 +102,8 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id,
 5. Faire frire à feu moyen jusqu''à ce qu''elles soient dorées.
 6. Retirer et égoutter sur du papier absorbant.
 7. Saupoudrer de sel et servir chaud.
-8. Accompagner de piment si désiré.', 
- 25, 
+8. Accompagner de piment si désiré.',
+ 25,
  'https://images.unsplash.com/photo-1600335895229-6e75511892c8?w=800&q=80',
  'cccccccc-cccc-cccc-cccc-cccccccccccc',
  NULL,
@@ -112,8 +112,8 @@ ON CONFLICT DO NOTHING;
 
 -- Tilapia au Four
 INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
-('44444444-4444-4444-4444-444444444444', 
- 'Tilapia au Four', 
+('d4e5f6a7-b8c9-0123-def0-234567890123',
+ 'Tilapia au Four',
  '1. Préchauffer le four à 200°C.
 2. Nettoyer le tilapia et le sécher.
 3. Préparer une marinade avec l''huile, l''ail, le gingembre, le citron et les herbes.
@@ -122,8 +122,8 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id,
 6. Ajouter des rondelles de tomate et d''oignon sur le poisson.
 7. Cuire au four pendant 25-30 minutes.
 8. Arroser régulièrement avec le jus de cuisson.
-9. Servir avec du riz ou des légumes.', 
- 35, 
+9. Servir avec du riz ou des légumes.',
+ 35,
  'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80',
  'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
  NULL,
@@ -132,8 +132,8 @@ ON CONFLICT DO NOTHING;
 
 -- Garba
 INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
-('55555555-5555-5555-5555-555555555555', 
- 'Garba (Attieké au Poisson)', 
+('e5f6a7b8-c9d0-1234-ef01-345678901234',
+ 'Garba (Attieké au Poisson)',
  '1. Rincer l''attieké à l''eau tiède et l''égrainer.
 2. Cuire à la vapeur pendant 10 minutes.
 3. Faire frire le poisson tilapia dans l''huile chaude.
@@ -141,8 +141,8 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id,
 5. Ajouter les oignons coupés et les tomates.
 6. Assaisonner avec le piment et le sel.
 7. Servir l''attieké avec le poisson frit.
-8. Accompagner de piment si désiré.', 
- 30, 
+8. Accompagner de piment si désiré.',
+ 30,
  'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80',
  'cccccccc-cccc-cccc-cccc-cccccccccccc',
  NULL,
@@ -151,8 +151,8 @@ ON CONFLICT DO NOTHING;
 
 -- Jollof Rice (Nigeria)
 INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
-('66666666-6666-6666-6666-666666666666', 
- 'Jollof Rice', 
+('f6a7b8c9-d0e1-2345-f012-456789012345',
+ 'Jollof Rice',
  '1. Laver le riz et le faire tremper pendant 30 minutes.
 2. Dans une grande marmite, faire chauffer l''huile et faire revenir les oignons.
 3. Ajouter l''ail, le gingembre et le piment, bien mélanger.
@@ -162,8 +162,8 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id,
 7. Ajouter du sel, du poivre et du curry.
 8. Couvrir et laisser cuire à feu doux pendant 25-30 minutes.
 9. Remuer de temps en temps pour éviter que le riz n''attache.
-10. Servir chaud avec du poulet grillé ou des légumes.', 
- 45, 
+10. Servir chaud avec du poulet grillé ou des légumes.',
+ 45,
  'https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=800&q=80',
  'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
  NULL,
@@ -172,8 +172,8 @@ ON CONFLICT DO NOTHING;
 
 -- Bobotie (South Africa)
 INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
-('77777777-7777-7777-7777-777777777777', 
- 'Bobotie', 
+('a7b8c9d0-e1f2-3456-0123-567890123456',
+ 'Bobotie',
  '1. Préchauffer le four à 180°C.
 2. Faire tremper le pain dans le lait pendant 10 minutes.
 3. Dans une poêle, faire revenir les oignons dans l''huile.
@@ -183,8 +183,8 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id,
 7. Égoutter le pain et l''ajouter à la viande.
 8. Verser le mélange dans un plat à gratin.
 9. Battre les œufs avec le lait restant et verser sur le bobotie.
-10. Cuire au four pendant 30-35 minutes jusqu''à ce que le dessus soit doré.', 
- 50, 
+10. Cuire au four pendant 30-35 minutes jusqu''à ce que le dessus soit doré.',
+ 50,
  'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80',
  'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
  NULL,
@@ -193,8 +193,8 @@ ON CONFLICT DO NOTHING;
 
 -- Ndolé (Cameroon)
 INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
-('88888888-8888-8888-8888-888888888888', 
- 'Ndolé', 
+('b8c9d0e1-f2a3-4567-1234-678901234567',
+ 'Ndolé',
  '1. Faire bouillir les feuilles de ndolé avec du bicarbonate pendant 20 minutes.
 2. Rincer abondamment à l''eau froide pour enlever l''amertume.
 3. Dans une marmite, faire chauffer l''huile de palme.
@@ -204,8 +204,8 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id,
 7. Ajouter le piment, le sel et le cube de bouillon.
 8. Laisser mijoter à feu doux pendant 30 minutes.
 9. Ajouter de l''eau si nécessaire pour obtenir la consistance désirée.
-10. Servir avec du plantain bouilli ou du manioc.', 
- 55, 
+10. Servir avec du plantain bouilli ou du manioc.',
+ 55,
  'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80',
  'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
  NULL,
@@ -214,8 +214,8 @@ ON CONFLICT DO NOTHING;
 
 -- Omelette aux légumes (Quick)
 INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
-('99999999-9999-9999-9999-999999999999', 
- 'Omelette aux légumes', 
+('c9d0e1f2-a3b4-5678-2345-789012345678',
+ 'Omelette aux légumes',
  '1. Laver et couper les légumes (poivron, tomate, oignon) en petits dés.
 2. Dans une poêle, faire chauffer un peu d''huile d''olive.
 3. Faire revenir les légumes pendant 3-4 minutes.
@@ -223,8 +223,8 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id,
 5. Verser les œufs sur les légumes dans la poêle.
 6. Cuire à feu moyen pendant 2-3 minutes.
 7. Ajouter du fromage râpé si désiré.
-8. Replier l''omelette en deux et servir chaud.', 
- 15, 
+8. Replier l''omelette en deux et servir chaud.',
+ 15,
  'https://images.unsplash.com/photo-1525351484163-7529414394d8?w=800&q=80',
  'cccccccc-cccc-cccc-cccc-cccccccccccc',
  NULL,
@@ -233,8 +233,8 @@ ON CONFLICT DO NOTHING;
 
 -- Salade César (Quick)
 INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
-('aaaaaaaa-aaaa-aaaa-aaaa-bbbbbbbbbbbb', 
- 'Salade César', 
+('d0e1f2a3-b4c5-6789-3456-890123456789',
+ 'Salade César',
  '1. Laver et sécher la laitue, la couper en morceaux.
 2. Couper le poulet grillé en lanières.
 3. Préparer la sauce : mélanger mayonnaise, jus de citron, ail, parmesan.
@@ -242,8 +242,8 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id,
 5. Dans un grand bol, disposer la laitue.
 6. Ajouter le poulet, les croûtons et le parmesan.
 7. Verser la sauce César sur la salade.
-8. Mélanger délicatement et servir immédiatement.', 
- 20, 
+8. Mélanger délicatement et servir immédiatement.',
+ 20,
  'https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=800&q=80',
  'cccccccc-cccc-cccc-cccc-cccccccccccc',
  NULL,
@@ -252,8 +252,8 @@ ON CONFLICT DO NOTHING;
 
 -- Pasta Carbonara (International)
 INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
-('bbbbbbbb-bbbb-bbbb-bbbb-aaaaaaaaaaaa', 
- 'Pasta Carbonara', 
+('e1f2a3b4-c5d6-7890-4567-901234567890',
+ 'Pasta Carbonara',
  '1. Faire cuire les pâtes dans une grande casserole d''eau salée.
 2. Dans une poêle, faire revenir le guanciale ou bacon jusqu''à ce qu''il soit croustillant.
 3. Dans un bol, battre les œufs avec le parmesan râpé.
@@ -263,8 +263,8 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id,
 7. Retirer du feu et ajouter le mélange d''œufs rapidement.
 8. Mélanger vigoureusement pour créer une sauce crémeuse.
 9. Ajouter un peu d''eau de cuisson si nécessaire.
-10. Servir immédiatement avec du parmesan supplémentaire.', 
- 25, 
+10. Servir immédiatement avec du parmesan supplémentaire.',
+ 25,
  'https://images.unsplash.com/photo-1612874742237-6526221588e3?w=800&q=80',
  'dddddddd-dddd-dddd-dddd-dddddddddddd',
  NULL,
@@ -273,8 +273,8 @@ ON CONFLICT DO NOTHING;
 
 -- Sushi Rolls (International)
 INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
-('cccccccc-cccc-cccc-cccc-bbbbbbbbbbbb', 
- 'Sushi Rolls (Maki)', 
+('f2a3b4c5-d6e7-8901-5678-012345678901',
+ 'Sushi Rolls (Maki)',
  '1. Rincer le riz à sushi jusqu''à ce que l''eau soit claire.
 2. Cuire le riz avec de l''eau dans une casserole.
 3. Mélanger le vinaigre de riz, le sucre et le sel pour la sauce.
@@ -284,8 +284,8 @@ INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id,
 7. Disposer le poisson, le concombre et l''avocat au centre.
 8. Rouler fermement à l''aide du tapis à sushi.
 9. Couper les rouleaux en morceaux avec un couteau humide.
-10. Servir avec de la sauce soja, du wasabi et du gingembre mariné.', 
- 40, 
+10. Servir avec de la sauce soja, du wasabi et du gingembre mariné.',
+ 40,
  'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&q=80',
  'dddddddd-dddd-dddd-dddd-dddddddddddd',
  NULL,
@@ -294,143 +294,278 @@ ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Amiwo
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
-('11111111-1111-1111-1111-111111111111', (SELECT id FROM ingredients WHERE name = 'Riz'), 300),
-('11111111-1111-1111-1111-111111111111', (SELECT id FROM ingredients WHERE name = 'Poulet'), 500),
-('11111111-1111-1111-1111-111111111111', (SELECT id FROM ingredients WHERE name = 'Tomate'), 200),
-('11111111-1111-1111-1111-111111111111', (SELECT id FROM ingredients WHERE name = 'Oignon'), 100),
-('11111111-1111-1111-1111-111111111111', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 50),
-('11111111-1111-1111-1111-111111111111', (SELECT id FROM ingredients WHERE name = 'Ail'), 10),
-('11111111-1111-1111-1111-111111111111', (SELECT id FROM ingredients WHERE name = 'Gingembre'), 10),
-('11111111-1111-1111-1111-111111111111', (SELECT id FROM ingredients WHERE name = 'Piment'), 5),
-('11111111-1111-1111-1111-111111111111', (SELECT id FROM ingredients WHERE name = 'Sel'), 5),
-('11111111-1111-1111-1111-111111111111', (SELECT id FROM ingredients WHERE name = 'Eau'), 500)
+('a1b2c3d4-e5f6-7890-abcd-ef1234567890', (SELECT id FROM ingredients WHERE name = 'Riz'), 300),
+('a1b2c3d4-e5f6-7890-abcd-ef1234567890', (SELECT id FROM ingredients WHERE name = 'Poulet'), 500),
+('a1b2c3d4-e5f6-7890-abcd-ef1234567890', (SELECT id FROM ingredients WHERE name = 'Tomate'), 200),
+('a1b2c3d4-e5f6-7890-abcd-ef1234567890', (SELECT id FROM ingredients WHERE name = 'Oignon'), 100),
+('a1b2c3d4-e5f6-7890-abcd-ef1234567890', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 50),
+('a1b2c3d4-e5f6-7890-abcd-ef1234567890', (SELECT id FROM ingredients WHERE name = 'Ail'), 10),
+('a1b2c3d4-e5f6-7890-abcd-ef1234567890', (SELECT id FROM ingredients WHERE name = 'Gingembre'), 10),
+('a1b2c3d4-e5f6-7890-abcd-ef1234567890', (SELECT id FROM ingredients WHERE name = 'Piment'), 5),
+('a1b2c3d4-e5f6-7890-abcd-ef1234567890', (SELECT id FROM ingredients WHERE name = 'Sel'), 5),
+('a1b2c3d4-e5f6-7890-abcd-ef1234567890', (SELECT id FROM ingredients WHERE name = 'Eau'), 500)
 ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Thiéboudienne
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
-('22222222-2222-2222-2222-222222222222', (SELECT id FROM ingredients WHERE name = 'Riz'), 400),
-('22222222-2222-2222-2222-222222222222', (SELECT id FROM ingredients WHERE name = 'Poisson Tilapia'), 600),
-('22222222-2222-2222-2222-222222222222', (SELECT id FROM ingredients WHERE name = 'Tomate'), 300),
-('22222222-2222-2222-2222-222222222222', (SELECT id FROM ingredients WHERE name = 'Oignon'), 150),
-('22222222-2222-2222-2222-222222222222', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 60),
-('22222222-2222-2222-2222-222222222222', (SELECT id FROM ingredients WHERE name = 'Carotte'), 200),
-('22222222-2222-2222-2222-222222222222', (SELECT id FROM ingredients WHERE name = 'Chou'), 150),
-('22222222-2222-2222-2222-222222222222', (SELECT id FROM ingredients WHERE name = 'Ail'), 15),
-('22222222-2222-2222-2222-222222222222', (SELECT id FROM ingredients WHERE name = 'Citron'), 30),
-('22222222-2222-2222-2222-222222222222', (SELECT id FROM ingredients WHERE name = 'Sel'), 8),
-('22222222-2222-2222-2222-222222222222', (SELECT id FROM ingredients WHERE name = 'Eau'), 600)
+('b2c3d4e5-f6a7-8901-bcde-f12345678901', (SELECT id FROM ingredients WHERE name = 'Riz'), 400),
+('b2c3d4e5-f6a7-8901-bcde-f12345678901', (SELECT id FROM ingredients WHERE name = 'Poisson Tilapia'), 600),
+('b2c3d4e5-f6a7-8901-bcde-f12345678901', (SELECT id FROM ingredients WHERE name = 'Tomate'), 300),
+('b2c3d4e5-f6a7-8901-bcde-f12345678901', (SELECT id FROM ingredients WHERE name = 'Oignon'), 150),
+('b2c3d4e5-f6a7-8901-bcde-f12345678901', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 60),
+('b2c3d4e5-f6a7-8901-bcde-f12345678901', (SELECT id FROM ingredients WHERE name = 'Carotte'), 200),
+('b2c3d4e5-f6a7-8901-bcde-f12345678901', (SELECT id FROM ingredients WHERE name = 'Chou'), 150),
+('b2c3d4e5-f6a7-8901-bcde-f12345678901', (SELECT id FROM ingredients WHERE name = 'Ail'), 15),
+('b2c3d4e5-f6a7-8901-bcde-f12345678901', (SELECT id FROM ingredients WHERE name = 'Citron'), 30),
+('b2c3d4e5-f6a7-8901-bcde-f12345678901', (SELECT id FROM ingredients WHERE name = 'Sel'), 8),
+('b2c3d4e5-f6a7-8901-bcde-f12345678901', (SELECT id FROM ingredients WHERE name = 'Eau'), 600)
 ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Aloco
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
-('33333333-3333-3333-3333-333333333333', (SELECT id FROM ingredients WHERE name = 'Banane plantain'), 500),
-('33333333-3333-3333-3333-333333333333', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 100),
-('33333333-3333-3333-3333-333333333333', (SELECT id FROM ingredients WHERE name = 'Sel'), 5),
-('33333333-3333-3333-3333-333333333333', (SELECT id FROM ingredients WHERE name = 'Piment'), 3)
+('c3d4e5f6-a7b8-9012-cdef-123456789012', (SELECT id FROM ingredients WHERE name = 'Banane plantain'), 500),
+('c3d4e5f6-a7b8-9012-cdef-123456789012', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 100),
+('c3d4e5f6-a7b8-9012-cdef-123456789012', (SELECT id FROM ingredients WHERE name = 'Sel'), 5),
+('c3d4e5f6-a7b8-9012-cdef-123456789012', (SELECT id FROM ingredients WHERE name = 'Piment'), 3)
 ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Tilapia au Four
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
-('44444444-4444-4444-4444-444444444444', (SELECT id FROM ingredients WHERE name = 'Poisson Tilapia'), 600),
-('44444444-4444-4444-4444-444444444444', (SELECT id FROM ingredients WHERE name = 'Tomate'), 200),
-('44444444-4444-4444-4444-444444444444', (SELECT id FROM ingredients WHERE name = 'Oignon'), 100),
-('44444444-4444-4444-4444-444444444444', (SELECT id FROM ingredients WHERE name = 'Ail'), 15),
-('44444444-4444-4444-4444-444444444444', (SELECT id FROM ingredients WHERE name = 'Gingembre'), 10),
-('44444444-4444-4444-4444-444444444444', (SELECT id FROM ingredients WHERE name = 'Citron'), 40),
-('44444444-4444-4444-4444-444444444444', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 30),
-('44444444-4444-4444-4444-444444444444', (SELECT id FROM ingredients WHERE name = 'Sel'), 5)
+('d4e5f6a7-b8c9-0123-def0-234567890123', (SELECT id FROM ingredients WHERE name = 'Poisson Tilapia'), 600),
+('d4e5f6a7-b8c9-0123-def0-234567890123', (SELECT id FROM ingredients WHERE name = 'Tomate'), 200),
+('d4e5f6a7-b8c9-0123-def0-234567890123', (SELECT id FROM ingredients WHERE name = 'Oignon'), 100),
+('d4e5f6a7-b8c9-0123-def0-234567890123', (SELECT id FROM ingredients WHERE name = 'Ail'), 15),
+('d4e5f6a7-b8c9-0123-def0-234567890123', (SELECT id FROM ingredients WHERE name = 'Gingembre'), 10),
+('d4e5f6a7-b8c9-0123-def0-234567890123', (SELECT id FROM ingredients WHERE name = 'Citron'), 40),
+('d4e5f6a7-b8c9-0123-def0-234567890123', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 30),
+('d4e5f6a7-b8c9-0123-def0-234567890123', (SELECT id FROM ingredients WHERE name = 'Sel'), 5)
 ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Garba
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
-('55555555-5555-5555-5555-555555555555', (SELECT id FROM ingredients WHERE name = 'Farine de maïs'), 300),
-('55555555-5555-5555-5555-555555555555', (SELECT id FROM ingredients WHERE name = 'Poisson Tilapia'), 500),
-('55555555-5555-5555-5555-555555555555', (SELECT id FROM ingredients WHERE name = 'Tomate'), 150),
-('55555555-5555-5555-5555-555555555555', (SELECT id FROM ingredients WHERE name = 'Oignon'), 80),
-('55555555-5555-5555-5555-555555555555', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 80),
-('55555555-5555-5555-5555-555555555555', (SELECT id FROM ingredients WHERE name = 'Piment'), 5),
-('55555555-5555-5555-5555-555555555555', (SELECT id FROM ingredients WHERE name = 'Sel'), 5)
+('e5f6a7b8-c9d0-1234-ef01-345678901234', (SELECT id FROM ingredients WHERE name = 'Farine de maïs'), 300),
+('e5f6a7b8-c9d0-1234-ef01-345678901234', (SELECT id FROM ingredients WHERE name = 'Poisson Tilapia'), 500),
+('e5f6a7b8-c9d0-1234-ef01-345678901234', (SELECT id FROM ingredients WHERE name = 'Tomate'), 150),
+('e5f6a7b8-c9d0-1234-ef01-345678901234', (SELECT id FROM ingredients WHERE name = 'Oignon'), 80),
+('e5f6a7b8-c9d0-1234-ef01-345678901234', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 80),
+('e5f6a7b8-c9d0-1234-ef01-345678901234', (SELECT id FROM ingredients WHERE name = 'Piment'), 5),
+('e5f6a7b8-c9d0-1234-ef01-345678901234', (SELECT id FROM ingredients WHERE name = 'Sel'), 5)
 ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Jollof Rice
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
-('66666666-6666-6666-6666-666666666666', (SELECT id FROM ingredients WHERE name = 'Riz'), 400),
-('66666666-6666-6666-6666-666666666666', (SELECT id FROM ingredients WHERE name = 'Tomate'), 300),
-('66666666-6666-6666-6666-666666666666', (SELECT id FROM ingredients WHERE name = 'Oignon'), 150),
-('66666666-6666-6666-6666-666666666666', (SELECT id FROM ingredients WHERE name = 'Ail'), 15),
-('66666666-6666-6666-6666-666666666666', (SELECT id FROM ingredients WHERE name = 'Gingembre'), 10),
-('66666666-6666-6666-6666-666666666666', (SELECT id FROM ingredients WHERE name = 'Piment'), 5),
-('66666666-6666-6666-6666-666666666666', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 50),
-('66666666-6666-6666-6666-666666666666', (SELECT id FROM ingredients WHERE name = 'Sel'), 8),
-('66666666-6666-6666-6666-666666666666', (SELECT id FROM ingredients WHERE name = 'Eau'), 500)
+('f6a7b8c9-d0e1-2345-f012-456789012345', (SELECT id FROM ingredients WHERE name = 'Riz'), 400),
+('f6a7b8c9-d0e1-2345-f012-456789012345', (SELECT id FROM ingredients WHERE name = 'Tomate'), 300),
+('f6a7b8c9-d0e1-2345-f012-456789012345', (SELECT id FROM ingredients WHERE name = 'Oignon'), 150),
+('f6a7b8c9-d0e1-2345-f012-456789012345', (SELECT id FROM ingredients WHERE name = 'Ail'), 15),
+('f6a7b8c9-d0e1-2345-f012-456789012345', (SELECT id FROM ingredients WHERE name = 'Gingembre'), 10),
+('f6a7b8c9-d0e1-2345-f012-456789012345', (SELECT id FROM ingredients WHERE name = 'Piment'), 5),
+('f6a7b8c9-d0e1-2345-f012-456789012345', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 50),
+('f6a7b8c9-d0e1-2345-f012-456789012345', (SELECT id FROM ingredients WHERE name = 'Sel'), 8),
+('f6a7b8c9-d0e1-2345-f012-456789012345', (SELECT id FROM ingredients WHERE name = 'Eau'), 500)
 ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Bobotie
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
-('77777777-7777-7777-7777-777777777777', (SELECT id FROM ingredients WHERE name = 'Bœuf'), 500),
-('77777777-7777-7777-7777-777777777777', (SELECT id FROM ingredients WHERE name = 'Pain'), 100),
-('77777777-7777-7777-7777-777777777777', (SELECT id FROM ingredients WHERE name = 'Lait'), 200),
-('77777777-7777-7777-7777-777777777777', (SELECT id FROM ingredients WHERE name = 'Oignon'), 100),
-('77777777-7777-7777-7777-777777777777', (SELECT id FROM ingredients WHERE name = 'Ail'), 15),
-('77777777-7777-7777-7777-777777777777', (SELECT id FROM ingredients WHERE name = 'Œuf'), 100),
-('77777777-7777-7777-7777-777777777777', (SELECT id FROM ingredients WHERE name = 'Huile d''olive'), 30),
-('77777777-7777-7777-7777-777777777777', (SELECT id FROM ingredients WHERE name = 'Sel'), 5),
-('77777777-7777-7777-7777-777777777777', (SELECT id FROM ingredients WHERE name = 'Miel'), 30)
+('a7b8c9d0-e1f2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Bœuf'), 500),
+('a7b8c9d0-e1f2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Pain'), 100),
+('a7b8c9d0-e1f2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Lait'), 200),
+('a7b8c9d0-e1f2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Oignon'), 100),
+('a7b8c9d0-e1f2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Ail'), 15),
+('a7b8c9d0-e1f2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Œuf'), 100),
+('a7b8c9d0-e1f2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Huile d''olive'), 30),
+('a7b8c9d0-e1f2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Sel'), 5),
+('a7b8c9d0-e1f2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Miel'), 30)
 ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Ndolé
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
-('88888888-8888-8888-8888-888888888888', (SELECT id FROM ingredients WHERE name = 'Crevettes'), 200),
-('88888888-8888-8888-8888-888888888888', (SELECT id FROM ingredients WHERE name = 'Oignon'), 100),
-('88888888-8888-8888-8888-888888888888', (SELECT id FROM ingredients WHERE name = 'Ail'), 15),
-('88888888-8888-8888-8888-888888888888', (SELECT id FROM ingredients WHERE name = 'Gingembre'), 10),
-('88888888-8888-8888-8888-888888888888', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 80),
-('88888888-8888-8888-8888-888888888888', (SELECT id FROM ingredients WHERE name = 'Piment'), 5),
-('88888888-8888-8888-8888-888888888888', (SELECT id FROM ingredients WHERE name = 'Sel'), 5),
-('88888888-8888-8888-8888-888888888888', (SELECT id FROM ingredients WHERE name = 'Eau'), 300)
+('b8c9d0e1-f2a3-4567-1234-678901234567', (SELECT id FROM ingredients WHERE name = 'Crevettes'), 200),
+('b8c9d0e1-f2a3-4567-1234-678901234567', (SELECT id FROM ingredients WHERE name = 'Oignon'), 100),
+('b8c9d0e1-f2a3-4567-1234-678901234567', (SELECT id FROM ingredients WHERE name = 'Ail'), 15),
+('b8c9d0e1-f2a3-4567-1234-678901234567', (SELECT id FROM ingredients WHERE name = 'Gingembre'), 10),
+('b8c9d0e1-f2a3-4567-1234-678901234567', (SELECT id FROM ingredients WHERE name = 'Huile de palme'), 80),
+('b8c9d0e1-f2a3-4567-1234-678901234567', (SELECT id FROM ingredients WHERE name = 'Piment'), 5),
+('b8c9d0e1-f2a3-4567-1234-678901234567', (SELECT id FROM ingredients WHERE name = 'Sel'), 5),
+('b8c9d0e1-f2a3-4567-1234-678901234567', (SELECT id FROM ingredients WHERE name = 'Eau'), 300)
 ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Omelette aux légumes
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
-('99999999-9999-9999-9999-999999999999', (SELECT id FROM ingredients WHERE name = 'Œuf'), 150),
-('99999999-9999-9999-9999-999999999999', (SELECT id FROM ingredients WHERE name = 'Poivron'), 50),
-('99999999-9999-9999-9999-999999999999', (SELECT id FROM ingredients WHERE name = 'Tomate'), 50),
-('99999999-9999-9999-9999-999999999999', (SELECT id FROM ingredients WHERE name = 'Oignon'), 30),
-('99999999-9999-9999-9999-999999999999', (SELECT id FROM ingredients WHERE name = 'Huile d''olive'), 15),
-('99999999-9999-9999-9999-999999999999', (SELECT id FROM ingredients WHERE name = 'Fromage'), 30),
-('99999999-9999-9999-9999-999999999999', (SELECT id FROM ingredients WHERE name = 'Sel'), 3)
+('c9d0e1f2-a3b4-5678-2345-789012345678', (SELECT id FROM ingredients WHERE name = 'Œuf'), 150),
+('c9d0e1f2-a3b4-5678-2345-789012345678', (SELECT id FROM ingredients WHERE name = 'Poivron'), 50),
+('c9d0e1f2-a3b4-5678-2345-789012345678', (SELECT id FROM ingredients WHERE name = 'Tomate'), 50),
+('c9d0e1f2-a3b4-5678-2345-789012345678', (SELECT id FROM ingredients WHERE name = 'Oignon'), 30),
+('c9d0e1f2-a3b4-5678-2345-789012345678', (SELECT id FROM ingredients WHERE name = 'Huile d''olive'), 15),
+('c9d0e1f2-a3b4-5678-2345-789012345678', (SELECT id FROM ingredients WHERE name = 'Fromage'), 30),
+('c9d0e1f2-a3b4-5678-2345-789012345678', (SELECT id FROM ingredients WHERE name = 'Sel'), 3)
 ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Salade César
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
-('aaaaaaaa-aaaa-aaaa-aaaa-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Poulet'), 200),
-('aaaaaaaa-aaaa-aaaa-aaaa-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Pain'), 50),
-('aaaaaaaa-aaaa-aaaa-aaaa-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Fromage'), 40),
-('aaaaaaaa-aaaa-aaaa-aaaa-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Ail'), 5),
-('aaaaaaaa-aaaa-aaaa-aaaa-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Citron'), 20),
-('aaaaaaaa-aaaa-aaaa-aaaa-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Huile d''olive'), 30),
-('aaaaaaaa-aaaa-aaaa-aaaa-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Sel'), 3)
+('d0e1f2a3-b4c5-6789-3456-890123456789', (SELECT id FROM ingredients WHERE name = 'Poulet'), 200),
+('d0e1f2a3-b4c5-6789-3456-890123456789', (SELECT id FROM ingredients WHERE name = 'Pain'), 50),
+('d0e1f2a3-b4c5-6789-3456-890123456789', (SELECT id FROM ingredients WHERE name = 'Fromage'), 40),
+('d0e1f2a3-b4c5-6789-3456-890123456789', (SELECT id FROM ingredients WHERE name = 'Ail'), 5),
+('d0e1f2a3-b4c5-6789-3456-890123456789', (SELECT id FROM ingredients WHERE name = 'Citron'), 20),
+('d0e1f2a3-b4c5-6789-3456-890123456789', (SELECT id FROM ingredients WHERE name = 'Huile d''olive'), 30),
+('d0e1f2a3-b4c5-6789-3456-890123456789', (SELECT id FROM ingredients WHERE name = 'Sel'), 3)
 ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Pasta Carbonara
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
-('bbbbbbbb-bbbb-bbbb-bbbb-aaaaaaaaaaaa', (SELECT id FROM ingredients WHERE name = 'Pâtes'), 300),
-('bbbbbbbb-bbbb-bbbb-bbbb-aaaaaaaaaaaa', (SELECT id FROM ingredients WHERE name = 'Bœuf'), 100),
-('bbbbbbbb-bbbb-bbbb-bbbb-aaaaaaaaaaaa', (SELECT id FROM ingredients WHERE name = 'Œuf'), 100),
-('bbbbbbbb-bbbb-bbbb-bbbb-aaaaaaaaaaaa', (SELECT id FROM ingredients WHERE name = 'Fromage'), 50),
-('bbbbbbbb-bbbb-bbbb-bbbb-aaaaaaaaaaaa', (SELECT id FROM ingredients WHERE name = 'Ail'), 5),
-('bbbbbbbb-bbbb-bbbb-bbbb-aaaaaaaaaaaa', (SELECT id FROM ingredients WHERE name = 'Huile d''olive'), 20),
-('bbbbbbbb-bbbb-bbbb-bbbb-aaaaaaaaaaaa', (SELECT id FROM ingredients WHERE name = 'Sel'), 5),
-('bbbbbbbb-bbbb-bbbb-bbbb-aaaaaaaaaaaa', (SELECT id FROM ingredients WHERE name = 'Eau'), 500)
+('e1f2a3b4-c5d6-7890-4567-901234567890', (SELECT id FROM ingredients WHERE name = 'Pâtes'), 300),
+('e1f2a3b4-c5d6-7890-4567-901234567890', (SELECT id FROM ingredients WHERE name = 'Bœuf'), 100),
+('e1f2a3b4-c5d6-7890-4567-901234567890', (SELECT id FROM ingredients WHERE name = 'Œuf'), 100),
+('e1f2a3b4-c5d6-7890-4567-901234567890', (SELECT id FROM ingredients WHERE name = 'Fromage'), 50),
+('e1f2a3b4-c5d6-7890-4567-901234567890', (SELECT id FROM ingredients WHERE name = 'Ail'), 5),
+('e1f2a3b4-c5d6-7890-4567-901234567890', (SELECT id FROM ingredients WHERE name = 'Huile d''olive'), 20),
+('e1f2a3b4-c5d6-7890-4567-901234567890', (SELECT id FROM ingredients WHERE name = 'Sel'), 5),
+('e1f2a3b4-c5d6-7890-4567-901234567890', (SELECT id FROM ingredients WHERE name = 'Eau'), 500)
 ON CONFLICT DO NOTHING;
 
 -- Insert recipe ingredients for Sushi Rolls
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
-('cccccccc-cccc-cccc-cccc-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Riz'), 300),
-('cccccccc-cccc-cccc-cccc-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Crevettes'), 200),
-('cccccccc-cccc-cccc-cccc-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Concombre'), 100),
-('cccccccc-cccc-cccc-cccc-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Sauce soja'), 30),
-('cccccccc-cccc-cccc-cccc-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Sucre'), 15),
-('cccccccc-cccc-cccc-cccc-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Sel'), 5),
-('cccccccc-cccc-cccc-cccc-bbbbbbbbbbbb', (SELECT id FROM ingredients WHERE name = 'Eau'), 400)
+('f2a3b4c5-d6e7-8901-5678-012345678901', (SELECT id FROM ingredients WHERE name = 'Riz'), 300),
+('f2a3b4c5-d6e7-8901-5678-012345678901', (SELECT id FROM ingredients WHERE name = 'Crevettes'), 200),
+('f2a3b4c5-d6e7-8901-5678-012345678901', (SELECT id FROM ingredients WHERE name = 'Concombre'), 100),
+('f2a3b4c5-d6e7-8901-5678-012345678901', (SELECT id FROM ingredients WHERE name = 'Sauce soja'), 30),
+('f2a3b4c5-d6e7-8901-5678-012345678901', (SELECT id FROM ingredients WHERE name = 'Sucre'), 15),
+('f2a3b4c5-d6e7-8901-5678-012345678901', (SELECT id FROM ingredients WHERE name = 'Sel'), 5),
+('f2a3b4c5-d6e7-8901-5678-012345678901', (SELECT id FROM ingredients WHERE name = 'Eau'), 400)
+ON CONFLICT DO NOTHING;
+
+-- Pad Thai (International)
+INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
+('a3b4c5d6-e7f8-9012-6789-123456789012',
+ 'Pad Thai',
+ '1. Faire tremper les nouilles de riz dans l''eau tiède pendant 30 minutes.
+2. Dans un wok, chauffer l''huile et faire revenir l''ail et les crevettes.
+3. Ajouter les nouilles égouttées et mélanger.
+4. Verser la sauce (sauce de poisson, tamarin, sucre).
+5. Pousser les nouilles sur le côté et casser 2 œufs dans le wok.
+6. Mélanger les œufs puis incorporer aux nouilles.
+7. Ajouter les germes de soja, les cacahuètes et la ciboulette.
+8. Servir avec du citron vert et des piments.',
+ 30,
+ 'https://images.unsplash.com/photo-1559314809-0d155014e29e?w=800&q=80',
+ 'dddddddd-dddd-dddd-dddd-dddddddddddd',
+ NULL,
+ 'Thaïlande')
+ON CONFLICT DO NOTHING;
+
+-- Tacos al Pastor (International)
+INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
+('b4c5d6e7-f8a9-0123-7890-234567890123',
+ 'Tacos al Pastor',
+ '1. Marinader le porc avec l''achiote, le vinaigre et les épices pendant 4h.
+2. Cuire le porc au four ou à la broche jusqu''à ce qu''il soit tendre.
+3. Chauffer les tortillas de maïs sur une plaque chaude.
+4. Hacher le porc cuit et le mettre dans les tortillas.
+5. Ajouter des morceaux d''ananas, de l''oignon et de la coriandre.
+6. Arroser de salsa verde.
+7. Servir avec des quartiers de citron vert.',
+ 45,
+ 'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=800&q=80',
+ 'dddddddd-dddd-dddd-dddd-dddddddddddd',
+ NULL,
+ 'Mexique')
+ON CONFLICT DO NOTHING;
+
+-- Chicken Tikka Masala (International)
+INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
+('c5d6e7f8-a9b0-1234-8901-345678901234',
+ 'Chicken Tikka Masala',
+ '1. Couper le poulet en cubes et le mariner avec le yaourt et les épices.
+2. Faire griller les morceaux de poulet au four ou au barbecue.
+3. Dans une poêle, faire revenir l''oignon, l''ail et le gingembre.
+4. Ajouter les tomates en dés et laisser mijoter.
+5. Incorporer les épices (curry, cumin, coriandre).
+6. Ajouter le poulet grillé et la crème.
+7. Laisser mijoter 10 minutes.
+8. Servir avec du riz basmati et du naan.',
+ 40,
+ 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800&q=80',
+ 'dddddddd-dddd-dddd-dddd-dddddddddddd',
+ NULL,
+ 'Inde')
+ON CONFLICT DO NOTHING;
+
+-- Croissant au Beurre (Quick)
+INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
+('d6e7f8a9-b0c1-2345-9012-456789012345',
+ 'Croissant au Beurre',
+ '1. Préchauffer le four à 200°C.
+2. Dérouler la pâte feuilletée et couper en triangles.
+3. Rouler chaque triangle en partant de la base.
+4. Badigeonner avec de l''œuf battu.
+5. Cuire au four pendant 15-20 minutes jusqu''à ce qu''ils soient dorés.
+6. Laisser refroidir sur une grille.',
+ 25,
+ 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80',
+ 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+ NULL,
+ 'France')
+ON CONFLICT DO NOTHING;
+
+-- Smoothie Bowl (Quick)
+INSERT INTO recipes (id, title, instructions, prep_time, image_url, category_id, created_by, country) VALUES
+('e7f8a9b0-c1d2-3456-0123-567890123456',
+ 'Smoothie Bowl aux Fruits',
+ '1. Mixer les bananes congelées avec les fraises et un peu de lait.
+2. Verser dans un bol.
+3. Garnir avec des fruits frais, des granolas et des graines de chia.
+4. Ajouter un filet de miel.
+5. Servir immédiatement.',
+ 10,
+ 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=800&q=80',
+ 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+ NULL,
+ 'Brésil')
+ON CONFLICT DO NOTHING;
+
+-- Insert recipe ingredients for Pad Thai
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
+('a3b4c5d6-e7f8-9012-6789-123456789012', (SELECT id FROM ingredients WHERE name = 'Pâtes'), 200),
+('a3b4c5d6-e7f8-9012-6789-123456789012', (SELECT id FROM ingredients WHERE name = 'Crevettes'), 150),
+('a3b4c5d6-e7f8-9012-6789-123456789012', (SELECT id FROM ingredients WHERE name = 'Œuf'), 100),
+('a3b4c5d6-e7f8-9012-6789-123456789012', (SELECT id FROM ingredients WHERE name = 'Ail'), 10),
+('a3b4c5d6-e7f8-9012-6789-123456789012', (SELECT id FROM ingredients WHERE name = 'Huile d''olive'), 20),
+('a3b4c5d6-e7f8-9012-6789-123456789012', (SELECT id FROM ingredients WHERE name = 'Sel'), 5)
+ON CONFLICT DO NOTHING;
+
+-- Insert recipe ingredients for Tacos al Pastor
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
+('b4c5d6e7-f8a9-0123-7890-234567890123', (SELECT id FROM ingredients WHERE name = 'Bœuf'), 300),
+('b4c5d6e7-f8a9-0123-7890-234567890123', (SELECT id FROM ingredients WHERE name = 'Oignon'), 80),
+('b4c5d6e7-f8a9-0123-7890-234567890123', (SELECT id FROM ingredients WHERE name = 'Ail'), 10),
+('b4c5d6e7-f8a9-0123-7890-234567890123', (SELECT id FROM ingredients WHERE name = 'Huile d''olive'), 25),
+('b4c5d6e7-f8a9-0123-7890-234567890123', (SELECT id FROM ingredients WHERE name = 'Sel'), 5)
+ON CONFLICT DO NOTHING;
+
+-- Insert recipe ingredients for Chicken Tikka Masala
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
+('c5d6e7f8-a9b0-1234-8901-345678901234', (SELECT id FROM ingredients WHERE name = 'Poulet'), 400),
+('c5d6e7f8-a9b0-1234-8901-345678901234', (SELECT id FROM ingredients WHERE name = 'Yaourt'), 150),
+('c5d6e7f8-a9b0-1234-8901-345678901234', (SELECT id FROM ingredients WHERE name = 'Tomate'), 200),
+('c5d6e7f8-a9b0-1234-8901-345678901234', (SELECT id FROM ingredients WHERE name = 'Oignon'), 100),
+('c5d6e7f8-a9b0-1234-8901-345678901234', (SELECT id FROM ingredients WHERE name = 'Ail'), 15),
+('c5d6e7f8-a9b0-1234-8901-345678901234', (SELECT id FROM ingredients WHERE name = 'Huile d''olive'), 30),
+('c5d6e7f8-a9b0-1234-8901-345678901234', (SELECT id FROM ingredients WHERE name = 'Sel'), 5)
+ON CONFLICT DO NOTHING;
+
+-- Insert recipe ingredients for Croissant au Beurre
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
+('d6e7f8a9-b0c1-2345-9012-456789012345', (SELECT id FROM ingredients WHERE name = 'Farine'), 200),
+('d6e7f8a9-b0c1-2345-9012-456789012345', (SELECT id FROM ingredients WHERE name = 'Beurre'), 100),
+('d6e7f8a9-b0c1-2345-9012-456789012345', (SELECT id FROM ingredients WHERE name = 'Œuf'), 50),
+('d6e7f8a9-b0c1-2345-9012-456789012345', (SELECT id FROM ingredients WHERE name = 'Sel'), 3)
+ON CONFLICT DO NOTHING;
+
+-- Insert recipe ingredients for Smoothie Bowl
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, amount_grams) VALUES
+('e7f8a9b0-c1d2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Fraises'), 150),
+('e7f8a9b0-c1d2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Yaourt'), 100),
+('e7f8a9b0-c1d2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Miel'), 20),
+('e7f8a9b0-c1d2-3456-0123-567890123456', (SELECT id FROM ingredients WHERE name = 'Lait'), 50)
 ON CONFLICT DO NOTHING;

@@ -43,6 +43,29 @@ body {
   }
 }
 
+/* Search bar animations */
+@keyframes searchExpand {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes searchSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ✅ Respect prefers-reduced-motion — WCAG 2.3.3 */
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in,
