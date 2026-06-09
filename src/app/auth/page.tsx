@@ -129,7 +129,7 @@ export default function AuthPage() {
       <div className="absolute bottom-20 right-10 w-48 h-48 bg-emerald-600/10 rounded-full blur-3xl animate-pulse delay-1000" />
 
       {/* Main Content */}
-      <main className="relative z-10 min-h-screen flex items-center justify-center px-6">
+      <main className="relative z-10 min-h-screen flex items-center justify-center px-6 py-12">
         {/* Accueil Link - Positionné en haut à gauche */}
         <Link 
           href="/"
@@ -139,11 +139,54 @@ export default function AuthPage() {
           <span>Accueil</span>
         </Link>
 
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          {/* Left column — texte de bienvenue */}
+          <div className="hidden lg:flex flex-col justify-center space-y-8 pr-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-6">
+                <Leaf className="w-6 h-6 text-emerald-400" />
+                <span className="text-emerald-400 font-semibold tracking-wide text-sm uppercase">Cuisinez mieux</span>
+              </div>
+              <h1 className={`${playfair.className} text-5xl xl:text-6xl text-white leading-tight mb-6`}>
+                {isLogin ? (
+                  <>Bienvenue<br /><span className="text-emerald-400">de retour</span></>
+                ) : (
+                  <>Rejoignez-<br /><span className="text-emerald-400">nous</span></>
+                )}
+              </h1>
+              <p className="text-zinc-300 text-lg leading-relaxed">
+                {isLogin
+                  ? "Connectez-vous pour retrouver vos recettes favorites et continuer votre aventure culinaire."
+                  : "Créez votre compte et commencez à cuisiner. Découvrez des centaines de recettes, gérez vos favoris et bien plus encore."}
+              </p>
+            </div>
+
+            {/* Feature highlights */}
+            <div className="space-y-4">
+              {[
+                { icon: "🍽️", text: "Des centaines de recettes à explorer" },
+                { icon: "❤️", text: "Sauvegardez vos plats favoris" },
+                { icon: "📊", text: "Suivez vos apports nutritionnels" },
+              ].map((item) => (
+                <div key={item.text} className="flex items-center space-x-3">
+                  <span className="text-2xl">{item.icon}</span>
+                  <span className="text-zinc-300 text-sm">{item.text}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Decorative divider */}
+            <div className="w-16 h-1 bg-emerald-500/50 rounded-full" />
+          </div>
+
+          {/* Right column — formulaire */}
+          <div className="w-full">
           {/* Glassmorphism Card */}
-          <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
-            <header className="mb-8 text-center">
-              <h1 className={`${playfair.className} text-3xl md:text-4xl text-white mb-4 leading-tight`}>
+          <div className={`bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl ${isLogin ? 'p-8' : 'p-6'}`}>
+            <header className={`${isLogin ? 'mb-8' : 'mb-5'} text-center lg:text-left`}>
+              {/* Titre visible uniquement sur mobile */}
+              <h1 className={`${playfair.className} text-3xl md:text-4xl text-white mb-3 leading-tight lg:hidden`}>
                 {isLogin ? "Bienvenue" : "Rejoignez-nous"}
               </h1>
               <p className="text-zinc-300 text-base">
@@ -166,7 +209,7 @@ export default function AuthPage() {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className={`${isLogin ? 'space-y-5' : 'space-y-3'}`}>
               {!isLogin && (
                 <div className="space-y-2">
                   <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Nom complet</label>
@@ -248,8 +291,8 @@ export default function AuthPage() {
                     </span>
                     <span className="text-zinc-400 group-hover:text-zinc-300 transition-colors">Se souvenir</span>
                   </label>
-                  <Link href="/auth/reset-password" className="text-emerald-400 hover:text-emerald-300 transition-colors">
-                    Oublié ?
+                  <Link href="/auth/reset-password" className="text-emerald-400 hover:text-emerald-300 transition-colors text-sm">
+                    Mot de passe oublié ?
                   </Link>
                 </div>
               )}
@@ -257,14 +300,14 @@ export default function AuthPage() {
               <button 
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-emerald-600/30 flex items-center justify-center space-x-2 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-emerald-600/30 flex items-center justify-center space-x-2 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span>{loading ? "Chargement..." : isLogin ? "Se connecter" : "Créer un compte"}</span>
                 {!loading && <ArrowRight className="w-5 h-5" />}
               </button>
             </form>
 
-            <div className="mt-8 pt-6 border-t border-white/10 text-center">
+            <div className={`${isLogin ? 'mt-8 pt-6' : 'mt-4 pt-4'} border-t border-white/10 text-center`}>
               <p className="text-zinc-400 text-sm mb-2">
                 {isLogin ? "Pas encore de compte ?" : "Déjà membre ?"}
               </p>
@@ -275,6 +318,7 @@ export default function AuthPage() {
                 {isLogin ? "Créer un compte" : "Se connecter"}
               </button>
             </div>
+          </div>
           </div>
         </div>
       </main>
