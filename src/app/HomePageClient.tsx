@@ -517,7 +517,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
               Questions Fréquentes
             </h2>
             <p className="text-zinc-500 text-base max-w-2xl mx-auto">
-              L'essentiel pour naviguer dans l'écosystème Naya avec aisance.
+              L&apos;essentiel pour naviguer dans l&apos;écosystème Naya avec aisance.
             </p>
           </div>
 

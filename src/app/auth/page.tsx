@@ -113,7 +113,7 @@ export default function AuthPage() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2o-5iT-Rh04BqnHzs1hpvxK9yBis84_UPfcvC41j77Q&s=10"
+          src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&w=1920&q=80"
           alt="Culinary background"
           fill
           className="object-cover opacity-60"
