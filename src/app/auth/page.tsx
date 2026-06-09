@@ -240,9 +240,13 @@ export default function AuthPage() {
 
               {isLogin && (
                 <div className="flex items-center justify-between text-sm">
-                  <label className="flex items-center space-x-2 cursor-pointer">
-                    <input type="checkbox" className="w-4 h-4 rounded border-zinc-500 text-emerald-600 focus:ring-emerald-500 focus:ring-offset-0 bg-transparent" />
-                    <span className="text-zinc-400">Se souvenir</span>
+                  <label className="flex items-center space-x-2 cursor-pointer group">
+                    <span className="relative inline-flex items-center">
+                      <input type="checkbox" className="sr-only peer" />
+                      <span className="w-9 h-5 rounded-full bg-white/10 border border-white/20 peer-checked:bg-emerald-600/70 peer-checked:border-emerald-500 transition-all duration-200 group-hover:border-white/40" />
+                      <span className="absolute left-0.5 top-0.5 w-4 h-4 rounded-full bg-zinc-400 peer-checked:bg-white peer-checked:translate-x-4 transition-all duration-200 shadow-sm" />
+                    </span>
+                    <span className="text-zinc-400 group-hover:text-zinc-300 transition-colors">Se souvenir</span>
                   </label>
                   <Link href="/auth/reset-password" className="text-emerald-400 hover:text-emerald-300 transition-colors">
                     Oublié ?
