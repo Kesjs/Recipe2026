@@ -44,8 +44,9 @@ const config: Config = {
         '102': '1.02',
       },
       animation: {
-        'fade-in': 'fadeIn 1s ease-out',
-        'slide-in-left': 'slideInLeft 1s ease-out',
+        // ✅ Durée réduite de 1000ms → 400ms (Material Design < 300ms pour interactions)
+        'fade-in': 'fadeIn 0.4s ease-out',
+        'slide-in-left': 'slideInLeft 0.4s ease-out',
       },
       keyframes: {
         fadeIn: {
@@ -53,7 +54,8 @@ const config: Config = {
           '100%': { opacity: '1' },
         },
         slideInLeft: {
-          '0%': { transform: 'translateX(-2rem)', opacity: '0' },
+          // ✅ Amplitude réduite de 2rem → 1rem : mouvement plus sobre
+          '0%': { transform: 'translateX(-1rem)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
         },
       },
@@ -61,4 +63,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;

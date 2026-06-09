@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Logo from "./navbar/Logo";
 import NavLinks from "./navbar/NavLinks";
 import MorphingSearchBar from "./navbar/MorphingSearchBar";
@@ -13,37 +13,58 @@ interface NavbarProps {
   setSearchQuery?: (query: string) => void;
 }
 
-export default function Navbar({ searchQuery: externalSearchQuery = "", setSearchQuery: externalSetSearchQuery }: NavbarProps = {}) {
+export default function Navbar({
+  searchQuery: externalSearchQuery = "",
+  setSearchQuery: externalSetSearchQuery,
+}: NavbarProps = {}) {
   const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [internalSearchQuery, setInternalSearchQuery] = useState("");
   const [user, setUser] = useState<any>(null);
 
+  // ✅ Ref pour éviter les appels rAF en double
+  const tickingRef = useRef(false);
+
   const searchQuery = externalSearchQuery || internalSearchQuery;
   const setSearchQuery = externalSetSearchQuery || setInternalSearchQuery;
 
   useEffect(() => {
+    // ✅ Scroll listener optimisé : passive + requestAnimationFrame
+    // Avant : synchrone → jank garanti à chaque pixel scrollé
+    // Après : le navigateur gère le scroll indépendamment du JS (passive),
+    //         et on ne lit scrollY qu'une fois par frame (rAF)
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 60);
+      if (tickingRef.current) return;
+      tickingRef.current = true;
+      window.requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 60);
+        tickingRef.current = false;
+      });
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    async function checkAuth() {
+    // ✅ Auth check déplacé après le premier paint via setTimeout 0
+    // Cela évite de bloquer le thread principal pendant le chargement initial.
+    // L'état user n'est pas critique pour le rendu du hero.
+    const timer = setTimeout(async () => {
       try {
         const { supabase } = await import("@/lib/supabase");
         if (!supabase) return;
-        const { data: { user } } = await supabase.auth.getUser();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
         setUser(user);
       } catch (error) {
         console.error("Error checking auth:", error);
       }
-    }
-    checkAuth();
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const handleLogoClick = () => {
@@ -59,7 +80,9 @@ export default function Navbar({ searchQuery: externalSearchQuery = "", setSearc
         router.push("/auth");
         return;
       }
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       if (user) router.push("/recettes/creer");
       else router.push("/auth");
     } catch (error) {
@@ -84,22 +107,32 @@ export default function Navbar({ searchQuery: externalSearchQuery = "", setSearc
   };
 
   return (
-    <nav className="fixed top-0 z-[100] w-full px-6 py-6 transition-all duration-300">
-      <div className={`max-w-7xl mx-auto flex items-center justify-between glass rounded-[2.5rem] px-10 py-4 shadow-xl shadow-zinc-200/20 ring-1 ring-white/20 transition-all ${isScrolled ? 'py-3' : 'py-4'}`}>
+    <nav
+      className="fixed top-0 z-[100] w-full px-6 py-6 transition-all duration-300"
+      role="navigation"
+      aria-label="Navigation principale"
+    >
+      <div
+        className={`max-w-7xl mx-auto flex items-center justify-between glass rounded-[2.5rem] px-10 shadow-xl shadow-zinc-200/20 ring-1 ring-white/20 transition-all ${
+          isScrolled ? "py-3" : "py-4"
+        }`}
+      >
         <Logo onLogoClick={handleLogoClick} />
 
         <NavLinks isScrolled={isScrolled} isSearchExpanded={isSearchExpanded} />
 
         <div className="flex items-center space-x-4">
           {!isSearchExpanded && (
-            <button 
+            <button
               onClick={() => setIsSearchExpanded(true)}
-              className="p-2.5 rounded-full hover:bg-emerald-50 text-zinc-600 transition-colors"
+              aria-label="Ouvrir la recherche"
+              aria-expanded={isSearchExpanded}
+              className="p-2.5 rounded-full hover:bg-emerald-50 text-zinc-600 transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200"
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-5 h-5" aria-hidden="true" />
             </button>
           )}
-          
+
           <UserActions
             user={user}
             isScrolled={isScrolled}
