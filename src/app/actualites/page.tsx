@@ -111,9 +111,9 @@ export default function ActualitesPage() {
       
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-6 py-12 lg:py-24 relative z-10">
+      <main className="max-w-7xl mx-auto px-6 py-16 lg:py-32 relative z-10">
         
-        <header className="mb-32">
+        <header className="mb-40">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 border-b border-zinc-200 pb-16">
             <div className="max-w-4xl">
               <h1 className={`${playfair.className} text-3xl md:text-4xl lg:text-5xl text-zinc-950 mb-12 leading-[1.1] tracking-tighter`}>
@@ -136,7 +136,7 @@ export default function ActualitesPage() {
             </div>
           </div>
 
-          <div className="mt-14 flex items-center space-x-6 overflow-x-auto pb-6 no-scrollbar snap-x">
+          <div className="mt-16 flex items-center space-x-8 overflow-x-auto pb-8 no-scrollbar snap-x">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -153,12 +153,12 @@ export default function ActualitesPage() {
           </div>
         </header>
 
-        <div className="space-y-48">
+        <div className="space-y-56">
           {/* Featured Hero Spread */}
           {filteredArticles[0] && (
             <section className="relative group">
               <Link href={`/actualites/${filteredArticles[0].id}`}>
-                <div className="relative w-full h-[500px] lg:h-[600px] rounded-[3rem] overflow-hidden shadow-[0_80px_120px_-32px_rgba(0,0,0,0.3)] ring-1 ring-zinc-200/50">
+                <div className="relative w-full h-[550px] lg:h-[650px] rounded-[3rem] overflow-hidden shadow-[0_80px_120px_-32px_rgba(0,0,0,0.3)] ring-1 ring-zinc-200/50">
                   <Image 
                     src={filteredArticles[0].image} 
                     alt={filteredArticles[0].title} 
@@ -167,12 +167,12 @@ export default function ActualitesPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent" />
                   
-                  <div className="absolute inset-x-0 bottom-0 p-6 lg:p-10">
-                    <div className="bg-white/10 backdrop-blur-3xl border border-white/20 p-6 lg:p-10 rounded-[3rem] max-w-4xl animate-in fade-in slide-in-from-bottom-12 duration-1000 relative overflow-hidden group/card">
+                  <div className="absolute inset-x-0 bottom-0 p-8 lg:p-12">
+                    <div className="bg-white/10 backdrop-blur-3xl border border-white/20 p-8 lg:p-12 rounded-[3rem] max-w-4xl animate-in fade-in slide-in-from-bottom-12 duration-1000 relative overflow-hidden group/card">
                       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-700" />
                       
                       <div className="relative z-10">
-                        <div className="flex items-center space-x-4 mb-10">
+                        <div className="flex items-center space-x-4 mb-12">
                           <span className="inline-block px-6 py-2 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-[0.4em] rounded-full">
                             FEATURED STORY
                           </span>
@@ -180,10 +180,10 @@ export default function ActualitesPage() {
                           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">{filteredArticles[0].category}</span>
                         </div>
                         
-                        <h2 className={`${playfair.className} text-xl md:text-2xl lg:text-3xl text-white mb-6 leading-[1.1] tracking-tight`}>
+                        <h2 className={`${playfair.className} text-2xl md:text-3xl lg:text-4xl text-white mb-8 leading-[1.15] tracking-tight`}>
                           {filteredArticles[0].title}
                         </h2>
-                        <p className="text-zinc-300 text-lg font-medium mb-8 line-clamp-2 max-w-2xl leading-relaxed">{filteredArticles[0].subtitle}</p>
+                        <p className="text-zinc-300 text-lg font-medium mb-10 line-clamp-2 max-w-2xl leading-relaxed">{filteredArticles[0].subtitle}</p>
                         
                         <div className="flex items-center space-x-6 text-emerald-400 font-black uppercase tracking-[0.3em] text-[10px] group-hover:gap-8 transition-all">
                           <span>Commencer la lecture</span>
@@ -198,13 +198,13 @@ export default function ActualitesPage() {
           )}
 
           {/* Asymmetric Magazine Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 lg:gap-32 pb-40">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-32 lg:gap-40 pb-48">
             {filteredArticles.slice(1).map((article, index) => {
               const isWide = index % 3 === 0;
               return (
                 <div key={article.id} className={isWide ? "lg:col-span-12 xl:col-span-8 lg:mx-auto" : "lg:col-span-6"}>
                   <Link href={`/actualites/${article.id}`} className="group block">
-                    <div className="relative aspect-[16/9] rounded-[3rem] overflow-hidden mb-8 shadow-2xl ring-1 ring-zinc-100 transition-all duration-700 group-hover:translate-y-[-8px]">
+                    <div className="relative aspect-[16/9] rounded-[3rem] overflow-hidden mb-10 shadow-2xl ring-1 ring-zinc-100 transition-all duration-700 group-hover:translate-y-[-8px]">
                       <Image src={article.image} alt={article.title} fill className="object-cover transition-transform duration-[1500ms] group-hover:scale-105" />
                       <div className="absolute top-6 left-6">
                         <div className="w-16 h-16 bg-white/95 backdrop-blur-2xl rounded-2xl flex items-center justify-center shadow-[0_24px_48px_-12px_rgba(0,0,0,0.15)] ring-1 ring-white/50 group-hover:rotate-6 transition-all duration-500">
@@ -214,17 +214,17 @@ export default function ActualitesPage() {
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                     </div>
                     
-                    <div className="px-4">
-                      <div className="flex items-center space-x-4 mb-6">
+                    <div className="px-6">
+                      <div className="flex items-center space-x-4 mb-8">
                         <span className="text-emerald-600 font-black uppercase tracking-[0.4em] text-[10px]">{article.category}</span>
                         <div className="h-[1px] w-8 bg-zinc-200" />
                       </div>
                       
-                      <h3 className={`${playfair.className} text-xl md:text-2xl lg:text-3xl text-zinc-950 mb-4 group-hover:text-emerald-950 transition-colors leading-[1.2] tracking-tight italic`}>
+                      <h3 className={`${playfair.className} text-2xl md:text-3xl lg:text-4xl text-zinc-950 mb-6 group-hover:text-emerald-950 transition-colors leading-[1.15] tracking-tight italic`}>
                         {article.title}
                       </h3>
                       
-                      <p className="text-zinc-500 text-base font-medium leading-relaxed line-clamp-3 mb-8 max-w-2xl">
+                      <p className="text-zinc-500 text-base font-medium leading-relaxed line-clamp-3 mb-10 max-w-2xl">
                         {article.subtitle}
                       </p>
                       
