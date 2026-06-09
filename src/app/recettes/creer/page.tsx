@@ -6,6 +6,7 @@ import { Plus, Trash2, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { localFoodDictionary } from "@/lib/food-dictionary";
+import { generateRecipeLink } from "@/lib/recipe-links";
 
 interface IngredientRow {
   id: string;
@@ -194,7 +195,7 @@ export default function CreateRecipePage() {
       setIngredients([{ id: "1", name: "", amount: "" }]);
 
       setTimeout(() => {
-        router.push(`/recettes/${recipe.id}`);
+        router.push(generateRecipeLink(recipe));
       }, 1500);
     } catch (err: any) {
       setError(err.message);

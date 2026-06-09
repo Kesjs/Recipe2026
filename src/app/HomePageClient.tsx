@@ -23,6 +23,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { calculateNutrition } from "@/lib/nutrition";
+import { generateRecipeLink } from "@/lib/recipe-links";
 
 interface Category {
   id: string;
@@ -289,7 +290,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                     ✅ will-change: transform sur boutons avec active:scale-95
                   */}
                   <Link
-                    href={heroRecipe ? `/recettes/${heroRecipe.id}` : "/recettes"}
+                    href={heroRecipe ? generateRecipeLink(heroRecipe) : "/recettes"}
                     className="px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl transition-all shadow-xl hover:shadow-emerald-200/50 flex items-center justify-center space-x-2 group focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 [will-change:transform] active:scale-95"
                   >
                     <span>Voir la recette</span>

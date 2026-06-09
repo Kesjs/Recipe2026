@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Clock, Flame, Heart } from "lucide-react";
 import { Recipe } from "@/lib/types";
 import { calculateNutrition } from "@/lib/nutrition";
+import { generateRecipeLink } from "@/lib/recipe-links";
 import { useState } from "react";
 
 interface RecipeCardProps {
@@ -51,7 +52,7 @@ export default function RecipeCard({
     return (
       <article className={`group cursor-pointer ${className}`}>
         <Link
-          href={`/recettes/${recipe.id}`}
+          href={generateRecipeLink(recipe)}
           className="focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 rounded-[2rem] block"
         >
           <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 shadow-sm">

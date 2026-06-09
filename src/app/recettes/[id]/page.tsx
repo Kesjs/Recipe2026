@@ -1,4 +1,5 @@
 import { fetchRecipeById } from "../fetch-recipes";
+import { extractRecipeIdFromUrl } from "@/lib/recipe-links";
 import RecipeDetailClient from "./RecipeDetailClient";
 import Link from "next/link";
 import { AlertCircle } from "lucide-react";
@@ -6,7 +7,9 @@ import { AlertCircle } from "lucide-react";
 export const revalidate = 300; // Revalidate every 5 minutes
 
 export default async function RecipeDetailPage({ params }: { params: { id: string } }) {
-  const recipe = await fetchRecipeById(params.id);
+  // Extract the ID from the hybrid URL format [id]-[slug]
+  const recipeId = extractRecipeIdFromUrl(params.id);
+  const recipe = await fetchRecipeById(recipeId);
 
   if (!recipe) {
     return (

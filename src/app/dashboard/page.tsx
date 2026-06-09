@@ -21,6 +21,7 @@ import {
   MoreHorizontal
 } from "lucide-react";
 import Image from "next/image";
+import { generateRecipeLink } from "@/lib/recipe-links";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -335,7 +336,7 @@ export default function DashboardPage() {
 
         <div className="flex-1 space-y-4">
           {userFavorites.length > 0 ? userFavorites.slice(0, 5).map((recipe) => (
-            <div key={recipe.id} className="group flex items-center gap-4 p-3 rounded-3xl border border-zinc-50 hover:border-emerald-100 hover:bg-emerald-50/30 transition-all cursor-pointer" onClick={() => router.push(`/recettes/${recipe.id}`)}>
+            <div key={recipe.id} className="group flex items-center gap-4 p-3 rounded-3xl border border-zinc-50 hover:border-emerald-100 hover:bg-emerald-50/30 transition-all cursor-pointer" onClick={() => router.push(generateRecipeLink(recipe))}>
               <div className="relative w-16 h-16 rounded-2xl overflow-hidden shrink-0 shadow-xs">
                 {recipe.image_url ? (
                   <Image src={recipe.image_url} alt={recipe.title} fill className="object-cover" />
