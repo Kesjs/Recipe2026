@@ -153,7 +153,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
         */}
         <section
           aria-label="Recette mise en avant"
-          className="relative w-full px-4 sm:px-6 pt-20 sm:pt-24"
+          className="relative w-full px-4 sm:px-6 pt-24 sm:pt-28"
         >
           {/*
             ✅ Hauteur hero corrigée :
