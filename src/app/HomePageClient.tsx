@@ -217,7 +217,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                 src="https://img.over-blog-kiwi.com/0/69/73/66/20150728/ob_153ab0_amiwo-au-poulet2-benin.jpg"
                 alt={heroRecipe.title}
                 fill
-                className="object-cover object-center"
+                className="object-cover object-center scale-75"
                 priority
                 fetchPriority="high"
                 sizes="100vw"
@@ -227,7 +227,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                 src="https://img.over-blog-kiwi.com/0/69/73/66/20150728/ob_153ab0_amiwo-au-poulet2-benin.jpg"
                 alt="Amiwo au poulet — recette béninoise"
                 fill
-                className="object-cover object-center"
+                className="object-cover object-center scale-75"
                 priority
                 fetchPriority="high"
                 sizes="100vw"
