@@ -1,6 +1,6 @@
 "use client";
 
-import { Leaf } from "lucide-react";
+import Image from "next/image";
 
 interface LogoProps {
   onLogoClick: () => void;
@@ -8,9 +8,20 @@ interface LogoProps {
 
 export default function Logo({ onLogoClick }: LogoProps) {
   return (
-    <button onClick={onLogoClick} className="flex items-center space-x-2 group cursor-pointer hover:opacity-80 transition-all">
-      <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:rotate-6 transition-transform">
-        <Leaf className="w-6 h-6" />
+    <button
+      onClick={onLogoClick}
+      className="flex items-center space-x-2 group cursor-pointer hover:opacity-80 transition-all"
+      aria-label="Retour à l'accueil"
+    >
+      <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg group-hover:rotate-3 transition-transform">
+        <Image
+          src="/naya.jpg"
+          alt="Naya logo"
+          width={40}
+          height={40}
+          className="object-cover w-full h-full"
+          priority
+        />
       </div>
       <span className="font-bold text-2xl tracking-tighter text-emerald-900">Naya</span>
     </button>
