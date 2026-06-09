@@ -214,20 +214,20 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
           <div className="relative w-full h-[75vh] min-h-[420px] max-h-[680px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
             {heroRecipe?.image_url ? (
               <Image
-                src="https://img.over-blog-kiwi.com/0/69/73/66/20150728/ob_153ab0_amiwo-au-poulet2-benin.jpg"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt8BncJnBChbdhm2H4IyENVQXaxqU6TUDbZc2-nQ3Zfqu37nuLjpnNUgs&s=10"
                 alt={heroRecipe.title}
                 fill
-                className="object-cover object-center scale-75"
+                className="object-cover object-center"
                 priority
                 fetchPriority="high"
                 sizes="100vw"
               />
             ) : (
               <Image
-                src="https://img.over-blog-kiwi.com/0/69/73/66/20150728/ob_153ab0_amiwo-au-poulet2-benin.jpg"
-                alt="Amiwo au poulet — recette béninoise"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt8BncJnBChbdhm2H4IyENVQXaxqU6TUDbZc2-nQ3Zfqu37nuLjpnNUgs&s=10"
+                alt="Plat africain — recette du jour"
                 fill
-                className="object-cover object-center scale-75"
+                className="object-cover object-center"
                 priority
                 fetchPriority="high"
                 sizes="100vw"

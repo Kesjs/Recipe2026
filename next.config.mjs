@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "img.over-blog-kiwi.com",
       },
+      {
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
+      },
     ],
 
     // ✅ Tailles d'images adaptées aux breakpoints du projet
