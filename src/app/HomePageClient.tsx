@@ -211,7 +211,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                  Garantit que le titre + CTA sont visibles sans scroll
                  sur 375×667 px (iPhone SE).
           */}
-          <div className="relative w-full h-[55vh] min-h-[320px] max-h-[500px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
+          <div className="relative w-full h-[75vh] min-h-[420px] max-h-[680px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
             {heroRecipe?.image_url ? (
               <Image
                 src="https://img.over-blog-kiwi.com/0/69/73/66/20150728/ob_153ab0_amiwo-au-poulet2-benin.jpg"
