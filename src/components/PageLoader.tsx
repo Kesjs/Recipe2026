@@ -4,13 +4,18 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function PageLoader() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // Démarre le fade-out après 1.6s
+    // N'afficher le loader qu'une seule fois par session navigateur
+    const alreadyShown = sessionStorage.getItem("naya_loader_shown");
+    if (alreadyShown) return;
+
+    sessionStorage.setItem("naya_loader_shown", "1");
+    setVisible(true);
+
     const fadeTimer = setTimeout(() => setFadeOut(true), 1600);
-    // Retire du DOM après la fin de l'animation (300ms de transition)
     const removeTimer = setTimeout(() => setVisible(false), 1900);
 
     return () => {
@@ -45,7 +50,7 @@ export default function PageLoader() {
         </div>
 
         {/* Nom */}
-        <p className="text-zinc-900 font-bold text-lg tracking-[0.3em] uppercase opacity-0 animate-[fadeUp_0.6s_ease-out_0.4s_forwards]">
+        <p className="text-emerald-600 font-bold text-lg tracking-[0.3em] uppercase opacity-0 animate-[fadeUp_0.6s_ease-out_0.4s_forwards]">
           Naya
         </p>
 
