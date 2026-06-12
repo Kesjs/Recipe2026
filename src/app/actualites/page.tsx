@@ -21,7 +21,7 @@ const articles = [
     icon: Wheat,
     category: "Nutrition",
     readTime: "5 min",
-    image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=1200&q=80&fit=crop",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREEX7LWnKI--AEWg7e7UV4STpnDwf_Cmmc-7f0QGDHdrSk5dVYzLChpDc&s=10",
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const articles = [
     icon: Fish,
     category: "Équilibre",
     readTime: "4 min",
-    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80&fit=crop",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8cbJ46WBcHmxDYNahz60yvdyN9n1wyveqaVAe8Sy2xQ&s=10",
   },
   {
     id: 3,
@@ -45,7 +45,7 @@ const articles = [
     icon: Leaf,
     category: "Bien-être",
     readTime: "3 min",
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80&fit=crop",
+    image: "https://www.kingnature.ch/content/uploads/Moringa--e1592383316787-600x449.jpg",
   },
   {
     id: 4,
@@ -57,7 +57,7 @@ const articles = [
     icon: Droplets,
     category: "Astuce",
     readTime: "3 min",
-    image: "https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?w=800&q=80&fit=crop",
+    image: "https://tarasmulticulturaltable.com/wp-content/uploads/2022/10/Bissap-2-of-3.jpg",
   },
   {
     id: 5,
@@ -69,7 +69,7 @@ const articles = [
     icon: Utensils,
     category: "Recette",
     readTime: "6 min",
-    image: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80&fit=crop",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQba-oY3HQLxZGnw1pYeLXZa2S67Sbov8_cy7E2gdXEjOj31TVak40JgOk&s=10",
   },
   {
     id: 6,
@@ -81,7 +81,7 @@ const articles = [
     icon: Banana,
     category: "Recette",
     readTime: "4 min",
-    image: "https://images.unsplash.com/photo-1601314002592-b8734bca6604?w=800&q=80&fit=crop",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKivBOygf3_24NWWc9Bz7NGGgMc9l3G6DfT0CG-FbyFw&s=10",
   },
   {
     id: 7,
@@ -93,7 +93,7 @@ const articles = [
     icon: Fish,
     category: "Science",
     readTime: "5 min",
-    image: "https://images.unsplash.com/photo-1518027424558-4cf9fafe6150?w=800&q=80&fit=crop",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGxu36pZrK6oWhpjra5Cc6F1bWNLe0o2iF8pEjGfQaSg&s=10",
   },
   {
     id: 8,
@@ -105,7 +105,7 @@ const articles = [
     icon: Flame,
     category: "Science",
     readTime: "5 min",
-    image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80&fit=crop",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx12Lism0nsqJazCIPsj0WqUckPhneQgKVJtBcSXzQsA&s=10",
   },
 ];
 
