@@ -379,18 +379,30 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
             })}
           </div>
 
-          {/* Titre de section */}
+          {/* Titre de section — dynamique selon la catégorie active */}
           <div className="mt-12 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-200 pb-10">
             <div className="max-w-2xl">
-              {/*
-                ✅ h2 (pas h1) — la hiérarchie est : h1 hero → h2 sections
-              */}
               <h2 className="font-serif text-4xl md:text-5xl text-zinc-900 mb-4">
-                Tendances de la semaine
+                {activeTab === "Tout"
+                  ? "Tendances de la semaine"
+                  : activeTab === "Afrique"
+                  ? "Patrimoine culinaire africain"
+                  : activeTab === "Rapide"
+                  ? "Recettes rapides"
+                  : activeTab === "International"
+                  ? "Cuisine du monde"
+                  : activeTab}
               </h2>
               <p className="text-zinc-500 text-lg leading-relaxed">
-                Les recettes les plus populaires de la communauté, sélectionnées
-                par nos nutritionnistes pour un quotidien équilibré.
+                {activeTab === "Tout"
+                  ? "Les recettes les plus populaires de la communauté, sélectionnées par nos nutritionnistes pour un quotidien équilibré."
+                  : activeTab === "Afrique"
+                  ? "Plongez dans les saveurs authentiques d'Afrique — du Sénégal au Nigeria, de la Côte d'Ivoire à l'Éthiopie."
+                  : activeTab === "Rapide"
+                  ? "Des recettes prêtes en moins de 30 minutes, sans compromis sur le goût ni la nutrition."
+                  : activeTab === "International"
+                  ? "Un tour du monde culinaire — Italie, Japon, Thaïlande, Mexique et bien d'autres dans votre assiette."
+                  : "Découvrez les recettes de cette sélection."}
               </p>
             </div>
             <Link

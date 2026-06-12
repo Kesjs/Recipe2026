@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Clock, ArrowLeft, Flame, ChevronRight, Quote, Mic, ExternalLink, Minus, Plus, AlertCircle, MapPin } from "lucide-react";
+import { Clock, ArrowLeft, Flame, ChevronRight, Quote, Mic, Minus, Plus, AlertCircle, MapPin } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { calculateNutrition } from "@/lib/nutrition";
 import { Recipe, RecipeIngredient } from "@/lib/types";
+import CookingMode from "@/components/CookingMode";
 
 interface RecipeDetailClientProps {
   initialRecipe: Recipe;
@@ -94,6 +95,7 @@ const NutritionDoughnut = ({ calories, protein, carbs, fat }: { calories: number
 
 export default function RecipeDetailClient({ initialRecipe }: RecipeDetailClientProps) {
   const [servings, setServings] = useState(4);
+  const [cookingMode, setCookingMode] = useState(false);
   const recipe = initialRecipe;
 
   const nutrition = useMemo(() => {
@@ -131,6 +133,15 @@ export default function RecipeDetailClient({ initialRecipe }: RecipeDetailClient
   return (
     <div className="bg-[#fafafa] font-sans text-[#18181b] min-h-screen selection:bg-emerald-100 selection:text-emerald-900">
       <Navbar />
+
+      {/* Mode Cuisine — plein écran */}
+      {cookingMode && (
+        <CookingMode
+          title={recipe.title}
+          steps={instructions}
+          onClose={() => setCookingMode(false)}
+        />
+      )}
       <main id="main-content">
         <header className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] pt-16 sm:pt-20">
           {recipe.image_url ? (
@@ -339,11 +350,12 @@ export default function RecipeDetailClient({ initialRecipe }: RecipeDetailClient
                 <h4 className="text-white text-lg sm:text-xl font-black uppercase tracking-tight mb-2">Mode Cuisine</h4>
                 <p className="text-zinc-400 text-xs sm:text-sm mb-4 sm:mb-6 leading-relaxed max-w-xs">Activez le guidage étape par étape pour cuisiner mains libres.</p>
                 <button 
-                  className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3 sm:py-4 px-6 sm:px-8 rounded-full transition-all uppercase tracking-[0.1em] text-[10px] sm:text-xs flex items-center justify-center gap-2 sm:gap-3 shadow-lg hover:shadow-emerald-500/20"
-                  aria-label="Activer le mode cuisine avec guidage vocal"
+                  onClick={() => setCookingMode(true)}
+                  disabled={instructions.length === 0}
+                  className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-black py-3 sm:py-4 px-6 sm:px-8 rounded-full transition-all uppercase tracking-[0.1em] text-[10px] sm:text-xs flex items-center justify-center gap-2 sm:gap-3 shadow-lg hover:shadow-emerald-500/20 disabled:opacity-40 disabled:cursor-not-allowed active:scale-95"
+                  aria-label="Démarrer le mode cuisine étape par étape"
                 >
-                  Démarrer
-                  <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  Démarrer le mode cuisine
                 </button>
               </div>
             </div>

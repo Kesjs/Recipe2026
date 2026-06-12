@@ -3,6 +3,8 @@ import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "@/lib/query-client";
 import PageLoader from "@/components/PageLoader";
+import NavigationProgress from "@/components/NavigationProgress";
+import { Suspense } from "react";
 
 // ✅ next/font/google gère le chargement optimisé (pas d'@import dans globals.css)
 const inter = Inter({
@@ -49,11 +51,10 @@ export default function RootLayout({
       </head>
       <body className="font-sans">
         <PageLoader />
-        {/*
-          ✅ div h-20 supprimée d'ici — elle créait un CLS et bloquait
-          le contenu au chargement. Le padding-top est géré directement
-          dans HomePageClient (pt-20 sm:pt-24) en dessous de la navbar fixe.
-        */}
+        {/* Barre de progression verte en haut à chaque navigation */}
+        <Suspense fallback={null}>
+          <NavigationProgress />
+        </Suspense>
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
