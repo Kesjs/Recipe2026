@@ -20,6 +20,37 @@ import {
   LucideIcon,
   Plus,
 } from "lucide-react";
+
+// Bouton favori autonome pour la card hero
+function HeroFavoriteButton({ recipeId }: { recipeId: string }) {
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  const toggle = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      const { toggleFavorite } = await import("@/lib/actions/favorites");
+      const result = await toggleFavorite(recipeId);
+      setIsFavorited(result.favorited);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={toggle}
+      aria-label={isFavorited ? "Retirer des favoris" : "Ajouter aux favoris"}
+      aria-pressed={isFavorited}
+      className="p-2.5 bg-white/15 hover:bg-white/25 border border-white/20 rounded-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 [will-change:transform] active:scale-95"
+    >
+      <Bookmark
+        className={`w-4 h-4 ${isFavorited ? "fill-white text-white" : "text-white/70"}`}
+        aria-hidden="true"
+      />
+    </button>
+  );
+}
 import Image from "next/image";
 import Link from "next/link";
 import { calculateNutrition } from "@/lib/nutrition";
@@ -193,124 +224,117 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
       <main className="flex-grow" role="main">
 
         {/* ─── Hero Section ─────────────────────────────────────────────── */}
-        {/*
-          ✅ <header> → <section> : le <header> global est dans layout.tsx.
-             Ici c'est une section de contenu, pas un bandeau de page.
-          ✅ pt-20 garde l'espacement sous la navbar fixe (remplace la div h-20
-             supprimée dans layout.tsx).
-        */}
         <section
-          aria-label="Recette mise en avant"
+          aria-label="Bannière principale"
           className="relative w-full px-4 sm:px-6 pt-24 sm:pt-28"
         >
-          {/*
-            ✅ Hauteur hero corrigée :
-               - Avant : min-h-[480px] md:min-h-[560px] lg:h-[640px]
-                 → sur petits mobiles (667px), le contenu pouvait être coupé
-               - Après : h-[75vh] avec min/max pour rester dans le viewport
-                 Garantit que le titre + CTA sont visibles sans scroll
-                 sur 375×667 px (iPhone SE).
-          */}
+          {/* Image de fond fixe — éditoriale, indépendante des recettes */}
           <div className="relative w-full h-[75vh] min-h-[420px] max-h-[680px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
-            {heroRecipe?.image_url ? (
-              <Image
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF7K6bOuWC6MLLY9F9KBVP86cN8NmJRvhAPR08iecSWrL6nFylPR5k8Mc&s=10"
-                alt={heroRecipe.title}
-                fill
-                className="object-cover object-center"
-                priority
-                fetchPriority="high"
-                sizes="100vw"
-              />
-            ) : (
-              <Image
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF7K6bOuWC6MLLY9F9KBVP86cN8NmJRvhAPR08iecSWrL6nFylPR5k8Mc&s=10"
-                alt="Plat africain — recette du jour"
-                fill
-                className="object-cover object-center"
-                priority
-                fetchPriority="high"
-                sizes="100vw"
-              />
-            )}
+            <Image
+              src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80"
+              alt="Table dressée avec des plats africains et du monde"
+              fill
+              className="object-cover object-center"
+              priority
+              fetchPriority="high"
+              sizes="100vw"
+            />
 
-            {/* Overlay lisibilité — décoratif */}
+            {/* Overlay dégradé — lisibilité du texte à gauche */}
             <div
-              className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"
               aria-hidden="true"
             />
 
-            <div className="relative h-full max-w-7xl mx-auto px-6 md:px-16 py-10 md:py-0 flex items-center">
-              <div className="glass max-w-xl p-6 sm:p-8 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl animate-slide-in-left bg-black/30 backdrop-blur-sm border border-white/10">
+            {/* Contenu textuel du hero — éditorial, pas lié à une recette */}
+            <div className="relative h-full max-w-7xl mx-auto px-6 md:px-16 py-10 md:py-0 flex items-center justify-between gap-8">
 
-                <div className="flex items-center space-x-2 mb-6">
-                  <span className="px-4 py-1.5 bg-emerald-600 text-white text-xs font-bold tracking-[0.2em] uppercase rounded-full">
-                    Recette du jour
-                  </span>
-                </div>
-
-                <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1] mb-8 max-w-2xl drop-shadow-md">
-                  {heroRecipe?.title
-                    .split(" ")
-                    .map((word: string, i: number, arr: string[]) => {
-                      const shouldItalicize = i === arr.length - 1;
-                      return (
-                        <span key={i}>
-                          {shouldItalicize ? (
-                            <span className="italic font-normal">{word}</span>
-                          ) : (
-                            word
-                          )}
-                          {" "}
-                          {i === 1 && i < arr.length - 1 && <br />}
-                        </span>
-                      );
-                    }) || "Naya Cuisine"}
+              {/* Texte gauche */}
+              <div className="max-w-lg">
+                <p className="text-emerald-400 font-bold text-xs tracking-[0.25em] uppercase mb-5">
+                  Naya Cuisine
+                </p>
+                <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl text-white leading-[1.05] mb-6 drop-shadow-md">
+                  La cuisine du monde,{" "}
+                  <span className="italic font-normal">dans votre assiette.</span>
                 </h1>
+                <p className="text-white/70 text-base md:text-lg leading-relaxed mb-10 max-w-sm">
+                  Découvrez des recettes africaines et internationales, pensées pour le quotidien.
+                </p>
+                <Link
+                  href="/recettes"
+                  className="inline-flex items-center space-x-2 px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl transition-all shadow-xl hover:shadow-emerald-200/30 group focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 [will-change:transform] active:scale-95"
+                >
+                  <span>Explorer les recettes</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                </Link>
+              </div>
 
-                <div className="flex items-center space-x-8 text-white/80 mb-10">
-                  <div className="flex items-center space-x-2.5">
-                    <Clock className="w-6 h-6 text-emerald-600" aria-hidden="true" />
-                    <span className="text-sm font-bold tracking-tight uppercase">
-                      {heroRecipe?.prep_time ?? "—"} min
+              {/* Card recette du jour — droite */}
+              {heroRecipe && (
+                <div className="hidden lg:flex flex-col w-80 shrink-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-[2rem] overflow-hidden shadow-2xl">
+                  {/* Thumbnail recette */}
+                  <div className="relative w-full h-48">
+                    {heroRecipe.image_url ? (
+                      <Image
+                        src={heroRecipe.image_url}
+                        alt={heroRecipe.title}
+                        fill
+                        className="object-cover"
+                        sizes="320px"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-zinc-700 flex items-center justify-center">
+                        <span className="text-4xl" aria-hidden="true">🍽️</span>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" aria-hidden="true" />
+                    <span className="absolute top-3 left-3 px-3 py-1 bg-emerald-600 text-white text-xs font-bold tracking-[0.15em] uppercase rounded-full">
+                      Recette du jour
                     </span>
                   </div>
-                  {heroNutrition && (
-                    <div className="flex items-center space-x-2.5">
-                      <Flame className="w-6 h-6 text-emerald-600" aria-hidden="true" />
-                      <span className="text-sm font-bold tracking-tight uppercase">
-                        {heroNutrition.calories} kcal
-                      </span>
+
+                  {/* Infos recette */}
+                  <div className="p-5 flex flex-col gap-4">
+                    <h2 className="font-serif text-xl text-white leading-tight line-clamp-2">
+                      {heroRecipe.title}
+                    </h2>
+                    <div className="flex items-center space-x-5 text-white/70 text-sm font-medium">
+                      <div className="flex items-center space-x-1.5">
+                        <Clock className="w-4 h-4 text-emerald-400" aria-hidden="true" />
+                        <span>{heroRecipe.prep_time} min</span>
+                      </div>
+                      {heroNutrition && (
+                        <div className="flex items-center space-x-1.5">
+                          <Flame className="w-4 h-4 text-emerald-400" aria-hidden="true" />
+                          <span>{heroNutrition.calories} kcal</span>
+                        </div>
+                      )}
                     </div>
-                  )}
+                    <div className="flex gap-3 mt-1">
+                      <Link
+                        href={generateRecipeLink(heroRecipe)}
+                        className="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl transition-all text-center focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 [will-change:transform] active:scale-95"
+                      >
+                        Voir la recette
+                      </Link>
+                      <HeroFavoriteButton recipeId={heroRecipe.id} />
+                    </div>
+                  </div>
                 </div>
+              )}
 
-                <div className="flex flex-col sm:flex-row gap-4">
-                  {/*
-                    ✅ py-3 → py-3.5 : hauteur ~48px (44px minimum respecté)
-                    ✅ will-change: transform sur boutons avec active:scale-95
-                  */}
-                  <Link
-                    href={heroRecipe ? generateRecipeLink(heroRecipe) : "/recettes"}
-                    className="px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl transition-all shadow-xl hover:shadow-emerald-200/50 flex items-center justify-center space-x-2 group focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 [will-change:transform] active:scale-95"
-                  >
-                    <span>Voir la recette</span>
-                    <ArrowRight
-                      className="w-5 h-5 group-hover:translate-x-1 transition-transform"
-                      aria-hidden="true"
-                    />
-                  </Link>
-
-                  <button
-                    type="button"
-                    aria-label="Enregistrer cette recette"
-                    className="px-8 py-3.5 bg-white/20 hover:bg-white/30 text-white font-bold rounded-2xl border border-white/30 transition-all flex items-center justify-center space-x-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 [will-change:transform] active:scale-95"
-                  >
-                    <Bookmark className="w-5 h-5" aria-hidden="true" />
-                    <span>Enregistrer</span>
-                  </button>
+              {/* Skeleton card si loading */}
+              {!heroRecipe && (
+                <div className="hidden lg:block w-80 shrink-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-[2rem] overflow-hidden shadow-2xl animate-pulse">
+                  <div className="w-full h-48 bg-white/10" />
+                  <div className="p-5 space-y-3">
+                    <div className="h-5 bg-white/10 rounded w-3/4" />
+                    <div className="h-4 bg-white/10 rounded w-1/2" />
+                    <div className="h-10 bg-white/10 rounded-xl" />
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </section>
