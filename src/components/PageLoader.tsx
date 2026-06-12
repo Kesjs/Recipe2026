@@ -24,7 +24,7 @@ export default function PageLoader() {
   return (
     <div
       aria-hidden="true"
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-zinc-950 transition-opacity duration-300 ${
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white transition-opacity duration-300 ${
         fadeOut ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
@@ -45,12 +45,12 @@ export default function PageLoader() {
         </div>
 
         {/* Nom */}
-        <p className="text-white font-bold text-lg tracking-[0.3em] uppercase opacity-0 animate-[fadeUp_0.6s_ease-out_0.4s_forwards]">
+        <p className="text-zinc-900 font-bold text-lg tracking-[0.3em] uppercase opacity-0 animate-[fadeUp_0.6s_ease-out_0.4s_forwards]">
           Naya
         </p>
 
         {/* Barre de chargement */}
-        <div className="w-24 h-0.5 bg-white/10 rounded-full overflow-hidden">
+        <div className="w-24 h-0.5 bg-zinc-200 rounded-full overflow-hidden">
           <div className="h-full bg-emerald-500 rounded-full animate-[loadBar_1.4s_ease-in-out_forwards]" />
         </div>
       </div>
