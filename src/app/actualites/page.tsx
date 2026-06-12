@@ -4,147 +4,187 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Playfair_Display } from "next/font/google";
-import { Search, ArrowRight, Wheat, Fish, Leaf, Droplets, Utensils, Carrot, Sparkles } from "lucide-react";
+import { Search, ArrowRight, Wheat, Fish, Leaf, Droplets, Utensils, Banana, Flame, Sprout } from "lucide-react";
 
 const playfair = Playfair_Display({ subsets: ["latin"] });
 
 const articles = [
   {
     id: 1,
-    title: "Focus Nutrition: L'Amiwo au poulet",
-    subtitle: "Énergie de la farine de maïs vs. bienfaits de la grillade",
-    content: "L'Amiwo est un plat traditionnel béninois à base de farine de maïs et de poulet. La farine de maïs fournit des glucides complexes pour une énergie durable, tandis que le poulet grillé apporte des protéines maigres essentielles à la construction musculaire. Ce plat équilibré est riche en fibres et en nutriments, idéal pour un repas complet et sain.",
+    title: "L'Amiwo, le plat béninois qui nourrit autant le corps que l'âme",
+    subtitle: "Glucides complexes du maïs et protéines maigres du poulet grillé",
+    content:
+      "Préparée à base de farine de maïs fermentée et mijotée dans une sauce tomate relevée, l'Amiwo est bien plus qu'un plat de réconfort. Les glucides complexes du maïs libèrent l'énergie lentement, évitant les pics de glycémie — un avantage que peu de céréales raffinées peuvent offrir. Associée à du poulet grillé, cette combinaison couvre environ 35 % des besoins journaliers en protéines pour un adulte actif de 70 kg. La farine de maïs apporte également du magnésium, essentiel à la contraction musculaire et souvent déficitaire dans les régimes modernes. Un plat patrimonial qui mériterait sa place dans n'importe quel guide nutritionnel sérieux.",
     accent: "emerald",
     icon: Wheat,
-    category: "Recette",
-    image: "https://images.unsplash.com/photo-1595786802424-d6efbc413db5?auto=format&w=1200&q=80"
+    category: "Nutrition",
+    readTime: "5 min",
+    image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=1200&q=80&fit=crop",
   },
   {
     id: 2,
-    title: "L'art d'équilibre son Garba",
-    subtitle: "Gérer les portions d'Attiéké et contrôler l'huile",
-    content: "Le Garba, composé d'Attiéké et de poisson frit, est un délice ivoirien. Pour en faire un repas sain, privilégiez des portions modérées d'Attiéké (environ 150g) et utilisez des méthodes de cuisson plus légères comme la cuisson au four.",
+    title: "Garba : l'attiéké et le poisson, un duo plus intelligent qu'on ne croit",
+    subtitle: "Index glycémique bas, oméga-3 élevés — le fast-food africain qui tient ses promesses",
+    content:
+      "Le Garba, composé d'attiéké et de thon frit, est souvent mal jugé pour sa cuisson à l'huile. Pourtant, l'attiéké fermenté affiche un index glycémique inférieur au riz blanc (IG 50 contre 72), ce qui en fait un glucide de choix pour les personnes attentives à leur glycémie. Le thon entier fournit des oméga-3 à longues chaînes (EPA et DHA), essentiels à la santé cardiovasculaire. Pour une version équilibrée : limiter la quantité d'huile de friture, ajouter du piment frais et des tomates. Même la sauce gnangnan à base de graines de courge enrichit le plat en zinc et en acides gras insaturés.",
     accent: "amber",
     icon: Fish,
-    category: "Recette",
-    image: "https://images.unsplash.com/photo-1575250686903-c2f5edb52830?auto=format&w=800&q=80"
+    category: "Équilibre",
+    readTime: "4 min",
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80&fit=crop",
   },
   {
     id: 3,
-    title: "Les super-aliments: Le Gombo et le Moringa",
-    subtitle: "Fibres et antioxydants pour une santé optimale",
-    content: "Le Gombo et le Moringa sont des trésors nutritionnels africains. Le Gombo est riche en fibres solubles qui aident à réguler la glycémie.",
+    title: "Gombo et moringa : deux trésors africains que vous sous-estimez",
+    subtitle: "Plus de folates que les épinards, plus de calcium que le lait",
+    content:
+      "Le gombo contient 60 µg de folates pour 100 g — soit plus que les épinards souvent vantés en Occident. Ses fibres solubles (mucilage) forment un gel dans l'intestin qui ralentit l'absorption du glucose, précieux pour les personnes à risque de diabète de type 2. Le moringa, lui, est une source exceptionnelle de calcium (185 mg/100g de feuilles fraîches, contre 120 mg pour le lait) et contient sept fois plus de vitamine C que l'orange. Ces deux plantes poussent facilement en Afrique de l'Ouest, coûtent peu et devraient figurer dans l'alimentation quotidienne de chaque famille.",
     accent: "green",
     icon: Leaf,
     category: "Bien-être",
-    image: "https://images.unsplash.com/photo-1547496502-affa22d38842?auto=format&w=800&q=80"
+    readTime: "3 min",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80&fit=crop",
   },
   {
     id: 4,
-    title: "Hydratation et climat chaud",
-    subtitle: "Promouvoir le Bissap sans sucre",
-    content: "Dans les climats chauds, l'hydratation est essentielle. Remplacez les sodas sucrés par le Bissap naturel sans sucre ajouté.",
+    title: "Pourquoi le bissap sans sucre est la meilleure boisson que vous ignorez",
+    subtitle: "37 kcal, des anthocyanines et une tension artérielle régulée naturellement",
+    content:
+      "Le bissap — infusion de fleurs d'hibiscus séchées — est une des boissons les plus riches en antioxydants de type anthocyanines, responsables de sa couleur rouge vif. Des études publiées dans le Journal of Nutrition montrent qu'une consommation régulière de 240 ml/jour réduit la tension artérielle systolique de 7 à 13 mmHg chez les adultes hypertendus. Sans sucre ajouté, il n'apporte que 37 kcal pour 100 ml, soit dix fois moins qu'un jus industriel. Servi frais avec quelques feuilles de menthe, il remplace avantageusement sodas et jus sucrés en toutes saisons.",
     accent: "red",
     icon: Droplets,
     category: "Astuce",
-    image: "https://images.unsplash.com/photo-1638469546636-bc626ae59438?auto=format&w=800&q=80"
+    readTime: "3 min",
+    image: "https://images.unsplash.com/photo-1589834390005-5d4fb9bf3d32?w=800&q=80&fit=crop",
   },
   {
     id: 5,
-    title: "Les bienfaits du Thiéboudienne",
-    subtitle: "Un plat complet équilibré en protéines",
-    content: "Le Thiéboudienne est le plat national sénégalais, combinant riz, poisson et légumes. Ce plat offre un excellent équilibre.",
+    title: "Thiéboudienne : le plat sénégalais classé patrimoine immatériel de l'Unesco",
+    subtitle: "Riz, poisson et légumes racines — une leçon d'équilibre involontaire",
+    content:
+      "Inscrit au patrimoine culturel immatériel de l'humanité par l'Unesco en 2021, le Thiéboudienne est une combinaison nutritionnellement remarquable : le riz brisé apporte les glucides, le poisson de mer couvre les besoins en protéines complètes (tous les acides aminés essentiels), et les légumes — manioc, carotte, aubergine africaine — enrichissent le plat en fibres, bêta-carotène et potassium. Une portion de 400g couvre les apports journaliers en iode et en sélénium, deux minéraux souvent oubliés mais essentiels au bon fonctionnement thyroïdien.",
     accent: "blue",
     icon: Utensils,
     category: "Recette",
-    image: "https://images.unsplash.com/photo-1718939045423-01388713f520?auto=format&w=800&q=80"
+    readTime: "6 min",
+    image: "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?w=800&q=80&fit=crop",
   },
   {
     id: 6,
-    title: "Aloco: Modération et plaisir",
-    subtitle: "Profiter des bananes plantains sans excès",
-    content: "L'Aloco, ces délicieuses bananes plantains frites, est un plat très apprécié. Pour une version saine, privilégiez le four.",
+    title: "Aloco : comment savourer la banane plantain sans sacrifier l'équilibre",
+    subtitle: "Deux fois plus de potassium que la banane douce, grillée plutôt que frite",
+    content:
+      "La banane plantain mûre est une source remarquable de potassium (499 mg/100g), dépassant même la banane douce classique. Elle contient aussi de la vitamine B6, indispensable à la synthèse de la sérotonine, le neurotransmetteur du bien-être. La version traditionnelle frite dans l'huile de palme ajoute des calories significatives. Une alternative simple : la cuisson au four à 200°C pendant 20 minutes après avoir incisé la peau. Le résultat est moelleux, naturellement sucré, et conserve tous les nutriments sans l'excès lipidique.",
     accent: "yellow",
-    icon: Carrot,
+    icon: Banana,
     category: "Recette",
-    image: "https://images.unsplash.com/photo-1597786766080-3218bb7f951f?auto=format&w=800&q=80"
+    readTime: "4 min",
+    image: "https://images.unsplash.com/photo-1601314002592-b8734bca6604?w=800&q=80&fit=crop",
   },
   {
     id: 7,
-    title: "Le Tilapia: Poisson maigre",
-    subtitle: "Une source de protéines idéale",
-    content: "Le Tilapia est un poisson populaire. C'est une excellente source de protéines maigres avec peu de calories.",
+    title: "Tilapia et capitaine : quand les poissons d'eau douce africains rivalisent avec le saumon",
+    subtitle: "Protéines maigres complètes, faible teneur en mercure, prix accessible",
+    content:
+      "Le tilapia et le capitaine (Nile perch) sont des poissons d'eau douce africains aux atouts nutritionnels souvent sous-estimés. Le tilapia grillé apporte 26 g de protéines pour 100 g avec seulement 3 g de lipides — un ratio protéines/calories parmi les meilleurs du règne animal. Contrairement aux poissons gras de mer, sa teneur en mercure est très faible, ce qui le rend sûr pour une consommation fréquente, y compris chez les femmes enceintes. Il est aussi riche en phosphore et en vitamine D, deux nutriments dont les carences sont fréquentes en Afrique sub-saharienne.",
     accent: "cyan",
     icon: Fish,
     category: "Science",
-    image: "https://images.unsplash.com/photo-1518027424558-4cf9fafe6150?auto=format&w=800&q=80"
+    readTime: "5 min",
+    image: "https://images.unsplash.com/photo-1518027424558-4cf9fafe6150?w=800&q=80&fit=crop",
   },
   {
     id: 8,
-    title: "Épices et santé: Le gingembre",
-    subtitle: "Propriétés anti-inflammatoires et digestives",
-    content: "Le gingembre et l'ail sont des épices fondamentales de la cuisine africaine aux propriétés médicinales reconnues.",
+    title: "Gingembre, ail, piment : pourquoi nos épices sont des médicaments naturels",
+    subtitle: "Ginégrol, allicine, capsaïcine — trois molécules aux effets documentés",
+    content:
+      "Le gingembre frais contient du ginégrol, une molécule aux puissantes propriétés anti-inflammatoires comparables à l'ibuprofène dans certaines études. L'ail cru libère de l'allicine lors de la coupe — un composé soufré aux effets antibactériens et hypotenseurs prouvés. La capsaïcine du piment rouge active les thermorecepteurs TRPV1 et augmente la dépense énergétique de 4 à 5 % pendant plusieurs heures après ingestion. Ces trois épices fondamentales de la cuisine ouest-africaine agissent en synergie dans les plats mijotés — une pharmacopée naturelle dissimulée dans chaque marmite.",
     accent: "purple",
-    icon: Sparkles,
+    icon: Flame,
     category: "Science",
-    image: "https://images.unsplash.com/photo-1676686045790-05d7d604ccb9?auto=format&w=800&q=80"
-  }
+    readTime: "5 min",
+    image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80&fit=crop",
+  },
 ];
+
+const categoryColors: Record<string, string> = {
+  Nutrition: "bg-emerald-50 text-emerald-700",
+  Équilibre: "bg-amber-50 text-amber-700",
+  "Bien-être": "bg-lime-50 text-lime-700",
+  Astuce: "bg-rose-50 text-rose-700",
+  Recette: "bg-blue-50 text-blue-700",
+  Science: "bg-violet-50 text-violet-700",
+};
 
 export default function ActualitesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("Tous");
 
-  const categories = ["Tous", "Recette", "Bien-être", "Astuce", "Science"];
+  const categories = ["Tous", "Nutrition", "Équilibre", "Bien-être", "Astuce", "Recette", "Science"];
 
   const filteredArticles = articles.filter((article) => {
-    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         article.content.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesFilter = activeFilter === "Tous" || article.category === activeFilter;
+    const matchesSearch =
+      article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      article.content.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesFilter =
+      activeFilter === "Tous" || article.category === activeFilter;
     return matchesSearch && matchesFilter;
   });
 
+  const featured = filteredArticles[0];
+  const rest = filteredArticles.slice(1);
+
   return (
-    <div className={`min-h-screen bg-zinc-50 text-zinc-900 selection:bg-emerald-100 selection:text-emerald-900 relative overflow-hidden`}>
-      <div className="absolute inset-0 pointer-events-none opacity-[0.04] paper-texture z-0" />
-      
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 selection:bg-emerald-100 selection:text-emerald-900">
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-6 py-16 lg:py-32 relative z-10">
-        
-        <header className="mb-40">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 border-b border-zinc-200 pb-16">
-            <div className="max-w-4xl">
-              <h1 className={`${playfair.className} text-3xl md:text-4xl lg:text-5xl text-zinc-950 mb-12 leading-[1.1] tracking-tighter`}>
-                Chroniques <br /> <span className="italic font-normal text-emerald-900 underline decoration-emerald-500/10 decoration-[16px] underline-offset-[24px]">Culinaire.</span>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+
+        {/* Header */}
+        <header className="mb-12 sm:mb-16 border-b border-zinc-200 pb-10">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+            <div>
+              <p className="text-xs uppercase tracking-widest text-emerald-600 font-medium mb-4">
+                Chroniques culinaires
+              </p>
+              <h1
+                className={`${playfair.className} text-4xl sm:text-5xl lg:text-6xl text-zinc-950 leading-[1.08] tracking-tight mb-5`}
+              >
+                Chroniques <br />
+                <span className="italic font-normal text-emerald-700">
+                  Culinaires.
+                </span>
               </h1>
-              <p className="text-zinc-500 text-lg lg:text-xl font-medium leading-relaxed max-w-2xl">
-                L&apos;actualité de la nutrition saine et des saveurs locales, racontée avec l&apos;élégance d&apos;un magazine de cuisine.
+              <p className="text-zinc-500 text-base sm:text-lg leading-relaxed max-w-xl">
+                L'actualité de la nutrition saine et des saveurs locales africaines,
+                racontée avec rigueur et appétit.
               </p>
             </div>
-            
-            <div className="relative w-full lg:w-[480px] group">
+
+            <div className="relative w-full lg:w-96 flex-shrink-0">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" strokeWidth={1.5} />
               <input
                 type="text"
                 placeholder="Rechercher une chronique..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-16 pr-10 py-4 bg-white border border-zinc-200 rounded-[2rem] shadow-sm hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-emerald-50 focus:border-emerald-200 transition-all text-zinc-950 font-bold text-base placeholder:text-zinc-200"
+                className="w-full pl-11 pr-4 py-3 bg-white border border-zinc-200 rounded-xl text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-emerald-400 focus:border-emerald-300 transition-all"
               />
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-200 group-focus-within:text-emerald-600 transition-all" />
             </div>
           </div>
 
-          <div className="mt-16 flex items-center space-x-8 overflow-x-auto pb-8 no-scrollbar snap-x">
+          {/* Filtres */}
+          <div className="mt-8 flex items-center gap-2 flex-wrap">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveFilter(cat)}
-                className={`px-10 py-4 rounded-full font-black text-xs uppercase tracking-[0.3em] transition-all border-[3px] snap-start shrink-0 ${
-                  activeFilter === cat 
-                    ? "bg-zinc-950 text-white border-zinc-950 shadow-2xl scale-105 z-10" 
-                    : "bg-white text-zinc-400 border-zinc-50 hover:border-zinc-200 hover:text-zinc-950"
+                className={`px-4 py-1.5 rounded-full text-xs font-medium tracking-wide border transition-all ${
+                  activeFilter === cat
+                    ? "bg-zinc-950 text-white border-zinc-950"
+                    : "bg-white text-zinc-500 border-zinc-200 hover:border-zinc-400 hover:text-zinc-900"
                 }`}
               >
                 {cat}
@@ -153,116 +193,136 @@ export default function ActualitesPage() {
           </div>
         </header>
 
-        <div className="space-y-56">
-          {/* Featured Hero Spread */}
-          {filteredArticles[0] && (
-            <section className="relative group">
-              <Link href={`/actualites/${filteredArticles[0].id}`}>
-                <div className="relative w-full h-[550px] lg:h-[650px] rounded-[3rem] overflow-hidden shadow-[0_80px_120px_-32px_rgba(0,0,0,0.3)] ring-1 ring-zinc-200/50">
-                  <Image 
-                    src={filteredArticles[0].image} 
-                    alt={filteredArticles[0].title} 
+        {filteredArticles.length === 0 && (
+          <div className="text-center py-24">
+            <Sprout className="w-8 h-8 text-zinc-300 mx-auto mb-3" strokeWidth={1.5} />
+            <p className="text-zinc-400 text-sm">Aucune chronique trouvée pour "{searchQuery}"</p>
+          </div>
+        )}
+
+        {/* Article à la une */}
+        {featured && (
+          <section className="mb-16">
+            <p className="text-xs uppercase tracking-widest text-zinc-400 font-medium mb-5">
+              À la une
+            </p>
+            <Link href={`/actualites/${featured.id}`} className="group block">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-white border border-zinc-100 rounded-3xl overflow-hidden hover:shadow-md transition-shadow duration-500">
+                <div className="relative h-64 lg:h-auto min-h-[320px]">
+                  <Image
+                    src={featured.image}
+                    alt={featured.title}
                     fill
-                    className="object-cover transition-transform duration-[2000ms] group-hover:scale-110 grayscale-[10%] group-hover:grayscale-0" 
+                    priority
+                    className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent" />
-                  
-                  <div className="absolute inset-x-0 bottom-0 p-8 lg:p-12">
-                    <div className="bg-white/10 backdrop-blur-3xl border border-white/20 p-8 lg:p-12 rounded-[3rem] max-w-4xl animate-in fade-in slide-in-from-bottom-12 duration-1000 relative overflow-hidden group/card">
-                      <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-700" />
-                      
-                      <div className="relative z-10">
-                        <div className="flex items-center space-x-4 mb-12">
-                          <span className="inline-block px-6 py-2 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-[0.4em] rounded-full">
-                            FEATURED STORY
-                          </span>
-                          <div className="h-[1px] w-12 bg-white/30" />
-                          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">{filteredArticles[0].category}</span>
-                        </div>
-                        
-                        <h2 className={`${playfair.className} text-2xl md:text-3xl lg:text-4xl text-white mb-8 leading-[1.15] tracking-tight`}>
-                          {filteredArticles[0].title}
-                        </h2>
-                        <p className="text-zinc-300 text-lg font-medium mb-10 line-clamp-2 max-w-2xl leading-relaxed">{filteredArticles[0].subtitle}</p>
-                        
-                        <div className="flex items-center space-x-6 text-emerald-400 font-black uppercase tracking-[0.3em] text-[10px] group-hover:gap-8 transition-all">
-                          <span>Commencer la lecture</span>
-                          <ArrowRight className="w-6 h-6 group-hover:translate-x-4 transition-transform duration-500" />
-                        </div>
-                      </div>
-                    </div>
+                </div>
+                <div className="p-8 lg:p-12 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-5">
+                    <span
+                      className={`text-xs font-medium px-3 py-1 rounded-full ${
+                        categoryColors[featured.category] ?? "bg-zinc-100 text-zinc-600"
+                      }`}
+                    >
+                      {featured.category}
+                    </span>
+                    <span className="text-xs text-zinc-400">{featured.readTime} de lecture</span>
+                  </div>
+                  <h2
+                    className={`${playfair.className} text-2xl sm:text-3xl text-zinc-950 leading-snug mb-4 italic`}
+                  >
+                    {featured.title}
+                  </h2>
+                  <p className="text-zinc-500 text-sm leading-relaxed mb-6 line-clamp-4">
+                    {featured.content}
+                  </p>
+                  <div className="flex items-center gap-2 text-emerald-600 text-sm font-medium">
+                    Lire la chronique
+                    <ArrowRight
+                      className="w-4 h-4 group-hover:translate-x-1 transition-transform"
+                      strokeWidth={1.5}
+                    />
                   </div>
                 </div>
-              </Link>
-            </section>
-          )}
+              </div>
+            </Link>
+          </section>
+        )}
 
-          {/* Asymmetric Magazine Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-32 lg:gap-40 pb-48">
-            {filteredArticles.slice(1).map((article, index) => {
-              const isWide = index % 3 === 0;
-              return (
-                <div key={article.id} className={isWide ? "lg:col-span-12 xl:col-span-8 lg:mx-auto" : "lg:col-span-6"}>
-                  <Link href={`/actualites/${article.id}`} className="group block">
-                    <div className="relative aspect-[16/9] rounded-[3rem] overflow-hidden mb-10 shadow-2xl ring-1 ring-zinc-100 transition-all duration-700 group-hover:translate-y-[-8px]">
-                      <Image src={article.image} alt={article.title} fill className="object-cover transition-transform duration-[1500ms] group-hover:scale-105" />
-                      <div className="absolute top-6 left-6">
-                        <div className="w-16 h-16 bg-white/95 backdrop-blur-2xl rounded-2xl flex items-center justify-center shadow-[0_24px_48px_-12px_rgba(0,0,0,0.15)] ring-1 ring-white/50 group-hover:rotate-6 transition-all duration-500">
-                          <article.icon className="w-6 h-6 text-zinc-950" />
+        {/* Grille des articles */}
+        {rest.length > 0 && (
+          <section>
+            <p className="text-xs uppercase tracking-widest text-zinc-400 font-medium mb-6">
+              Toutes les chroniques
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {rest.map((article) => {
+                const Icon = article.icon;
+                return (
+                  <Link
+                    href={`/actualites/${article.id}`}
+                    key={article.id}
+                    className="group block bg-white border border-zinc-100 rounded-2xl overflow-hidden hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+                  >
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={article.image}
+                        alt={article.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute top-3 left-3">
+                        <div className="w-9 h-9 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                          <Icon
+                            className="w-4 h-4 text-zinc-800"
+                            strokeWidth={1.5}
+                          />
                         </div>
                       </div>
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                     </div>
-                    
-                    <div className="px-6">
-                      <div className="flex items-center space-x-4 mb-8">
-                        <span className="text-emerald-600 font-black uppercase tracking-[0.4em] text-[10px]">{article.category}</span>
-                        <div className="h-[1px] w-8 bg-zinc-200" />
+
+                    <div className="p-5">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span
+                          className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${
+                            categoryColors[article.category] ??
+                            "bg-zinc-100 text-zinc-600"
+                          }`}
+                        >
+                          {article.category}
+                        </span>
+                        <span className="text-xs text-zinc-400">
+                          {article.readTime}
+                        </span>
                       </div>
-                      
-                      <h3 className={`${playfair.className} text-2xl md:text-3xl lg:text-4xl text-zinc-950 mb-6 group-hover:text-emerald-950 transition-colors leading-[1.15] tracking-tight italic`}>
+
+                      <h3
+                        className={`${playfair.className} text-lg text-zinc-950 leading-snug mb-2 italic group-hover:text-emerald-800 transition-colors`}
+                      >
                         {article.title}
                       </h3>
-                      
-                      <p className="text-zinc-500 text-base font-medium leading-relaxed line-clamp-3 mb-10 max-w-2xl">
+
+                      <p className="text-zinc-500 text-sm leading-relaxed line-clamp-3 mb-4">
                         {article.subtitle}
                       </p>
-                      
-                      <div className="flex items-center space-x-4 text-zinc-950 font-black uppercase tracking-[0.4em] text-[9px] group-hover:gap-10 transition-all duration-700">
-                        <span>L&apos;histoire complète</span>
-                        <div className="h-[2px] w-12 bg-zinc-950 transition-all duration-700 group-hover:w-24 group-hover:bg-emerald-600" />
+
+                      <div className="flex items-center gap-1.5 text-xs text-emerald-600 font-medium">
+                        Lire
+                        <ArrowRight
+                          className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"
+                          strokeWidth={1.5}
+                        />
                       </div>
                     </div>
                   </Link>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
       </main>
 
-      <footer className="bg-zinc-950 text-zinc-500 py-32 px-12 relative z-10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-24">
-          <div className="flex flex-col gap-6">
-            <div className={`${playfair.className} text-2xl text-white italic`}>Naya Cooking</div>
-            <p className="text-zinc-600 font-bold uppercase tracking-[0.5em] text-[9px]">L&apos;excellence & Chroniques culinaires africaines</p>
-          </div>
-          <div className="flex items-center space-x-16">
-            <div className="flex flex-col items-center">
-              <span className="text-xl text-white font-black tracking-tighter italic">2024</span>
-              <span className="text-[9px] font-black text-zinc-700 uppercase tracking-[0.5em] mt-3">EDITION PREMIÈRE</span>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      <style jsx global>{`
-        .paper-texture {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-        }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-      `}</style>
+      <Footer />
     </div>
   );
 }

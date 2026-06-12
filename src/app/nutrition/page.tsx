@@ -9,9 +9,10 @@ import ProfileForm from "@/components/nutrition/ProfileForm";
 import MacroCard from "@/components/nutrition/MacroCard";
 import CaloriesDisplay from "@/components/nutrition/CaloriesDisplay";
 import FoodDictionary from "@/components/nutrition/FoodDictionary";
+import SuperfoodsSection from "@/components/nutrition/SuperfoodsSection";
+import FAQ from "@/components/nutrition/FAQ";
 
 const playfair = Playfair_Display({ subsets: ["latin"] });
-
 
 export default function NutritionPage() {
   const [age, setAge] = useState("");
@@ -23,24 +24,21 @@ export default function NutritionPage() {
   const [calculated, setCalculated] = useState(false);
   const [dailyCalories, setDailyCalories] = useState(0);
   const [macros, setMacros] = useState({ proteins: 0, carbs: 0, fats: 0 });
-  const [currentIntake, setCurrentIntake] = useState({ proteins: 0, carbs: 0, fats: 0 });
+  const [currentIntake] = useState({ proteins: 0, carbs: 0, fats: 0 });
   const [searchTerm, setSearchTerm] = useState("");
 
   const calculateCalories = () => {
     const ageNum = parseInt(age);
     const weightNum = parseFloat(weight);
     const heightNum = parseFloat(height);
-
     if (!ageNum || !weightNum || !heightNum) return;
 
-    let bmr: number;
-    if (gender === "male") {
-      bmr = 10 * weightNum + 6.25 * heightNum - 5 * ageNum + 5;
-    } else {
-      bmr = 10 * weightNum + 6.25 * heightNum - 5 * ageNum - 161;
-    }
+    let bmr =
+      gender === "male"
+        ? 10 * weightNum + 6.25 * heightNum - 5 * ageNum + 5
+        : 10 * weightNum + 6.25 * heightNum - 5 * ageNum - 161;
 
-    const activityMultipliers: Record<string, number> = {
+    const multipliers: Record<string, number> = {
       sedentary: 1.2,
       light: 1.375,
       moderate: 1.55,
@@ -48,38 +46,51 @@ export default function NutritionPage() {
       veryActive: 1.9,
     };
 
-    const tdee = bmr * activityMultipliers[activityLevel];
+    const tdee = bmr * multipliers[activityLevel];
+    let target = tdee;
+    if (goal === "lose") target = tdee - 500;
+    if (goal === "gain") target = tdee + 500;
 
-    let targetCalories = tdee;
-    if (goal === "lose") targetCalories = tdee - 500;
-    if (goal === "gain") targetCalories = tdee + 500;
-
-    setDailyCalories(Math.round(targetCalories));
-
-    const proteinTarget = Math.round((targetCalories * 0.3) / 4);
-    const carbTarget = Math.round((targetCalories * 0.4) / 4);
-    const fatTarget = Math.round((targetCalories * 0.3) / 9);
-
-    setMacros({ proteins: proteinTarget, carbs: carbTarget, fats: fatTarget });
+    setDailyCalories(Math.round(target));
+    setMacros({
+      proteins: Math.round((target * 0.3) / 4),
+      carbs: Math.round((target * 0.4) / 4),
+      fats: Math.round((target * 0.3) / 9),
+    });
     setCalculated(true);
   };
-
 
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 selection:bg-emerald-100 selection:text-emerald-900">
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        <header className="mb-8 sm:mb-12">
-          <h1 className={`${playfair.className} text-3xl sm:text-4xl md:text-5xl text-zinc-900 mb-3 sm:mb-4 leading-tight`}>
-            Intelligence <span className="italic text-emerald-600">Nutritive</span>
+
+        {/* Hero */}
+        <header className="mb-10 sm:mb-14">
+          <p className="text-xs uppercase tracking-widest text-emerald-600 font-medium mb-3">
+            Nutrition & bien-être
+          </p>
+          <h1
+            className={`${playfair.className} text-3xl sm:text-4xl md:text-5xl text-zinc-900 mb-3 leading-tight`}
+          >
+            La nutrition africaine,{" "}
+            <span className="italic text-emerald-600">enfin décryptée</span>
           </h1>
-          <p className="text-zinc-500 text-sm sm:text-base">
-            Calculez vos besoins caloriques et optimisez votre alimentation
+          <p className="text-zinc-500 text-sm sm:text-base max-w-lg leading-relaxed">
+            Calculez vos besoins, découvrez ce que vos ingrédients locaux vous
+            apportent, et trouvez toutes vos réponses.
           </p>
         </header>
 
+        {/* Séparateur */}
+        <div className="h-px bg-zinc-200 mb-10" />
+
+        {/* Calculateur */}
         <div className="space-y-8">
+          <p className="text-xs uppercase tracking-widest text-zinc-400 font-medium">
+            Calculateur personnalisé
+          </p>
           <ProfileForm
             age={age}
             setAge={setAge}
@@ -99,7 +110,6 @@ export default function NutritionPage() {
           {calculated && (
             <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
               <CaloriesDisplay calories={dailyCalories} />
-              
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 <MacroCard
                   label="Protéines"
@@ -127,7 +137,24 @@ export default function NutritionPage() {
           )}
         </div>
 
+        {/* Séparateur */}
+        <div className="h-px bg-zinc-200 mt-14" />
+
+        {/* Superaliments */}
+        <SuperfoodsSection />
+
+        {/* Séparateur */}
+        <div className="h-px bg-zinc-200 mt-14" />
+
+        {/* Bibliothèque */}
         <FoodDictionary searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
+        {/* Séparateur */}
+        <div className="h-px bg-zinc-200 mt-14" />
+
+        {/* FAQ */}
+        <FAQ />
+
       </main>
 
       <Footer />
