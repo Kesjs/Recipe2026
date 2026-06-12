@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   title: "Naya : Mangez mieux, vivez mieux.",
   description:
     "Plateforme culinaire haut de gamme dédiée à l'équilibre alimentaire et aux patrimoines culinaires africains",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({

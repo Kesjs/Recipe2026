@@ -15,7 +15,7 @@ export default function Logo({ onLogoClick }: LogoProps) {
     >
       <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg group-hover:rotate-3 transition-transform">
         <Image
-          src="/naya.jpg"
+          src="/icon.png"
           alt="Naya logo"
           width={40}
           height={40}

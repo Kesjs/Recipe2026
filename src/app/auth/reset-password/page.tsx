@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, ArrowLeft, Leaf, Home, AlertCircle, KeyRound } from "lucide-react";
+import { Mail, ArrowLeft, Leaf, Home, AlertCircle, KeyRound, ShieldCheck, Zap, Clock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Playfair_Display } from "next/font/google";
@@ -88,13 +88,13 @@ export default function ResetPasswordPage() {
 
             <div className="space-y-4">
               {[
-                { icon: "🔒", text: "Lien sécurisé et unique" },
-                { icon: "⚡", text: "Reçu en quelques secondes" },
-                { icon: "✅", text: "Valable pendant 24 heures" },
-              ].map((item) => (
-                <div key={item.text} className="flex items-center space-x-3">
-                  <span className="text-2xl">{item.icon}</span>
-                  <span className="text-zinc-300 text-sm">{item.text}</span>
+                { icon: ShieldCheck, text: "Lien sécurisé et unique",     color: "text-emerald-400" },
+                { icon: Zap,         text: "Reçu en quelques secondes",   color: "text-yellow-400"  },
+                { icon: Clock,       text: "Valable pendant 24 heures",   color: "text-blue-400"    },
+              ].map(({ icon: Icon, text, color }) => (
+                <div key={text} className="flex items-center space-x-3">
+                  <Icon className={`w-5 h-5 shrink-0 ${color}`} aria-hidden="true" />
+                  <span className="text-zinc-300 text-sm">{text}</span>
                 </div>
               ))}
             </div>

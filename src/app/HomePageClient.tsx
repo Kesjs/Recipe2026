@@ -181,9 +181,14 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
     "International": Salad,
   };
 
-  const tabs = categories || [];
+  // "Tout" toujours en premier, puis le reste trié
+  const tabs = categories
+    ? [
+        ...(categories.filter((c) => c.name === "Tout")),
+        ...(categories.filter((c) => c.name !== "Tout")),
+      ]
+    : [];
   const activeCategory = categories?.find((c) => c.name === activeTab);
-  const activeCategoryName = activeTab || "Tout";
 
   const {
     data,
@@ -343,13 +348,8 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
         <div className="max-w-7xl mx-auto px-6 py-20">
 
           {/* Filtres de catégories */}
-          {/*
-            ✅ space-x-6 → space-x-8 : espacement entre éléments tactiles
-               porté à 32px (WCAG 2.5.5 recommande 8px min, on dépasse
-               confortablement).
-          */}
           <div
-            className="flex items-center space-x-8 overflow-x-auto pb-16 no-scrollbar snap-x"
+            className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 pb-16"
             role="tablist"
             aria-label="Filtrer par catégorie"
           >
@@ -363,17 +363,17 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveTab(tab.name)}
-                  className={`h-16 shrink-0 flex items-center space-x-4 px-12 transition-all rounded-[2rem] snap-start focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 [will-change:transform] active:scale-95 ${
+                  className={`h-14 flex items-center justify-center sm:justify-start space-x-3 px-6 transition-all rounded-2xl focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 [will-change:transform] active:scale-95 ${
                     isActive
-                      ? "bg-zinc-900 text-white shadow-2xl shadow-zinc-400/20 ring-4 ring-zinc-900/10"
+                      ? "bg-zinc-900 text-white shadow-xl shadow-zinc-400/20 ring-4 ring-zinc-900/10"
                       : "border-2 border-zinc-100 bg-white text-zinc-500 hover:border-emerald-200 hover:text-emerald-900 shadow-sm hover:shadow-md"
                   }`}
                 >
                   <Icon
-                    className={`w-8 h-8 ${isActive ? "text-emerald-400" : "text-emerald-600"}`}
+                    className={`w-5 h-5 shrink-0 ${isActive ? "text-emerald-400" : "text-emerald-600"}`}
                     aria-hidden="true"
                   />
-                  <span className="font-bold text-base">{tab.title}</span>
+                  <span className="font-bold text-sm">{tab.title}</span>
                 </button>
               );
             })}

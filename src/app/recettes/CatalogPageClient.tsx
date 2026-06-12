@@ -153,22 +153,25 @@ export default function CatalogPageClient({ initialRecipes }: CatalogPageClientP
             </div>
           </div>
 
-          {/* Staggered Filter Pills */}
-          <div className="mt-8 sm:mt-10 flex items-center space-x-3 sm:space-x-4 overflow-x-auto pb-6 sm:pb-8 no-scrollbar snap-x">
-            {categories.map((cat) => {
+          {/* Filter Pills — grille 2×2 sur mobile, flex sur desktop */}
+          <div className="mt-8 sm:mt-10 grid grid-cols-2 sm:flex sm:flex-wrap gap-3 pb-6 sm:pb-8">
+            {[
+              ...categories.filter((c) => c.name === "Tout"),
+              ...categories.filter((c) => c.name !== "Tout"),
+            ].map((cat) => {
               const Icon = CATEGORY_ICONS[cat.name] || BookOpen;
               return (
                 <button
                   key={cat.id}
                   onClick={() => setActiveTab(cat.name)}
-                  className={`h-12 sm:h-14 shrink-0 flex items-center space-x-2 sm:space-x-3 px-4 sm:px-6 rounded-[1.25rem] sm:rounded-[1.5rem] transition-all duration-300 active:scale-95 snap-start border-2 ${
+                  className={`h-12 sm:h-14 flex items-center justify-center sm:justify-start space-x-2 sm:space-x-3 px-4 sm:px-6 rounded-xl sm:rounded-2xl transition-all duration-200 active:scale-95 border-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 ${
                     activeTab === cat.name
-                      ? "bg-zinc-950 text-white border-zinc-950 shadow-lg ring-4 ring-zinc-900/5"
+                      ? "bg-zinc-950 text-white border-zinc-950 shadow-lg"
                       : "bg-white text-zinc-400 border-zinc-100 hover:border-emerald-200 hover:text-emerald-950 shadow-sm"
                   }`}
                 >
                   <Icon 
-                    className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 ${activeTab === cat.name ? 'text-white' : 'text-zinc-300'}`} 
+                    className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 ${activeTab === cat.name ? 'text-white' : 'text-zinc-300'}`} 
                     aria-hidden="true"
                   />
                   <span className={`font-black uppercase tracking-tight text-xs sm:text-sm ${activeTab === cat.name ? 'text-white' : ''}`}>

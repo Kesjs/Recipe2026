@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Clock, Flame, Heart } from "lucide-react";
+import { Clock, Flame, Heart, MapPin, ChefHat } from "lucide-react";
 import { Recipe } from "@/lib/types";
 import { calculateNutrition } from "@/lib/nutrition";
 import { generateRecipeLink } from "@/lib/recipe-links";
@@ -15,6 +15,12 @@ interface RecipeCardProps {
   variant?: "default" | "editorial";
   className?: string;
 }
+
+const DIFFICULTY_STYLES: Record<string, { bg: string; text: string }> = {
+  Facile:   { bg: "bg-emerald-500/90", text: "text-white" },
+  Moyen:    { bg: "bg-amber-500/90",   text: "text-white" },
+  Difficile:{ bg: "bg-red-500/90",     text: "text-white" },
+};
 
 export default function RecipeCard({
   recipe,
@@ -29,8 +35,12 @@ export default function RecipeCard({
     ? calculateNutrition(recipe.recipe_ingredients)
     : null;
 
+  const difficulty = recipe.difficulty;
+  const diffStyle = difficulty ? DIFFICULTY_STYLES[difficulty] : null;
+
   const toggleFavorite = async (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     try {
       const { toggleFavorite: toggleFavoriteAction } = await import(
         "@/lib/actions/favorites"
@@ -44,154 +54,98 @@ export default function RecipeCard({
     }
   };
 
-  const favoriteLabel = isFavorited
-    ? "Retirer des favoris"
-    : "Ajouter aux favoris";
+  const favoriteLabel = isFavorited ? "Retirer des favoris" : "Ajouter aux favoris";
 
-  if (variant === "editorial") {
-    return (
-      <article className={`group cursor-pointer ${className}`}>
+  return (
+    <>
+      <article className={`group flex flex-col ${className}`}>
         <Link
           href={generateRecipeLink(recipe)}
-          className="focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 rounded-[2rem] block"
+          className="flex flex-col h-full focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 rounded-[1.75rem]"
         >
-          <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 shadow-sm">
+          {/* Image container — hauteur fixe pour uniformité */}
+          <div className="relative w-full h-56 rounded-[1.75rem] overflow-hidden bg-zinc-100 shrink-0">
             {recipe.image_url ? (
               <Image
                 src={recipe.image_url}
                 alt={recipe.title}
                 fill
-                // ✅ transition-transform au lieu de rien : seule propriété GPU-friendly
-                // duration réduite 1000ms → 500ms
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 33vw"
                 priority={priority}
               />
             ) : (
-              <div className="w-full h-full bg-zinc-200" aria-hidden="true" />
+              <div className="w-full h-full flex items-center justify-center bg-zinc-200">
+                <ChefHat className="w-10 h-10 text-zinc-300" aria-hidden="true" />
+              </div>
             )}
 
-            {/* ✅ Overlay hover : transition-opacity uniquement (GPU-friendly) */}
+            {/* Overlay hover */}
             <div
-              className="absolute inset-0 bg-emerald-950/0 group-hover:bg-emerald-950/20 transition-opacity duration-300 flex items-center justify-center"
+              className="absolute inset-0 bg-zinc-950/0 group-hover:bg-zinc-950/25 transition-all duration-300 flex items-center justify-center"
               aria-hidden="true"
             >
-              <span className="opacity-0 group-hover:opacity-100 bg-white text-emerald-950 px-8 py-3 rounded-2xl font-bold shadow-2xl transition-all translate-y-4 group-hover:translate-y-0 duration-300">
-                Aperçu
+              <span className="opacity-0 group-hover:opacity-100 bg-white text-zinc-900 px-5 py-2 rounded-xl font-bold text-sm shadow-xl transition-all translate-y-2 group-hover:translate-y-0 duration-300">
+                Voir la recette
               </span>
             </div>
 
-            {/* ✅ Touch target 44×44px (p-3 = 12px × 2 + icône 20px = 44px) */}
-            {/* ✅ aria-label explicite + aria-pressed pour screen readers */}
+            {/* Badge difficulté — haut gauche */}
+            {diffStyle && difficulty && (
+              <span
+                className={`absolute top-3 left-3 ${diffStyle.bg} ${diffStyle.text} text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full backdrop-blur-sm`}
+              >
+                {difficulty}
+              </span>
+            )}
+
+            {/* Bouton favori — haut droite */}
             <button
               type="button"
               onClick={toggleFavorite}
               aria-label={favoriteLabel}
               aria-pressed={isFavorited}
-              className="absolute top-4 right-4 p-3 bg-white/80 backdrop-blur-sm rounded-xl shadow-sm hover:bg-white transition-colors z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+              className="absolute top-3 right-3 p-2.5 bg-white/85 backdrop-blur-sm rounded-xl shadow-sm hover:bg-white transition-colors z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
             >
               <Heart
-                className={`w-5 h-5 ${
-                  isFavorited ? "fill-red-500 text-red-500" : "text-zinc-400"
-                }`}
-                aria-hidden="true"
-              />
-            </button>
-          </div>
-
-          <span className="text-emerald-600 font-bold text-xs uppercase tracking-widest">
-            {category}
-          </span>
-          <h3 className="font-serif text-3xl text-zinc-950 mt-2 leading-tight group-hover:text-emerald-700 transition-colors line-clamp-2">
-            {recipe.title}
-          </h3>
-          <div className="flex items-center space-x-4 mt-4 text-zinc-400 font-medium">
-            <div className="flex items-center space-x-1.5">
-              <Clock className="w-4 h-4" aria-hidden="true" />
-              <span>{recipe.prep_time} min</span>
-            </div>
-            {nutrition && (
-              <div className="flex items-center space-x-1.5">
-                <Flame className="w-4 h-4" aria-hidden="true" />
-                <span>{nutrition.calories} kcal</span>
-              </div>
-            )}
-          </div>
-        </Link>
-
-        {showToast && (
-          <div
-            role="status"
-            aria-live="polite"
-            className="fixed bottom-4 right-4 bg-emerald-600 text-white px-4 py-2 rounded-lg shadow-lg z-50"
-          >
-            {isFavorited ? "Ajouté aux favoris" : "Retiré des favoris"}
-          </div>
-        )}
-      </article>
-    );
-  }
-
-  return (
-    <>
-      <article className={`group cursor-pointer ${className}`}>
-        <Link
-          href={`/recettes/${recipe.id}`}
-          className="block focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 rounded-[2rem]"
-        >
-          <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden mb-5 bg-zinc-100 shadow-sm">
-            {recipe.image_url ? (
-              <Image
-                src={recipe.image_url}
-                alt={recipe.title}
-                fill
-                // ✅ duration réduite 700ms → 500ms
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                priority={priority}
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-zinc-100">
-                <span className="text-zinc-300 text-4xl" aria-hidden="true">
-                  🍽️
-                </span>
-              </div>
-            )}
-
-            {/* ✅ Touch target 44×44px + aria complet */}
-            <button
-              type="button"
-              onClick={toggleFavorite}
-              aria-label={favoriteLabel}
-              aria-pressed={isFavorited}
-              className="absolute top-4 right-4 p-3 bg-white/85 backdrop-blur-sm rounded-xl shadow-sm hover:bg-white transition-colors z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-            >
-              <Heart
-                className={`w-5 h-5 ${
-                  isFavorited ? "fill-red-500 text-red-500" : "text-zinc-500"
-                }`}
+                className={`w-4 h-4 ${isFavorited ? "fill-red-500 text-red-500" : "text-zinc-400"}`}
                 aria-hidden="true"
               />
             </button>
 
+            {/* Badge calories — bas gauche */}
             {nutrition && (
-              <div className="absolute bottom-4 left-4 bg-white/85 backdrop-blur-sm px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm">
-                <Flame className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
-                <span className="text-xs font-bold text-zinc-900">
+              <div className="absolute bottom-3 left-3 bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center space-x-1.5">
+                <Flame className="w-3.5 h-3.5 text-orange-400" aria-hidden="true" />
+                <span className="text-xs font-bold text-white">
                   {nutrition.calories} kcal
                 </span>
               </div>
             )}
           </div>
 
-          <span className="text-emerald-600 font-bold text-xs uppercase tracking-widest">
-            {category}
-          </span>
-          <h3 className="font-serif text-2xl text-zinc-950 mt-2 leading-tight group-hover:text-emerald-700 transition-colors line-clamp-2">
-            {recipe.title}
-          </h3>
-          <div className="flex items-center space-x-4 mt-3 text-zinc-400 text-sm font-medium">
-            <div className="flex items-center space-x-1.5">
+          {/* Contenu texte */}
+          <div className="flex flex-col flex-1 pt-4 pb-1">
+            {/* Catégorie + pays */}
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-emerald-600 font-bold text-[10px] uppercase tracking-widest">
+                {category}
+              </span>
+              {recipe.country && (
+                <span className="flex items-center space-x-1 text-zinc-400 text-[10px] font-medium">
+                  <MapPin className="w-3 h-3" aria-hidden="true" />
+                  <span>{recipe.country}</span>
+                </span>
+              )}
+            </div>
+
+            {/* Titre */}
+            <h3 className="font-serif text-xl text-zinc-900 leading-snug group-hover:text-emerald-700 transition-colors line-clamp-2 flex-1">
+              {recipe.title}
+            </h3>
+
+            {/* Méta — temps */}
+            <div className="flex items-center space-x-1.5 mt-3 text-zinc-400 text-sm font-medium">
               <Clock className="w-4 h-4" aria-hidden="true" />
               <span>{recipe.prep_time} min</span>
             </div>
@@ -203,9 +157,9 @@ export default function RecipeCard({
         <div
           role="status"
           aria-live="polite"
-          className="fixed bottom-4 right-4 bg-emerald-600 text-white px-4 py-2 rounded-lg shadow-lg z-50"
+          className="fixed bottom-4 right-4 bg-emerald-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm font-medium"
         >
-          {isFavorited ? "Ajouté aux favoris" : "Retiré des favoris"}
+          {isFavorited ? "Ajouté aux favoris ❤" : "Retiré des favoris"}
         </div>
       )}
     </>
