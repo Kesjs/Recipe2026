@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "@/lib/query-client";
+import PageLoader from "@/components/PageLoader";
 
 // ✅ next/font/google gère le chargement optimisé (pas d'@import dans globals.css)
 const inter = Inter({
@@ -47,6 +48,7 @@ export default function RootLayout({
         */}
       </head>
       <body className="font-sans">
+        <PageLoader />
         {/*
           ✅ div h-20 supprimée d'ici — elle créait un CLS et bloquait
           le contenu au chargement. Le padding-top est géré directement

@@ -140,8 +140,8 @@ export default function RecipeCard({
             )}
           </div>
 
-          {/* Contenu texte */}
-          <div className="flex flex-col flex-1 pt-4 pb-1">
+          {/* Contenu texte — hauteur fixe pour aligner toutes les cards */}
+          <div className="flex flex-col pt-4 pb-1 h-28">
             {/* Catégorie + pays */}
             <div className="flex items-center justify-between mb-2">
               <span className="text-emerald-600 font-bold text-[10px] uppercase tracking-widest">
@@ -155,13 +155,13 @@ export default function RecipeCard({
               )}
             </div>
 
-            {/* Titre */}
+            {/* Titre — 2 lignes max, occupe l'espace disponible */}
             <h3 className="font-serif text-xl text-zinc-900 leading-snug group-hover:text-emerald-700 transition-colors line-clamp-2 flex-1">
               {recipe.title}
             </h3>
 
-            {/* Méta — temps */}
-            <div className="flex items-center space-x-1.5 mt-3 text-zinc-400 text-sm font-medium">
+            {/* Méta — temps, toujours en bas */}
+            <div className="flex items-center space-x-1.5 mt-auto pt-2 text-zinc-400 text-sm font-medium">
               <Clock className="w-4 h-4" aria-hidden="true" />
               <span>{recipe.prep_time} min</span>
             </div>

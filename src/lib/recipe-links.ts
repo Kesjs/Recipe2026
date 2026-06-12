@@ -25,9 +25,15 @@ export function generateRecipeLink(recipe: Pick<Recipe, "id" | "title">): string
 }
 
 /**
- * Extrait l'ID depuis une URL hybride [id]-[slug]
- * Exemple: "a1b2c3d4-poulet-yassa" -> "a1b2c3d4"
+ * Extrait l'ID UUID depuis une URL hybride [uuid]-[slug]
+ * Un UUID v4 fait exactement 36 caractères (32 hex + 4 tirets)
+ * Exemple: "f47ac10b-58cc-4372-a567-0e02b2c3d479-thieboudienne" -> "f47ac10b-58cc-4372-a567-0e02b2c3d479"
  */
 export function extractRecipeIdFromUrl(urlSegment: string): string {
+  // UUID v4 : 8-4-4-4-12 caractères hex séparés par des tirets = 36 caractères au total
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
+  const match = urlSegment.match(uuidRegex);
+  if (match) return match[0];
+  // Fallback : ancienne logique si l'ID n'est pas un UUID (ex: ID court)
   return urlSegment.split("-")[0];
 }

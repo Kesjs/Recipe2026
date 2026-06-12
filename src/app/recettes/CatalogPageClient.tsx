@@ -207,7 +207,7 @@ export default function CatalogPageClient({ initialRecipes }: CatalogPageClientP
                   recipe={recipe} 
                   priority={index < 6} 
                   variant="editorial"
-                  className={isMiddleColumn ? "md:translate-y-24" : ""}
+                  className=""
                   category={categories.find(c => c.id === recipe.category_id)?.title}
                 />
               );

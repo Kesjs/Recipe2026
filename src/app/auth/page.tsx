@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Lock, User, ArrowRight, Leaf, Home, AlertCircle, UtensilsCrossed, Heart, BarChart2 } from "lucide-react";
+import { Mail, Lock, User, ArrowRight, Leaf, Home, AlertCircle, UtensilsCrossed, Heart, BarChart2, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -18,6 +18,7 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<{ email?: string; password?: string; name?: string }>({});
 
   const validateEmail = (email: string) => {
@@ -78,7 +79,7 @@ export default function AuthPage() {
           }
           throw error;
         }
-        setSuccess("Connexion réussie ! Redirection...");
+        setSuccess("Connexion réussie !");
         // Respecter le ?redirect param posé par le middleware
         const params = new URLSearchParams(window.location.search);
         const redirectTo = params.get("redirect") || "/dashboard";
@@ -103,8 +104,7 @@ export default function AuthPage() {
 
         // Si session immédiate (email confirm désactivé) → rediriger direct
         if (data.session) {
-          setSuccess("Compte créé ! Redirection...");
-          setTimeout(() => router.push("/dashboard"), 800);
+          router.push("/dashboard");
         } else {
           setSuccess("Compte créé ! Vérifiez votre email pour activer votre compte.");
         }
@@ -266,21 +266,28 @@ export default function AuthPage() {
                 )}
               </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Mot de passe</label>
-                <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
-                  <input 
-                    type="password" 
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                      if (fieldErrors.password) setFieldErrors({ ...fieldErrors, password: undefined });
-                    }}
-                    placeholder="••••••••"
-                    className={`w-full pl-12 pr-4 py-3 bg-white/10 border rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all ${fieldErrors.password ? 'border-red-500/50 focus:ring-red-500' : 'border-white/20 focus:ring-emerald-500'}`}
-                  />
-                </div>
+               <div className="space-y-2">
+                 <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Mot de passe</label>
+                 <div className="relative">
+                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
+                   <input 
+                     type={showPassword ? "text" : "password"}
+                     value={password}
+                     onChange={(e) => {
+                       setPassword(e.target.value);
+                       if (fieldErrors.password) setFieldErrors({ ...fieldErrors, password: undefined });
+                     }}
+                     placeholder="••••••••"
+                     className={`w-full pl-12 pr-12 py-3 bg-white/10 border rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all ${fieldErrors.password ? 'border-red-500/50 focus:ring-red-500' : 'border-white/20 focus:ring-emerald-500'}`}
+                   />
+                   <button
+                     type="button"
+                     onClick={() => setShowPassword(!showPassword)}
+                     className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition-colors"
+                   >
+                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                   </button>
+                 </div>
                 {fieldErrors.password && (
                   <p className="text-red-400 text-xs mt-1 flex items-center space-x-1">
                     <AlertCircle className="w-3 h-3" />

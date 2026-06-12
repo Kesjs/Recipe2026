@@ -435,7 +435,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                   key={recipe.id}
                   recipe={recipe}
                   category={activeCategory?.name || "Recette"}
-                  className={index % 3 === 1 ? "md:translate-y-16" : ""}
+                  className=""
                   variant="editorial"
                 />
               ))

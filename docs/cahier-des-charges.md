@@ -1,248 +1,115 @@
 # Cahier des charges — Naya Cuisine
-> Plateforme culinaire dédiée au patrimoine gastronomique africain et à la nutrition saine
+**Plateforme culinaire dédiée au patrimoine gastronomique africain et à la nutrition saine**
 
 ---
 
 ## 1. Présentation du projet
-
 ### 1.1 Intitulé
-**Naya Cuisine** — Plateforme web culinaire et nutritionnelle
+**Naya Cuisine** — Plateforme web culinaire et nutritionnelle.
 
 ### 1.2 Commanditaire
-Projet académique réalisé dans le cadre d'un mémoire de fin d'études.
+Projet académique réalisé dans le cadre d'un mémoire de fin d'études en Génie Logiciel.
 
 ### 1.3 Résumé
-Naya Cuisine est une application web full-stack permettant de consulter, créer et partager des recettes de cuisine, avec un accent fort sur les cuisines africaines et les données nutritionnelles associées. La plateforme intègre un système d'authentification, une gestion des favoris, un calculateur de besoins caloriques personnalisés et des contenus éditoriaux sur la nutrition.
+Naya Cuisine est une application web full-stack permettant de consulter, créer et partager des recettes de cuisine. Le projet se distingue par un focus sur les cuisines africaines et une intégration de données nutritionnelles précises. La plateforme inclut un système d'authentification, une gestion des favoris, un calculateur de besoins caloriques (TDEE) et des contenus éditoriaux experts.
 
 ---
 
 ## 2. Contexte et enjeux
-
 ### 2.1 Contexte
-Les plateformes culinaires numériques existantes (Marmiton, AllRecipes, Yummly) sont dominées par les cuisines européennes et nord-américaines. Les cuisines africaines y sont peu représentées, mal documentées sur le plan nutritionnel, et souvent stéréotypées.
-
-Parallèlement, la transition nutritionnelle en Afrique subsaharienne — marquée par l'abandon progressif des aliments locaux au profit de produits industriels — représente un enjeu de santé publique documenté par l'OMS et la FAO.
+Les plateformes culinaires numériques dominantes sont centrées sur les gastronomies occidentales, laissant les cuisines africaines sous-représentées et souvent stéréotypées. Parallèlement, la transition nutritionnelle en Afrique subsaharienne souligne l'urgence de valoriser les aliments locaux face aux produits industriels, un enjeu de santé publique majeur documenté par l'OMS et la FAO.
 
 ### 2.2 Enjeux du projet
-- **Culturel** : préserver et valoriser les recettes du patrimoine culinaire africain
-- **Éducatif** : informer sur les propriétés nutritionnelles des ingrédients locaux
-- **Technique** : concevoir une application web moderne, performante et accessible
-- **Communautaire** : permettre la contribution des utilisateurs via la création de recettes
+* **Culturel** : Préserver et valoriser le patrimoine culinaire africain.
+* **Éducatif** : Informer sur les propriétés nutritionnelles des ingrédients locaux.
+* **Technique** : Concevoir une application web moderne, performante et accessible.
+* **Communautaire** : Faciliter la contribution des utilisateurs via le partage de recettes.
 
 ---
 
 ## 3. Cible utilisateur
+### 3.1 Profils
+* **Principal** : Diaspora africaine et populations locales (18-40 ans), soucieuses de leur alimentation et maîtrisant les outils numériques.
+* **Secondaire** : Nutritionnistes, professionnels de santé et amateurs de cuisine internationale.
 
-### 3.1 Profil principal
-- Âge : 18-40 ans
-- Diaspora africaine et populations locales soucieuses de leur alimentation
-- Intérêt pour la cuisine maison et la nutrition
-- Maîtrise des outils numériques
-
-### 3.2 Profil secondaire
-- Nutritionnistes et professionnels de santé en Afrique
-- Amateurs de cuisine internationale
-
-### 3.3 Types d'utilisateurs dans l'application
-| Type | Description | Droits |
-|---|---|---|
-| Visiteur | Non inscrit | Consultation des recettes, nutrition, actualités |
-| Utilisateur connecté | Inscrit et authentifié | Favoris, création de recettes, dashboard |
+### 3.2 Droits d'accès
+| Type | Droits |
+| :--- | :--- |
+| **Visiteur** | Consultation (Recettes, Nutrition, Actualités) |
+| **Utilisateur connecté** | Favoris, Création de recettes, Accès au Dashboard |
 
 ---
 
-## 4. Exigences fonctionnelles
+## 4. Périmètre fonctionnel
+*(Priorité 1 : Essentiel | Priorité 2 : Avancé | Priorité 3 : Évolutif)*
 
 ### 4.1 Module Recettes (Priorité 1)
-
-| ID | Fonctionnalité | Description |
-|---|---|---|
-| F01 | Catalogue de recettes | Affichage de toutes les recettes avec image, titre, difficulté, pays, calories |
-| F02 | Filtrage par catégorie | 4 catégories : Tout, Afrique, Rapide, International |
-| F03 | Recherche textuelle | Filtrage en temps réel sur le titre de la recette |
-| F04 | Fiche recette | Détail complet : ingrédients, instructions, nutrition, description |
-| F05 | Ajusteur de portions | Recalcul des quantités d'ingrédients selon le nombre de convives |
-| F06 | Calcul nutritionnel | Calories, protéines, glucides, lipides calculés depuis les ingrédients réels |
-| F07 | Pagination infinie | Chargement progressif des recettes (6 par lot) |
+* **F01** : Catalogue avec filtres (image, titre, difficulté, pays, calories).
+* **F02-F03** : Filtrage par catégorie et recherche textuelle temps réel.
+* **F04-F05** : Fiche recette détaillée et ajusteur de portions.
+* **F06** : Calcul nutritionnel automatique basé sur les ingrédients.
+* **F07** : Pagination infinie pour une navigation fluide.
 
 ### 4.2 Module Authentification (Priorité 1)
-
-| ID | Fonctionnalité | Description |
-|---|---|---|
-| A01 | Inscription | Email, nom, mot de passe (min 6 caractères) |
-| A02 | Connexion | Email + mot de passe avec gestion des erreurs |
-| A03 | Redirection post-login | Redirige vers la page d'origine après connexion |
-| A04 | Réinitialisation mot de passe | Envoi de lien sécurisé par email (valable 24h) |
-| A05 | Protection de routes | `/dashboard` et `/recettes/creer` accessibles uniquement si connecté |
-| A06 | Déconnexion | Suppression de la session Supabase |
-| A07 | Persistance de session | "Se souvenir de moi" (cookie longue durée) |
+Gestion complète via Supabase (Inscription, Connexion, Réinitialisation, Persistance de session et protection des routes via middleware).
 
 ### 4.3 Module Utilisateur (Priorité 2)
-
-| ID | Fonctionnalité | Description |
-|---|---|---|
-| U01 | Favoris | Ajouter/retirer une recette des favoris via le bouton cœur |
-| U02 | Persistance des favoris | Stockage en base de données, état réel au chargement |
-| U03 | Dashboard | Vue personnelle : recettes créées + favoris + compteurs |
-| U04 | Création de recette | Formulaire complet avec calcul nutritionnel en direct |
+Gestion des favoris persistants et Dashboard personnel (suivi des créations et favoris).
 
 ### 4.4 Module Nutrition (Priorité 2)
-
-| ID | Fonctionnalité | Description |
-|---|---|---|
-| N01 | Calculateur calorique | TDEE via formule Mifflin-St Jeor (âge, poids, taille, sexe, activité, objectif) |
-| N02 | Affichage des macros | Objectifs protéines/glucides/lipides calculés depuis le TDEE |
-| N03 | Superaliments africains | 6 fiches détaillées (Moringa, Gombo, Bissap, Manioc, Baobab, Fonio) |
-| N04 | Bibliothèque alimentaire | 12 aliments locaux avec valeurs nutritionnelles, recherche filtrante |
-| N05 | FAQ nutritionnelle | 10 questions-réponses en 2 groupes thématiques |
+Calculateur TDEE (formule Mifflin-St Jeor), fiches sur les superaliments africains, bibliothèque d'aliments locaux et FAQ nutritionnelle.
 
 ### 4.5 Module Actualités (Priorité 3)
-
-| ID | Fonctionnalité | Description |
-|---|---|---|
-| C01 | Chroniques culinaires | 8 articles éditoriaux sur des plats africains avec données scientifiques |
-| C02 | Filtrage par thème | 6 catégories : Nutrition, Équilibre, Bien-être, Astuce, Recette, Science |
-| C03 | Recherche dans les articles | Filtrage temps réel sur titre et contenu |
-| C04 | Article mis en avant | Premier article affiché en format featured (grande mise en page) |
+Chroniques culinaires éditoriales filtrables par thèmes scientifiques et bien-être.
 
 ---
 
 ## 5. Exigences non fonctionnelles
-
-### 5.1 Performance
-- Score Lighthouse Performance ≥ 85 sur mobile
-- Images servies en AVIF/WebP via Next.js Image Optimization
-- Revalidation des pages SSR toutes les 5 minutes (`revalidate: 300`)
-- Données client mises en cache 5 minutes (`staleTime: 5 * 60 * 1000`)
-- Fonts hébergées localement (pas de requête Google Fonts en production)
-
-### 5.2 Accessibilité
-- Conformité WCAG 2.1 niveau AA
-- Tous les boutons interactifs ont un `aria-label` explicite
-- Navigation clavier complète (`focus-visible` sur tous les éléments interactifs)
-- Contrastes de couleurs conformes (ratio minimum 4.5:1 pour le texte)
-- `aria-live` sur les toasts de notification
-- `aria-pressed` sur les boutons toggle (favoris)
-- Balises sémantiques (`<main>`, `<nav>`, `<article>`, `<section>`, `<header>`, `<aside>`)
-
-### 5.3 Sécurité
-- Authentification via Supabase Auth (JWT)
-- Row Level Security (RLS) activé sur toutes les tables
-- Les recettes du seed ont `created_by = NULL` pour contourner la RLS à l'insertion
-- Middleware Next.js pour protéger les routes sensibles côté serveur
-- Variables d'environnement pour les clés Supabase (jamais en clair dans le code)
-- Validation de formulaire côté client et côté serveur
-
-### 5.4 Responsive Design
-- Mobile-first : toutes les pages fonctionnelles à partir de 375px
-- Breakpoints principaux : `sm` (640px), `md` (768px), `lg` (1024px), `xl` (1280px)
-- Navigation mobile via drawer latéral
-- Grilles adaptatives (1 colonne mobile → 2-3 colonnes desktop)
-
-### 5.5 Compatibilité navigateurs
-- Chrome, Firefox, Safari, Edge (2 dernières versions majeures)
-- iOS Safari 15+, Android Chrome
+* **Performance** : Score Lighthouse ≥ 85, optimisation d'images (AVIF/WebP), SSR avec revalidation (5 min).
+* **Accessibilité** : Conformité WCAG 2.1 niveau AA (navigation clavier, contrastes, balisage sémantique).
+* **Sécurité** : RLS (Row Level Security) activé, protection des routes via Middleware Next.js, validation des données (Client & Serveur).
+* **Responsive** : Approche Mobile-first (375px+).
 
 ---
 
-## 6. Contraintes techniques
+## 6. Architecture et choix techniques
+### 6.1 Pile technologique
+* **Framework** : Next.js 14 (App Router).
+* **Backend** : Supabase (PostgreSQL, Auth, RLS).
+* **Style** : Tailwind CSS.
+* **Langage** : TypeScript (Strict mode).
 
-### 6.1 Contraintes imposées
-- Next.js 14 avec App Router (pas de Pages Router)
-- Supabase comme backend unique (auth + base de données)
-- Tailwind CSS pour le style (pas de CSS-in-JS)
-- TypeScript strict
-
-### 6.2 Contraintes métier
-- Les recettes du catalogue de base ne sont pas modifiables par les utilisateurs
-- La suppression de compte n'est pas implémentée (hors périmètre)
-- Les images de recettes sont des URLs externes (pas d'upload de fichier)
-
----
-
-## 7. Architecture technique
-
-```
-src/
-├── app/                    # Pages (App Router Next.js)
-│   ├── page.tsx            # Accueil
-│   ├── recettes/           # Catalogue + Détail + Création
-│   ├── nutrition/          # Page nutrition
-│   ├── actualites/         # Chroniques
-│   ├── dashboard/          # Espace utilisateur
-│   ├── auth/               # Authentification
-│   ├── aide/               # FAQ et contact
-│   └── legal/              # Mentions légales
-├── components/             # Composants réutilisables
-│   ├── Navbar.tsx
-│   ├── Footer.tsx
-│   ├── RecipeCard.tsx
-│   └── nutrition/          # Composants nutrition
-├── lib/                    # Utilitaires
-│   ├── supabase.ts         # Client Supabase côté client
-│   ├── supabase-server.ts  # Client Supabase côté serveur
-│   ├── types.ts            # Types TypeScript
-│   ├── nutrition.ts        # Calcul nutritionnel
-│   └── actions/            # Server Actions
-│       └── favorites.ts
-├── hooks/
-│   └── useAuth.ts
-└── middleware.ts           # Protection des routes
-```
+### 6.2 Justifications techniques
+* **Supabase** est retenu pour sa solution tout-en-un (Auth + BDD + RLS), permettant une vélocité de développement élevée.
+* **Next.js 14** permet une gestion optimisée du rendu (SSR) garantissant à la fois performance et bon référencement (SEO).
+* **Architecture** : Le modèle de données est structuré en 3e forme normale pour garantir l'intégrité référentielle, notamment pour la gestion complexe des ingrédients par recette (Many-to-Many).
 
 ---
 
-## 8. Modèle de données
-
-```sql
-profiles          (id, name, email, created_at)
-categories        (id, name, title, description, created_at)
-recipes           (id, title, description, instructions, prep_time,
-                   difficulty, country, image_url, category_id,
-                   created_by, created_at)
-ingredients       (id, name, calories_per_100g, proteins, carbs, lipids)
-recipe_ingredients(recipe_id, ingredient_id, amount_grams)  -- PK composée
-favorites         (id, user_id, recipe_id, created_at)
-```
+## 7. Gestion des risques
+| Risque | Stratégie d'atténuation |
+| :--- | :--- |
+| Complexité calculs nutritionnels | Tests unitaires sur la logique de calcul `nutrition.ts`. |
+| Délais de développement | Respect strict de la hiérarchie des priorités (1, 2, 3). |
+| Performance BDD | Indexation des colonnes fréquemment recherchées (titres, catégories). |
 
 ---
 
-## 9. Livrables
+## 8. Planning et critères d'acceptation
+### 8.1 Planning (8 semaines)
+1. **Conception** (Maquettes, Modèle de données) - S1
+2. **Infrastructure** (Setup Next.js, Supabase) - S2
+3. **Core features** (Recettes, Auth) - S3-S4
+4. **Features secondaires** (Nutrition, Dashboard) - S5-S6
+5. **Polish** (Accessibilité, SEO) - S7
+6. **Documentation** (Mémoire, Soutenance) - S8
 
-| Livrable | Description |
-|---|---|
-| Code source complet | Repository Next.js avec toutes les pages et composants |
-| Base de données | Schéma SQL (`schema.sql`) + données initiales (`seed.sql`) |
-| Documentation projet | Ce cahier des charges + résumé de projet |
-| Application déployée | URL de démonstration (Vercel) |
-
----
-
-## 10. Planning prévisionnel
-
-| Phase | Contenu | Durée estimée |
-|---|---|---|
-| 1 — Conception | Maquettes, modèle de données, choix techniques | 1 semaine |
-| 2 — Infrastructure | Setup Next.js, Supabase, authentification | 1 semaine |
-| 3 — Core features | Catalogue, fiche recette, création | 2 semaines |
-| 4 — Features secondaires | Nutrition, actualités, dashboard | 2 semaines |
-| 5 — Polish | Accessibilité, performance, responsive | 1 semaine |
-| 6 — Documentation | Mémoire, soutenance | 1 semaine |
+### 8.2 Checklist de validation (Critères d'acceptation)
+* [ ] Navigation fluide (Visiteur/Connecté)
+* [ ] Calculateur nutritionnel fonctionnel et cohérent
+* [ ] Dashboard utilisateur opérationnel
+* [ ] Conformité mobile et accessibilité AA
+* [ ] Absence de lien mort
 
 ---
-
-## 11. Critères d'acceptation
-
-Le projet est considéré comme livrable si :
-
-- [ ] Un visiteur peut consulter toutes les recettes sans inscription
-- [ ] Un visiteur peut filtrer les recettes par catégorie et faire une recherche
-- [ ] Un visiteur peut consulter le détail d'une recette avec ses valeurs nutritionnelles
-- [ ] Un utilisateur peut s'inscrire, se connecter et se déconnecter
-- [ ] Un utilisateur connecté peut ajouter/retirer des favoris
-- [ ] Un utilisateur connecté peut créer une recette qui apparaît dans le catalogue
-- [ ] Le dashboard affiche les vraies recettes créées et les vrais favoris
-- [ ] Les routes protégées redirigent vers `/auth` si non connecté
-- [ ] Le calculateur nutritionnel produit un résultat cohérent
-- [ ] L'application est utilisable sur mobile (375px minimum)
-- [ ] Aucun lien mort dans la navigation
+*Hors périmètre : Suppression de compte utilisateur, upload de fichiers images (URLs externes uniquement).*

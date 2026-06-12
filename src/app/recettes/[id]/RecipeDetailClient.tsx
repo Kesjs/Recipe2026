@@ -1,12 +1,72 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Clock, ArrowLeft, Flame, ChevronRight, Quote, Mic, ExternalLink, Minus, Plus, AlertCircle } from "lucide-react";
+import { Clock, ArrowLeft, Flame, ChevronRight, Quote, Mic, ExternalLink, Minus, Plus, AlertCircle, MapPin } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import { calculateNutrition } from "@/lib/nutrition";
 import { Recipe, RecipeIngredient } from "@/lib/types";
+
+interface RecipeDetailClientProps {
+  initialRecipe: Recipe;
+}
+
+// ── Skeleton ────────────────────────────────────────────────────────────────
+export function RecipeDetailSkeleton() {
+  return (
+    <div className="bg-[#fafafa] min-h-screen animate-pulse">
+      <Navbar />
+      {/* Image placeholder */}
+      <div className="w-full h-[400px] sm:h-[500px] md:h-[600px] bg-zinc-200" />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 mt-8 pb-24">
+        {/* Title card */}
+        <div className="bg-white rounded-lg p-8 shadow-sm -mt-20 relative z-10 mb-16">
+          <div className="h-4 bg-zinc-200 rounded w-24 mb-6" />
+          <div className="h-10 bg-zinc-200 rounded w-3/4 mb-4" />
+          <div className="h-6 bg-zinc-200 rounded w-1/4" />
+        </div>
+        <div className="flex flex-col lg:flex-row gap-12">
+          {/* Left */}
+          <div className="lg:w-[60%] space-y-4">
+            <div className="h-6 bg-zinc-200 rounded w-40 mb-8" />
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="flex justify-between py-4 border-b border-zinc-100">
+                <div className="h-5 bg-zinc-200 rounded w-32" />
+                <div className="h-5 bg-zinc-200 rounded w-16" />
+              </div>
+            ))}
+            <div className="h-6 bg-zinc-200 rounded w-40 mt-10 mb-6" />
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="flex gap-4">
+                <div className="w-10 h-10 bg-zinc-200 rounded-full shrink-0" />
+                <div className="flex-1 space-y-2 pt-1">
+                  <div className="h-4 bg-zinc-200 rounded w-full" />
+                  <div className="h-4 bg-zinc-200 rounded w-4/5" />
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Sidebar */}
+          <div className="lg:w-[40%] space-y-6">
+            <div className="bg-white rounded-lg p-8 shadow-sm">
+              <div className="w-40 h-40 bg-zinc-200 rounded-full mx-auto mb-6" />
+              <div className="grid grid-cols-3 gap-4">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="space-y-2 text-center">
+                    <div className="h-6 bg-zinc-200 rounded mx-auto w-12" />
+                    <div className="h-3 bg-zinc-200 rounded mx-auto w-16" />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-zinc-100 rounded-lg h-40" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 interface RecipeDetailClientProps {
   initialRecipe: Recipe;
@@ -112,6 +172,15 @@ export default function RecipeDetailClient({ initialRecipe }: RecipeDetailClient
                       <div className="flex flex-col">
                         <span className="text-[10px] uppercase tracking-[0.2em] text-[#71717a] font-bold mb-1">Difficulté</span>
                         <span className="text-xl sm:text-2xl font-black text-[#18181b]">{recipe.difficulty}</span>
+                      </div>
+                    )}
+                    {recipe.country && (
+                      <div className="flex flex-col">
+                        <span className="text-[10px] uppercase tracking-[0.2em] text-[#71717a] font-bold mb-1">Origine</span>
+                        <span className="flex items-center gap-1.5 text-xl sm:text-2xl font-black text-[#18181b]">
+                          <MapPin className="w-4 h-4 text-emerald-600 shrink-0" aria-hidden="true" />
+                          {recipe.country}
+                        </span>
                       </div>
                     )}
                   </div>
