@@ -80,11 +80,12 @@ export default function AuthPage() {
           throw error;
         }
         setSuccess("Connexion réussie !");
-        // Respecter le ?redirect param posé par le middleware
+        // Utiliser window.location pour forcer un vrai rechargement
+        // afin que les cookies Supabase soient bien lus par le middleware
         const params = new URLSearchParams(window.location.search);
         const redirectTo = params.get("redirect") || "/dashboard";
         setTimeout(() => {
-          router.push(redirectTo);
+          window.location.href = redirectTo;
         }, 800);
       } else {
         const { data, error } = await supabase.auth.signUp({
@@ -104,7 +105,10 @@ export default function AuthPage() {
 
         // Si session immédiate (email confirm désactivé) → rediriger direct
         if (data.session) {
-          router.push("/dashboard");
+          setSuccess("Compte créé ! Redirection...");
+          setTimeout(() => {
+            window.location.href = "/dashboard";
+          }, 800);
         } else {
           setSuccess("Compte créé ! Vérifiez votre email pour activer votre compte.");
         }
