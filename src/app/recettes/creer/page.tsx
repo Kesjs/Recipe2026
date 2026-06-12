@@ -318,9 +318,9 @@ export default function CreateRecipePage() {
                   required
                 >
                   <option value="">Sélectionner</option>
-                  <option value="facile">Facile</option>
-                  <option value="moyen">Moyen</option>
-                  <option value="difficile">Difficile</option>
+                  <option value="Facile">Facile</option>
+                  <option value="Moyen">Moyen</option>
+                  <option value="Difficile">Difficile</option>
                 </select>
               </div>
             </div>

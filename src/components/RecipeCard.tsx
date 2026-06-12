@@ -6,7 +6,7 @@ import { Clock, Flame, Heart, MapPin, ChefHat } from "lucide-react";
 import { Recipe } from "@/lib/types";
 import { calculateNutrition } from "@/lib/nutrition";
 import { generateRecipeLink } from "@/lib/recipe-links";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -37,6 +37,22 @@ export default function RecipeCard({
 
   const difficulty = recipe.difficulty;
   const diffStyle = difficulty ? DIFFICULTY_STYLES[difficulty] : null;
+
+  // Charger l'état favori réel depuis Supabase
+  useEffect(() => {
+    let cancelled = false;
+    async function checkFavorite() {
+      try {
+        const { isRecipeFavorited } = await import("@/lib/actions/favorites");
+        const result = await isRecipeFavorited(recipe.id);
+        if (!cancelled) setIsFavorited(result);
+      } catch {
+        // non connecté — on laisse false
+      }
+    }
+    checkFavorite();
+    return () => { cancelled = true; };
+  }, [recipe.id]);
 
   const toggleFavorite = async (e: React.MouseEvent) => {
     e.preventDefault();

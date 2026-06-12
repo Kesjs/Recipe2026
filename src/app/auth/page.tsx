@@ -78,18 +78,19 @@ export default function AuthPage() {
           }
           throw error;
         }
-        setSuccess("Connexion réussie! Redirection...");
+        setSuccess("Connexion réussie ! Redirection...");
+        // Respecter le ?redirect param posé par le middleware
+        const params = new URLSearchParams(window.location.search);
+        const redirectTo = params.get("redirect") || "/dashboard";
         setTimeout(() => {
-          router.push("/dashboard");
-        }, 1000);
+          router.push(redirectTo);
+        }, 800);
       } else {
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
-            data: {
-              name,
-            },
+            data: { name },
           },
         });
 
@@ -99,7 +100,14 @@ export default function AuthPage() {
           }
           throw error;
         }
-        setSuccess("Compte créé avec succès! Veuillez vérifier votre email.");
+
+        // Si session immédiate (email confirm désactivé) → rediriger direct
+        if (data.session) {
+          setSuccess("Compte créé ! Redirection...");
+          setTimeout(() => router.push("/dashboard"), 800);
+        } else {
+          setSuccess("Compte créé ! Vérifiez votre email pour activer votre compte.");
+        }
       }
     } catch (err: any) {
       setError(err.message || "Une erreur est survenue. Réessayez.");
