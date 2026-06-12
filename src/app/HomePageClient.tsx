@@ -214,7 +214,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
           <div className="relative w-full h-[75vh] min-h-[420px] max-h-[680px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
             {heroRecipe?.image_url ? (
               <Image
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJsq6gs7GMaX5AmVXXQ1iLH02IrUs-qYjxcCPut5fzsQ&s=10"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF7K6bOuWC6MLLY9F9KBVP86cN8NmJRvhAPR08iecSWrL6nFylPR5k8Mc&s=10"
                 alt={heroRecipe.title}
                 fill
                 className="object-cover object-center"
@@ -224,7 +224,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
               />
             ) : (
               <Image
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJsq6gs7GMaX5AmVXXQ1iLH02IrUs-qYjxcCPut5fzsQ&s=10"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF7K6bOuWC6MLLY9F9KBVP86cN8NmJRvhAPR08iecSWrL6nFylPR5k8Mc&s=10"
                 alt="Plat africain — recette du jour"
                 fill
                 className="object-cover object-center"

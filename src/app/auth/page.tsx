@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Lock, User, ArrowRight, Leaf, Home, AlertCircle } from "lucide-react";
+import { Mail, Lock, User, ArrowRight, Leaf, Home, AlertCircle, UtensilsCrossed, Heart, BarChart2 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -165,12 +165,12 @@ export default function AuthPage() {
             {/* Feature highlights */}
             <div className="space-y-4">
               {[
-                { icon: "🍽️", text: "Des centaines de recettes à explorer" },
-                { icon: "❤️", text: "Sauvegardez vos plats favoris" },
-                { icon: "📊", text: "Suivez vos apports nutritionnels" },
+                { icon: <UtensilsCrossed className="w-5 h-5 text-emerald-400" />, text: "Des centaines de recettes à explorer" },
+                { icon: <Heart className="w-5 h-5 text-emerald-400" />, text: "Sauvegardez vos plats favoris" },
+                { icon: <BarChart2 className="w-5 h-5 text-emerald-400" />, text: "Suivez vos apports nutritionnels" },
               ].map((item) => (
                 <div key={item.text} className="flex items-center space-x-3">
-                  <span className="text-2xl">{item.icon}</span>
+                  <span className="shrink-0">{item.icon}</span>
                   <span className="text-zinc-300 text-sm">{item.text}</span>
                 </div>
               ))}
