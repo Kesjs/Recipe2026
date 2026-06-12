@@ -35,7 +35,7 @@ export async function middleware(req: NextRequest) {
 
   const { pathname } = req.nextUrl
 
-  // Protect specific routes
+  // Protect specific routes — redirige vers /auth si non connecté
   const isProtected = PROTECTED_PATHS.some((p) => pathname.startsWith(p))
   if (isProtected && !user) {
     const url = req.nextUrl.clone()
@@ -44,20 +44,9 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  // Redirect already-authenticated users away from auth pages
-  // (except the password reset/update flows)
-  if (
-    pathname.startsWith('/auth') &&
-    user &&
-    !pathname.startsWith('/auth/reset-password') &&
-    !pathname.startsWith('/auth/update-password') &&
-    !pathname.startsWith('/auth/callback')
-  ) {
-    const url = req.nextUrl.clone()
-    url.pathname = '/dashboard'
-    url.search = ''
-    return NextResponse.redirect(url)
-  }
+  // Ne pas rediriger automatiquement les connectés sur /auth
+  // La page auth gère elle-même la redirection post-login côté client
+  // pour éviter les boucles dues au timing des cookies SSR
 
   return res
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Lock, User, ArrowRight, Leaf, Home, AlertCircle, UtensilsCrossed, Heart, BarChart2, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -20,6 +20,22 @@ export default function AuthPage() {
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<{ email?: string; password?: string; name?: string }>({});
+
+  // Si déjà connecté → rediriger vers dashboard sans passer par le middleware
+  useEffect(() => {
+    async function checkSession() {
+      try {
+        const { supabase } = await import("@/lib/supabase");
+        if (!supabase) return;
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          const params = new URLSearchParams(window.location.search);
+          window.location.href = params.get("redirect") || "/dashboard";
+        }
+      } catch {}
+    }
+    checkSession();
+  }, []);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
