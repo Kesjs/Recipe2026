@@ -158,8 +158,7 @@ export default function ActualitesPage() {
                 </span>
               </h1>
               <p className="text-zinc-500 text-base sm:text-lg leading-relaxed max-w-xl">
-                L'actualité de la nutrition saine et des saveurs locales africaines,
-                racontée avec rigueur et appétit.
+                {"L'actualité de la nutrition saine et des saveurs locales africaines, racontée avec rigueur et appétit."}
               </p>
             </div>
 
@@ -196,7 +195,7 @@ export default function ActualitesPage() {
         {filteredArticles.length === 0 && (
           <div className="text-center py-24">
             <Sprout className="w-8 h-8 text-zinc-300 mx-auto mb-3" strokeWidth={1.5} />
-            <p className="text-zinc-400 text-sm">Aucune chronique trouvée pour "{searchQuery}"</p>
+            <p className="text-zinc-400 text-sm">{'Aucune chronique trouvée pour "'}{searchQuery}{'"'}</p>
           </div>
         )}
 

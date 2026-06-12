@@ -62,10 +62,10 @@ async function fetchRecipes() {
 }
 
 const CATEGORY_ICONS: Record<string, any> = {
-  "Tout": BookOpen,
-  "Patrimoine Culinaires Africains": Globe,
-  "Recettes Rapides": Utensils,
-  "Cuisine du Monde": Globe,
+  "Tout":          BookOpen,
+  "Afrique":       Globe,
+  "Rapide":        Utensils,
+  "International": ChefHat,
 };
 
 export default function CatalogPageClient({ initialRecipes }: CatalogPageClientProps) {
@@ -85,7 +85,7 @@ export default function CatalogPageClient({ initialRecipes }: CatalogPageClientP
           .order("name");
 
         if (data) {
-          setCategories([{ id: "all", name: "all", title: "Tout" }, ...data]);
+          setCategories(data);
         }
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -112,8 +112,8 @@ export default function CatalogPageClient({ initialRecipes }: CatalogPageClientP
   }
 
   if (activeTab !== "Tout") {
-    const category = categories.find(cat => cat.title === activeTab);
-    if (category && category.id !== "all") {
+    const category = categories.find(cat => cat.name === activeTab);
+    if (category) {
       filteredRecipes = filteredRecipes.filter((recipe) =>
         recipe.category_id === category.id
       );
@@ -156,23 +156,23 @@ export default function CatalogPageClient({ initialRecipes }: CatalogPageClientP
           {/* Staggered Filter Pills */}
           <div className="mt-8 sm:mt-10 flex items-center space-x-3 sm:space-x-4 overflow-x-auto pb-6 sm:pb-8 no-scrollbar snap-x">
             {categories.map((cat) => {
-              const Icon = CATEGORY_ICONS[cat.title] || BookOpen;
+              const Icon = CATEGORY_ICONS[cat.name] || BookOpen;
               return (
                 <button
                   key={cat.id}
-                  onClick={() => setActiveTab(cat.title)}
+                  onClick={() => setActiveTab(cat.name)}
                   className={`h-12 sm:h-14 shrink-0 flex items-center space-x-2 sm:space-x-3 px-4 sm:px-6 rounded-[1.25rem] sm:rounded-[1.5rem] transition-all duration-300 active:scale-95 snap-start border-2 ${
-                    activeTab === cat.title
+                    activeTab === cat.name
                       ? "bg-zinc-950 text-white border-zinc-950 shadow-lg ring-4 ring-zinc-900/5"
                       : "bg-white text-zinc-400 border-zinc-100 hover:border-emerald-200 hover:text-emerald-950 shadow-sm"
                   }`}
                 >
                   <Icon 
-                    className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 ${activeTab === cat.title ? 'text-white' : 'text-zinc-300'}`} 
+                    className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 ${activeTab === cat.name ? 'text-white' : 'text-zinc-300'}`} 
                     aria-hidden="true"
                   />
-                  <span className={`font-black uppercase tracking-tight text-xs sm:text-sm ${activeTab === cat.title ? 'text-white' : ''}`}>
-                    {cat.title === 'Tout' ? 'Tout Voir' : cat.title}
+                  <span className={`font-black uppercase tracking-tight text-xs sm:text-sm ${activeTab === cat.name ? 'text-white' : ''}`}>
+                    {cat.title}
                   </span>
                 </button>
               );

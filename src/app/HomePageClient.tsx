@@ -166,7 +166,7 @@ async function fetchRecipes({
 }
 
 export default function HomePageClient({ initialRecipes }: HomePageClientProps) {
-  const [activeTab, setActiveTab] = useState("Tout Voir");
+  const [activeTab, setActiveTab] = useState("Tout");
   const [searchQuery, setSearchQuery] = useState("");
 
   const { data: categories } = useQuery({
@@ -175,15 +175,15 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
   });
 
   const categoryIcons: Record<string, LucideIcon> = {
-    "Petit-déjeuner": Egg,
-    "Déjeuner": Salad,
-    "Dîner": CookingPot,
-    "Snack": Cookie,
-    "Tout Voir": LayoutGrid,
+    "Tout":          LayoutGrid,
+    "Afrique":       CookingPot,
+    "Rapide":        Cookie,
+    "International": Salad,
   };
 
-  const tabs = ["Tout Voir", ...(categories?.map((c) => c.name) || [])];
+  const tabs = categories || [];
   const activeCategory = categories?.find((c) => c.name === activeTab);
+  const activeCategoryName = activeTab || "Tout";
 
   const {
     data,
@@ -353,16 +353,16 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
             role="tablist"
             aria-label="Filtrer par catégorie"
           >
-            {tabs.map((tab) => {
-              const Icon = categoryIcons[tab] || CookingPot;
-              const isActive = activeTab === tab;
+          {tabs.map((tab) => {
+              const Icon = categoryIcons[tab.name] || CookingPot;
+              const isActive = activeTab === tab.name;
               return (
                 <button
-                  key={tab}
+                  key={tab.id}
                   type="button"
                   role="tab"
                   aria-selected={isActive}
-                  onClick={() => setActiveTab(tab)}
+                  onClick={() => setActiveTab(tab.name)}
                   className={`h-16 shrink-0 flex items-center space-x-4 px-12 transition-all rounded-[2rem] snap-start focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200 [will-change:transform] active:scale-95 ${
                     isActive
                       ? "bg-zinc-900 text-white shadow-2xl shadow-zinc-400/20 ring-4 ring-zinc-900/10"
@@ -373,7 +373,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                     className={`w-8 h-8 ${isActive ? "text-emerald-400" : "text-emerald-600"}`}
                     aria-hidden="true"
                   />
-                  <span className="font-bold text-base">{tab}</span>
+                  <span className="font-bold text-base">{tab.title}</span>
                 </button>
               );
             })}
