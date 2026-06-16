@@ -39,19 +39,19 @@ export default function PageLoader() {
         <div className="absolute w-32 h-32 rounded-full bg-emerald-500/10 animate-ping" />
 
         {/* Logo */}
-        <div className="relative w-20 h-20 rounded-2xl overflow-hidden shadow-2xl shadow-emerald-900/40 animate-[logoScale_1.6s_ease-in-out_infinite]">
+        <div className="relative w-20 h-20 animate-[logoScale_1.6s_ease-in-out_infinite]">
           <Image
-            src="/icon.png"
+            src="/Naya_cuisine.png"
             alt="Naya Cuisine"
             fill
-            className="object-cover"
+            className="object-contain"
             priority
           />
         </div>
 
         {/* Nom */}
         <p className="text-emerald-600 font-bold text-lg tracking-[0.3em] uppercase opacity-0 animate-[fadeUp_0.6s_ease-out_0.4s_forwards]">
-          Naya
+          Naya Cuisine
         </p>
 
         {/* Barre de chargement */}
