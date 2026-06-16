@@ -36,6 +36,30 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: "https",
+        hostname: "www.kuehn.fr",
+      },
+      {
+        protocol: "https",
+        hostname: "www.foodandwine.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.allrecipes.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lowcarbafrica.com",
+      },
+      {
+        protocol: "https",
+        hostname: "i.pinimg.com",
+      },
+      {
+        protocol: "https",
+        hostname: "saveursdeoumy.com",
+      },
     ],
 
     // ✅ Tailles d'images adaptées aux breakpoints du projet
