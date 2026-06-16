@@ -172,31 +172,17 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white relative overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&w=1920&q=80"
-          alt="Culinary background"
-          fill
-          className="object-cover opacity-60"
-          priority
-          sizes="100vw"
-          quality={85}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-950/90 via-zinc-950/70 to-emerald-950/80" />
-      </div>
-
-      {/* Floating decorative elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 right-10 w-48 h-48 bg-emerald-600/10 rounded-full blur-3xl animate-pulse delay-1000" />
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-zinc-50 text-zinc-900 relative overflow-hidden">
+      {/* Subtle decorative elements */}
+      <div className="absolute top-20 left-10 w-64 h-64 bg-emerald-200/30 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 right-10 w-80 h-80 bg-emerald-300/20 rounded-full blur-3xl" />
 
       {/* Main Content */}
       <main className="relative z-10 min-h-screen flex items-center justify-center px-6 py-12">
         {/* Accueil Link - Positionné en haut à gauche */}
         <Link 
           href="/"
-          className="absolute top-6 left-6 flex items-center space-x-2 text-zinc-400 hover:text-white transition-colors text-sm font-medium z-20"
+          className="absolute top-6 left-6 flex items-center space-x-2 text-zinc-600 hover:text-emerald-700 transition-colors text-sm font-medium z-20"
         >
           <Home className="w-4 h-4" />
           <span>Accueil</span>
@@ -208,17 +194,17 @@ export default function AuthPage() {
           <div className="hidden lg:flex flex-col justify-center space-y-8 pr-8">
             <div>
               <div className="flex items-center space-x-2 mb-6">
-                <Leaf className="w-6 h-6 text-emerald-400" />
-                <span className="text-emerald-400 font-semibold tracking-wide text-sm uppercase">Cuisinez mieux</span>
+                <Leaf className="w-6 h-6 text-emerald-600" />
+                <span className="text-emerald-600 font-semibold tracking-wide text-sm uppercase">Cuisinez mieux</span>
               </div>
-              <h1 className={`${playfair.className} text-5xl xl:text-6xl text-white leading-tight mb-6`}>
+              <h1 className={`${playfair.className} text-5xl xl:text-6xl text-zinc-900 leading-tight mb-6`}>
                 {isLogin ? (
-                  <>Bienvenue<br /><span className="text-emerald-400">de retour</span></>
+                  <>Connectez-<br /><span className="text-emerald-600">vous</span></>
                 ) : (
-                  <>Rejoignez-<br /><span className="text-emerald-400">nous</span></>
+                  <>Rejoignez-<br /><span className="text-emerald-600">nous</span></>
                 )}
               </h1>
-              <p className="text-zinc-300 text-lg leading-relaxed">
+              <p className="text-zinc-600 text-lg leading-relaxed">
                 {isLogin
                   ? "Connectez-vous pour retrouver vos recettes favorites et continuer votre aventure culinaire."
                   : "Créez votre compte et commencez à cuisiner. Découvrez des centaines de recettes, gérez vos favoris et bien plus encore."}
@@ -228,46 +214,46 @@ export default function AuthPage() {
             {/* Feature highlights */}
             <div className="space-y-4">
               {[
-                { icon: <UtensilsCrossed className="w-5 h-5 text-emerald-400" />, text: "Des centaines de recettes à explorer" },
-                { icon: <Heart className="w-5 h-5 text-emerald-400" />, text: "Sauvegardez vos plats favoris" },
-                { icon: <BarChart2 className="w-5 h-5 text-emerald-400" />, text: "Suivez vos apports nutritionnels" },
+                { icon: <UtensilsCrossed className="w-5 h-5 text-emerald-600" />, text: "Des centaines de recettes à explorer" },
+                { icon: <Heart className="w-5 h-5 text-emerald-600" />, text: "Sauvegardez vos plats favoris" },
+                { icon: <BarChart2 className="w-5 h-5 text-emerald-600" />, text: "Suivez vos apports nutritionnels" },
               ].map((item) => (
                 <div key={item.text} className="flex items-center space-x-3">
                   <span className="shrink-0">{item.icon}</span>
-                  <span className="text-zinc-300 text-sm">{item.text}</span>
+                  <span className="text-zinc-600 text-sm">{item.text}</span>
                 </div>
               ))}
             </div>
 
             {/* Decorative divider */}
-            <div className="w-16 h-1 bg-emerald-500/50 rounded-full" />
+            <div className="w-16 h-1 bg-emerald-500 rounded-full" />
           </div>
 
           {/* Right column — formulaire */}
           <div className="w-full">
           {/* Glassmorphism Card */}
-          <div className={`bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl ${isLogin ? 'p-8' : 'p-6'}`}>
+          <div className={`bg-white/70 backdrop-blur-xl rounded-3xl border-2 border-emerald-200 shadow-2xl ${isLogin ? 'p-8' : 'p-6'}`}>
             <header className={`${isLogin ? 'mb-8' : 'mb-5'} text-center lg:text-left`}>
               {/* Titre visible uniquement sur mobile */}
-              <h1 className={`${playfair.className} text-3xl md:text-4xl text-white mb-3 leading-tight lg:hidden`}>
-                {isLogin ? "Bienvenue" : "Rejoignez-nous"}
+              <h1 className={`${playfair.className} text-3xl md:text-4xl text-zinc-900 mb-3 leading-tight lg:hidden`}>
+                {isLogin ? "Connectez-vous" : "Rejoignez-nous"}
               </h1>
-              <p className="text-zinc-300 text-base">
-                {isLogin 
-                  ? "Connectez-vous pour accéder à vos recettes" 
+              <p className="text-zinc-600 text-base">
+                {isLogin
+                  ? "Connectez-vous pour accéder à vos recettes"
                   : "Créez votre compte et commencez à cuisiner"}
               </p>
             </header>
 
             {error && (
-              <div className="mb-6 p-4 bg-red-500/20 border border-red-500/30 rounded-xl text-red-200 text-sm font-medium animate-in fade-in flex items-start space-x-3">
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm font-medium animate-in fade-in flex items-start space-x-3">
                 <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
                 <span>{error}</span>
               </div>
             )}
 
             {success && (
-              <div className="mb-6 p-4 bg-emerald-500/20 border border-emerald-500/30 rounded-xl text-emerald-200 text-sm font-medium animate-in fade-in">
+              <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-700 text-sm font-medium animate-in fade-in">
                 {success}
               </div>
             )}
@@ -275,22 +261,22 @@ export default function AuthPage() {
             <form onSubmit={handleSubmit} className={`${isLogin ? 'space-y-5' : 'space-y-3'}`}>
               {!isLogin && (
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Nom complet</label>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Nom complet</label>
                   <div className="relative">
                     <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       value={name}
                       onChange={(e) => {
                         setName(e.target.value);
                         if (fieldErrors.name) setFieldErrors({ ...fieldErrors, name: undefined });
                       }}
                       placeholder="Votre nom"
-                      className={`w-full pl-12 pr-4 py-3 bg-white/10 border rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all ${fieldErrors.name ? 'border-red-500/50 focus:ring-red-500' : 'border-white/20 focus:ring-emerald-500'}`}
+                      className={`w-full pl-12 pr-4 py-3 bg-white border-2 rounded-xl text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all ${fieldErrors.name ? 'border-red-300 focus:ring-red-500' : 'border-zinc-200 focus:ring-emerald-500 focus:border-emerald-500'}`}
                     />
                   </div>
                   {fieldErrors.name && (
-                    <p className="text-red-400 text-xs mt-1 flex items-center space-x-1">
+                    <p className="text-red-600 text-xs mt-1 flex items-center space-x-1">
                       <AlertCircle className="w-3 h-3" />
                       <span>{fieldErrors.name}</span>
                     </p>
@@ -299,22 +285,22 @@ export default function AuthPage() {
               )}
 
               <div className="space-y-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Email</label>
+                <label className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Email</label>
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
                       if (fieldErrors.email) setFieldErrors({ ...fieldErrors, email: undefined });
                     }}
                     placeholder="votre@email.com"
-                    className={`w-full pl-12 pr-4 py-3 bg-white/10 border rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all ${fieldErrors.email ? 'border-red-500/50 focus:ring-red-500' : 'border-white/20 focus:ring-emerald-500'}`}
+                    className={`w-full pl-12 pr-4 py-3 bg-white border-2 rounded-xl text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all ${fieldErrors.email ? 'border-red-300 focus:ring-red-500' : 'border-zinc-200 focus:ring-emerald-500 focus:border-emerald-500'}`}
                   />
                 </div>
                 {fieldErrors.email && (
-                  <p className="text-red-400 text-xs mt-1 flex items-center space-x-1">
+                  <p className="text-red-600 text-xs mt-1 flex items-center space-x-1">
                     <AlertCircle className="w-3 h-3" />
                     <span>{fieldErrors.email}</span>
                   </p>
@@ -322,10 +308,10 @@ export default function AuthPage() {
               </div>
 
                <div className="space-y-2">
-                 <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Mot de passe</label>
+                 <label className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Mot de passe</label>
                  <div className="relative">
                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
-                   <input 
+                   <input
                      type={showPassword ? "text" : "password"}
                      value={password}
                      onChange={(e) => {
@@ -333,18 +319,18 @@ export default function AuthPage() {
                        if (fieldErrors.password) setFieldErrors({ ...fieldErrors, password: undefined });
                      }}
                      placeholder="••••••••"
-                     className={`w-full pl-12 pr-12 py-3 bg-white/10 border rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:border-transparent transition-all ${fieldErrors.password ? 'border-red-500/50 focus:ring-red-500' : 'border-white/20 focus:ring-emerald-500'}`}
+                     className={`w-full pl-12 pr-12 py-3 bg-white border-2 rounded-xl text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all ${fieldErrors.password ? 'border-red-300 focus:ring-red-500' : 'border-zinc-200 focus:ring-emerald-500 focus:border-emerald-500'}`}
                    />
                    <button
                      type="button"
                      onClick={() => setShowPassword(!showPassword)}
-                     className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition-colors"
+                     className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 transition-colors"
                    >
                      {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                    </button>
                  </div>
                 {fieldErrors.password && (
-                  <p className="text-red-400 text-xs mt-1 flex items-center space-x-1">
+                  <p className="text-red-600 text-xs mt-1 flex items-center space-x-1">
                     <AlertCircle className="w-3 h-3" />
                     <span>{fieldErrors.password}</span>
                   </p>
@@ -356,12 +342,12 @@ export default function AuthPage() {
                   <label className="flex items-center space-x-2 cursor-pointer group">
                     <span className="relative inline-flex items-center">
                       <input type="checkbox" className="sr-only peer" />
-                      <span className="w-9 h-5 rounded-full bg-white/10 border border-white/20 peer-checked:bg-emerald-600/70 peer-checked:border-emerald-500 transition-all duration-200 group-hover:border-white/40" />
-                      <span className="absolute left-0.5 top-0.5 w-4 h-4 rounded-full bg-zinc-400 peer-checked:bg-white peer-checked:translate-x-4 transition-all duration-200 shadow-sm" />
+                      <span className="w-9 h-5 rounded-full bg-zinc-200 border-2 border-zinc-300 peer-checked:bg-emerald-600 peer-checked:border-emerald-600 transition-all duration-200 group-hover:border-zinc-400" />
+                      <span className="absolute left-0.5 top-0.5 w-4 h-4 rounded-full bg-white peer-checked:translate-x-4 transition-all duration-200 shadow-sm" />
                     </span>
-                    <span className="text-zinc-400 group-hover:text-zinc-300 transition-colors">Se souvenir</span>
+                    <span className="text-zinc-600 group-hover:text-zinc-800 transition-colors">Se souvenir</span>
                   </label>
-                  <Link href="/auth/reset-password" className="text-emerald-400 hover:text-emerald-300 transition-colors text-sm">
+                  <Link href="/auth/reset-password" className="text-emerald-600 hover:text-emerald-700 transition-colors text-sm font-medium">
                     Mot de passe oublié ?
                   </Link>
                 </div>
@@ -377,13 +363,13 @@ export default function AuthPage() {
               </button>
             </form>
 
-            <div className={`${isLogin ? 'mt-8 pt-6' : 'mt-4 pt-4'} border-t border-white/10 text-center`}>
-              <p className="text-zinc-400 text-sm mb-2">
+            <div className={`${isLogin ? 'mt-8 pt-6' : 'mt-4 pt-4'} border-t border-zinc-200 text-center`}>
+              <p className="text-zinc-600 text-sm mb-2">
                 {isLogin ? "Pas encore de compte ?" : "Déjà membre ?"}
               </p>
-              <button 
+              <button
                 onClick={() => setIsLogin(!isLogin)}
-                className="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
+                className="text-emerald-600 hover:text-emerald-700 font-semibold transition-colors"
               >
                 {isLogin ? "Créer un compte" : "Se connecter"}
               </button>

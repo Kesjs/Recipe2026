@@ -30,6 +30,12 @@ const nextConfig = {
         protocol: "https",
         hostname: "tarasmulticulturaltable.com",
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.prod.website-files.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
 
     // ✅ Tailles d'images adaptées aux breakpoints du projet

@@ -32,8 +32,8 @@ export default function MorphingSearchBar({
   if (!isSearchExpanded) return null;
 
   return (
-    <div className="absolute top-full left-0 right-0 z-50 px-4 sm:px-6 pt-3">
-      <div className="max-w-7xl mx-auto">
+    <div className="absolute top-full left-0 right-0 z-50 px-4 sm:px-6 pt-3 pointer-events-none">
+      <div className="max-w-7xl mx-auto pointer-events-auto">
         <div className="relative max-w-2xl mx-auto">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
           <input

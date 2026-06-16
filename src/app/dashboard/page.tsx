@@ -12,11 +12,11 @@ import {
   ArrowRight,
   User,
   Utensils,
+  Home,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+
 import { calculateNutrition } from "@/lib/nutrition";
 import { generateRecipeLink } from "@/lib/recipe-links";
 import { Playfair_Display } from "next/font/google";
@@ -175,9 +175,15 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 flex flex-col">
-      <Navbar />
-
-      <main className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 pt-28 sm:pt-32 pb-16">
+      <main className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 pt-12 sm:pt-16 pb-16 relative">
+        {/* Bouton Accueil flottant en bas à droite */}
+        <Link
+          href="/"
+          className="fixed bottom-6 right-6 flex items-center justify-center w-12 h-12 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full shadow-lg transition-colors z-50"
+          aria-label="Retour à l'accueil"
+        >
+          <Home className="w-5 h-5" />
+        </Link>
 
         {/* ── En-tête profil ────────────────────────────────────────── */}
         <section className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12 pb-10 border-b border-zinc-200">
@@ -331,7 +337,7 @@ export default function DashboardPage() {
         </section>
       </main>
 
-      <Footer />
+    
     </div>
   );
 }

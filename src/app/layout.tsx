@@ -24,8 +24,8 @@ export const metadata: Metadata = {
   description:
     "Plateforme culinaire haut de gamme dédiée à l'équilibre alimentaire et aux patrimoines culinaires africains",
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
   },
 };
 

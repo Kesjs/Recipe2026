@@ -177,6 +177,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
   const categoryIcons: Record<string, LucideIcon> = {
     "Tout":          LayoutGrid,
     "Afrique":       CookingPot,
+    "Bénin":         CookingPot,
     "Rapide":        Cookie,
     "International": Salad,
   };
@@ -201,10 +202,10 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
     queryFn: ({ pageParam }) =>
       fetchRecipes({ pageParam, categoryId: activeCategory?.id }),
     initialPageParam: 1,
-    initialData: {
+    initialData: activeTab === "Tout" ? {
       pages: [initialRecipes],
       pageParams: [1],
-    },
+    } : undefined,
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.length === 0 || lastPage.length < 6) return undefined;
       return allPages.length + 1;
@@ -236,7 +237,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
           {/* Image de fond fixe — éditoriale, indépendante des recettes */}
           <div className="relative w-full h-[75vh] min-h-[420px] max-h-[680px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
             <Image
-              src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80"
+              src="https://cdn.prod.website-files.com/6879fb8cc5b3443d06f6e153/687a6f680f3897c2b21beea0_hero-bg-overlay-p-1600.webp"
               alt="Table dressée avec des plats africains et du monde"
               fill
               className="object-cover object-center"
@@ -256,15 +257,12 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
 
               {/* Texte gauche */}
               <div className="max-w-lg">
-                <p className="text-emerald-400 font-bold text-xs tracking-[0.25em] uppercase mb-5">
-                  Naya Cuisine
-                </p>
+                
                 <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl text-white leading-[1.05] mb-6 drop-shadow-md">
-                  La cuisine du monde,{" "}
-                  <span className="italic font-normal">dans votre assiette.</span>
+                  L'Afrique à table
                 </h1>
                 <p className="text-white/70 text-base md:text-lg leading-relaxed mb-10 max-w-sm">
-                  Découvrez des recettes africaines et internationales, pensées pour le quotidien.
+                  Des recettes africaines au cœur de votre quotidien, complétées par quelques classiques du monde.
                 </p>
                 <Link
                   href="/recettes"
@@ -398,6 +396,8 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                   ? "Les recettes les plus populaires de la communauté, sélectionnées par nos nutritionnistes pour un quotidien équilibré."
                   : activeTab === "Afrique"
                   ? "Plongez dans les saveurs authentiques d'Afrique — du Sénégal au Nigeria, de la Côte d'Ivoire à l'Éthiopie."
+                  : activeTab === "Bénin"
+                  ? "Découvrez la richesse de la cuisine béninoise : du gbegnan à l'akassa, en passant par le wagassi et les saveurs authentiques de l'Afrique de l'Ouest."
                   : activeTab === "Rapide"
                   ? "Des recettes prêtes en moins de 30 minutes, sans compromis sur le goût ni la nutrition."
                   : activeTab === "International"
@@ -454,18 +454,14 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
             )}
           </div>
 
-          {hasNextPage && !isLoading && !searchQuery && (
-            <div className="flex justify-center mt-24">
-              <button
-                type="button"
-                onClick={() => fetchNextPage()}
-                disabled={isFetchingNextPage}
-                className="px-10 py-4 bg-white border border-zinc-200 rounded-full text-zinc-900 font-bold hover:border-emerald-600 hover:text-emerald-600 transition-all shadow-sm disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200"
-              >
-                {isFetchingNextPage ? "Chargement…" : "Voir plus de recettes"}
-              </button>
-            </div>
-          )}
+          <div className="flex justify-center mt-24">
+            <Link
+              href="/recettes"
+              className="px-10 py-4 bg-white border border-zinc-200 rounded-full text-zinc-900 font-bold hover:border-emerald-600 hover:text-emerald-600 transition-all shadow-sm focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-200"
+            >
+              Voir plus de recettes
+            </Link>
+          </div>
         </div>
 
         {/* ─── Newsletter ───────────────────────────────────────────────── */}
