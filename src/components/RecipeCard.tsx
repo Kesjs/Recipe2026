@@ -31,6 +31,7 @@ export default function RecipeCard({
 }: RecipeCardProps) {
   const [isFavorited, setIsFavorited] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const nutrition = recipe.recipe_ingredients
     ? calculateNutrition(recipe.recipe_ingredients)
     : null;
@@ -81,6 +82,11 @@ export default function RecipeCard({
         >
           {/* Image container — hauteur fixe pour uniformité */}
           <div className="relative w-full h-56 rounded-[1.75rem] overflow-hidden bg-zinc-100 shrink-0">
+            {/* Skeleton pendant le chargement */}
+            {isImageLoading && (
+              <div className="absolute inset-0 bg-gradient-to-br from-zinc-200 to-zinc-100 animate-pulse z-10" aria-hidden="true" />
+            )}
+
             {recipe.image_url ? (
               <Image
                 src={recipe.image_url}
@@ -89,6 +95,7 @@ export default function RecipeCard({
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 33vw"
                 priority={priority}
+                onLoadingComplete={() => setIsImageLoading(false)}
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-zinc-200">

@@ -22,6 +22,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "encrypted-tbn0.gstatic.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.kingnature.ch",
+      },
+      {
+        protocol: "https",
+        hostname: "tarasmulticulturaltable.com",
+      },
     ],
 
     // ✅ Tailles d'images adaptées aux breakpoints du projet

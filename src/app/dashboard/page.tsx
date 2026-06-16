@@ -94,10 +94,25 @@ export default function DashboardPage() {
     async function load() {
       try {
         const { supabase } = await import("@/lib/supabase");
-        if (!supabase) { router.push("/auth"); return; }
+        if (!supabase) { 
+          console.error("Supabase not configured");
+          router.push("/auth"); 
+          return; 
+        }
 
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) { router.push("/auth"); return; }
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+        if (userError) {
+          console.error("Error getting user:", userError);
+          router.push("/auth");
+          return;
+        }
+        
+        if (!user) { 
+          console.warn("No user found in dashboard");
+          router.push("/auth"); 
+          return; 
+        }
+        
         setUser(user);
 
         const selectIngredients = `
@@ -108,7 +123,7 @@ export default function DashboardPage() {
           )
         `;
 
-        const [{ data: recipes }, { data: favorites }] = await Promise.all([
+        const [{ data: recipes, error: recipesError }, { data: favorites, error: favoritesError }] = await Promise.all([
           supabase
             .from("recipes")
             .select(selectIngredients)
@@ -121,9 +136,13 @@ export default function DashboardPage() {
             .order("created_at", { ascending: false }),
         ]);
 
+        if (recipesError) console.error("Error loading recipes:", recipesError);
+        if (favoritesError) console.error("Error loading favorites:", favoritesError);
+
         setUserRecipes(recipes || []);
         setUserFavorites(favorites?.map((f: any) => f.recipes).filter(Boolean) || []);
-      } catch {
+      } catch (err) {
+        console.error("Dashboard load error:", err);
         router.push("/auth");
       } finally {
         setLoading(false);

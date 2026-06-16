@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Plus, Trash2, ArrowLeft } from "lucide-react";
+import { Plus, Trash2, ArrowLeft, Globe, Zap, Flame } from "lucide-react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import IngredientSelector from "@/components/IngredientSelector";
+import SelectField from "@/components/SelectField";
 import { localFoodDictionary } from "@/lib/food-dictionary";
 import { generateRecipeLink } from "@/lib/recipe-links";
 
@@ -29,7 +31,6 @@ export default function CreateRecipePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [totalCalories, setTotalCalories] = useState(0);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -54,19 +55,6 @@ export default function CreateRecipePage() {
     }
     checkAuth();
   }, [router]);
-
-  useEffect(() => {
-    let total = 0;
-    ingredients.forEach((ing) => {
-      if (ing.name && ing.amount) {
-        const food = localFoodDictionary.find((f) => f.name === ing.name);
-        if (food) {
-          total += (food.calories_per_100g * parseFloat(ing.amount)) / 100;
-        }
-      }
-    });
-    setTotalCalories(Math.round(total));
-  }, [ingredients]);
 
   function addIngredient() {
     setIngredients([
@@ -119,9 +107,9 @@ export default function CreateRecipePage() {
       let categoryId = null;
       if (category) {
         const categoryMap: Record<string, string> = {
-          'africa': 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',
-          'world': 'dddddddd-dddd-dddd-dddd-dddddddddddd',
-          'quick': 'cccccccc-cccc-cccc-cccc-cccccccccccc',
+          'africa': 'b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e',      // Afrique
+          'world': 'd4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a',      // International (Cuisine du Monde)
+          'quick': 'c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f',      // Rapide (Recettes Rapides)
         };
         categoryId = categoryMap[category] || null;
       }
@@ -276,21 +264,17 @@ export default function CreateRecipePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Catégorie
-                </label>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900"
-                >
-                  <option value="">Sélectionner</option>
-                  <option value="africa">Afrique</option>
-                  <option value="world">Cuisine du Monde</option>
-                  <option value="quick">Recettes Rapides</option>
-                </select>
-              </div>
+              <SelectField
+                value={category}
+                onChange={setCategory}
+                label="Catégorie"
+                placeholder="Sélectionner"
+                options={[
+                  { value: "africa", label: "Afrique", icon: <Globe className="w-4 h-4" />, color: "text-yellow-600" },
+                  { value: "world", label: "Cuisine du Monde", icon: <Globe className="w-4 h-4" />, color: "text-blue-600" },
+                  { value: "quick", label: "Recettes Rapides", icon: <Zap className="w-4 h-4" />, color: "text-orange-600" },
+                ]}
+              />
 
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -307,22 +291,18 @@ export default function CreateRecipePage() {
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Difficulté *
-                </label>
-                <select
-                  value={difficulty}
-                  onChange={(e) => setDifficulty(e.target.value)}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900"
-                  required
-                >
-                  <option value="">Sélectionner</option>
-                  <option value="Facile">Facile</option>
-                  <option value="Moyen">Moyen</option>
-                  <option value="Difficile">Difficile</option>
-                </select>
-              </div>
+              <SelectField
+                value={difficulty}
+                onChange={setDifficulty}
+                label="Difficulté *"
+                placeholder="Sélectionner"
+                required
+                options={[
+                  { value: "Facile", label: "Facile", icon: <Flame className="w-4 h-4" />, color: "text-emerald-600" },
+                  { value: "Moyen", label: "Moyen", icon: <Flame className="w-4 h-4" />, color: "text-amber-600" },
+                  { value: "Difficile", label: "Difficile", icon: <Flame className="w-4 h-4" />, color: "text-red-600" },
+                ]}
+              />
             </div>
 
             <div>
@@ -343,54 +323,136 @@ export default function CreateRecipePage() {
                 Ingrédients *
               </label>
               <div className="space-y-3">
-                {ingredients.map((ing) => (
-                  <div key={ing.id} className="flex items-center space-x-3">
-                    <select
-                      value={ing.name}
-                      onChange={(e) => updateIngredient(ing.id, "name", e.target.value)}
-                      className="flex-1 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900"
-                    >
-                      <option value="">Sélectionner un aliment</option>
-                      {localFoodDictionary.map((food) => (
-                        <option key={food.name} value={food.name}>{food.name}</option>
-                      ))}
-                    </select>
-                    <input
-                      type="number"
-                      value={ing.amount}
-                      onChange={(e) => updateIngredient(ing.id, "amount", e.target.value)}
-                      className="w-24 px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900 placeholder-slate-400"
-                      placeholder="100"
-                      min="0"
-                      step="0.1"
-                    />
-                    <span className="text-slate-500 text-sm">g</span>
-                    {ingredients.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => removeIngredient(ing.id)}
-                        className="p-2 text-slate-600 hover:bg-slate-50 rounded-xl transition-colors"
-                      >
-                        <Trash2 className="w-5 h-5" />
-                      </button>
+                {ingredients.map((ing, index) => (
+                  <div key={ing.id} className="flex flex-col gap-2 p-4 bg-slate-50 border border-slate-200 rounded-xl">
+                    {/* Row 1: Ingredient selector */}
+                    <div className="flex items-center gap-3">
+                      <div className="flex-1">
+                        <label className="text-xs text-slate-500 font-medium mb-1 block">Aliment</label>
+                        <IngredientSelector
+                          value={ing.name}
+                          onChange={(value) => updateIngredient(ing.id, "name", value)}
+                          options={localFoodDictionary}
+                          placeholder="Sélectionner un aliment..."
+                        />
+                      </div>
+                      
+                      {/* Amount input */}
+                      <div className="flex items-end gap-2 flex-shrink-0">
+                        <div>
+                          <label className="text-xs text-slate-500 font-medium mb-1 block">Quantité</label>
+                          <div className="flex items-center gap-1">
+                            <input
+                              type="number"
+                              value={ing.amount}
+                              onChange={(e) => updateIngredient(ing.id, "amount", e.target.value)}
+                              className="w-20 px-2.5 py-2.5 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-slate-900 text-sm font-medium"
+                              placeholder="100"
+                              min="0"
+                              step="10"
+                            />
+                            <span className="text-slate-500 text-sm font-medium">g</span>
+                          </div>
+                        </div>
+                        
+                        {/* Delete button */}
+                        {ingredients.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => removeIngredient(ing.id)}
+                            className="p-2.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                            title="Supprimer cet ingrédient"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Row 2: Nutritional info preview */}
+                    {ing.name && ing.amount && (
+                      <div className="flex items-center gap-3 pt-2 border-t border-slate-200">
+                        {(() => {
+                          const food = localFoodDictionary.find((f) => f.name === ing.name);
+                          if (!food) return null;
+                          const factor = parseFloat(ing.amount) / 100;
+                          const calories = Math.round(food.calories_per_100g * factor);
+                          const proteins = Math.round(food.proteins * factor * 10) / 10;
+                          const carbs = Math.round(food.carbs * factor * 10) / 10;
+                          const lipids = Math.round(food.lipids * factor * 10) / 10;
+                          
+                          return (
+                            <>
+                              <div className="text-xs flex-1">
+                                <div className="font-semibold text-emerald-700">{calories} kcal</div>
+                                <div className="text-slate-500 text-[11px]">
+                                  P:{proteins}g C:{carbs}g L:{lipids}g
+                                </div>
+                              </div>
+                            </>
+                          );
+                        })()}
+                      </div>
                     )}
                   </div>
                 ))}
+
+                {/* Add ingredient button */}
                 <button
                   type="button"
                   onClick={addIngredient}
-                  className="flex items-center space-x-2 text-emerald-600 hover:text-emerald-700 font-medium"
+                  className="flex items-center justify-center gap-2 w-full py-3 border-2 border-dashed border-emerald-300 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 hover:border-emerald-400 font-semibold rounded-xl transition-colors"
                 >
                   <Plus className="w-5 h-5" />
                   <span>Ajouter un ingrédient</span>
                 </button>
               </div>
 
-              {totalCalories > 0 && (
-                <div className="mt-4 p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
-                  <p className="text-sm text-slate-700">
-                    <span className="font-semibold">Total estimé:</span> {totalCalories} kcal
-                  </p>
+              {/* Total nutrition summary */}
+              {ingredients.some(ing => ing.name && ing.amount) && (
+                <div className="mt-5 p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 border border-emerald-200 rounded-xl">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {(() => {
+                      let totals = { calories: 0, proteins: 0, carbs: 0, lipids: 0 };
+                      ingredients.forEach((ing) => {
+                        if (ing.name && ing.amount) {
+                          const food = localFoodDictionary.find((f) => f.name === ing.name);
+                          if (food) {
+                            const factor = parseFloat(ing.amount) / 100;
+                            totals.calories += food.calories_per_100g * factor;
+                            totals.proteins += food.proteins * factor;
+                            totals.carbs += food.carbs * factor;
+                            totals.lipids += food.lipids * factor;
+                          }
+                        }
+                      });
+                      
+                      return (
+                        <>
+                          <div>
+                            <div className="text-xs text-slate-600 font-medium">Calories</div>
+                            <div className="text-xl font-black text-emerald-700">{Math.round(totals.calories)}</div>
+                            <div className="text-[10px] text-slate-500">kcal</div>
+                          </div>
+                          <div>
+                            <div className="text-xs text-slate-600 font-medium">Protéines</div>
+                            <div className="text-xl font-black text-blue-600">{(Math.round(totals.proteins * 10) / 10).toFixed(1)}</div>
+                            <div className="text-[10px] text-slate-500">g</div>
+                          </div>
+                          <div>
+                            <div className="text-xs text-slate-600 font-medium">Glucides</div>
+                            <div className="text-xl font-black text-amber-600">{(Math.round(totals.carbs * 10) / 10).toFixed(1)}</div>
+                            <div className="text-[10px] text-slate-500">g</div>
+                          </div>
+                          <div>
+                            <div className="text-xs text-slate-600 font-medium">Lipides</div>
+                            <div className="text-xl font-black text-orange-600">{(Math.round(totals.lipids * 10) / 10).toFixed(1)}</div>
+                            <div className="text-[10px] text-slate-500">g</div>
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
                 </div>
               )}
             </div>

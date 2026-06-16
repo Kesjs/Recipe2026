@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Leaf, Instagram, Twitter, Heart, ArrowRight } from "lucide-react";
+import { Leaf, Instagram, Twitter, Sparkles, ArrowRight } from "lucide-react";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -92,11 +92,11 @@ export default function Footer() {
         </div>
 
         <div className="pt-12 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-zinc-600 text-xs uppercase tracking-widest">© 2024 Naya Cooking. Tous droits réservés.</p>
+          <p className="text-zinc-600 text-xs uppercase tracking-widest">© 2026 Naya Cooking. Tous droits réservés.</p>
           <div className="flex items-center space-x-2 text-zinc-600 text-xs">
-            <span>Conçu avec</span>
-            <Heart className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
-            <span>pour mieux manger</span>
+            <span>Inspiré par les saveurs</span>
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
+            <span>d'Afrique</span>
           </div>
         </div>
       </div>

@@ -64,7 +64,7 @@ export default function NutritionPage() {
     <div className="min-h-screen bg-zinc-50 text-zinc-900 selection:bg-emerald-100 selection:text-emerald-900">
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-16 md:pb-20">
 
         {/* Hero */}
         <header className="mb-10 sm:mb-14">

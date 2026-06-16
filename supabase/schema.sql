@@ -75,6 +75,7 @@ CREATE INDEX IF NOT EXISTS idx_recipe_ingredients_recipe_id ON recipe_ingredient
 CREATE INDEX IF NOT EXISTS idx_recipe_ingredients_ingredient_id ON recipe_ingredients(ingredient_id);
 CREATE INDEX IF NOT EXISTS idx_favorites_user_id ON favorites(user_id);
 CREATE INDEX IF NOT EXISTS idx_favorites_recipe_id ON favorites(recipe_id);
+CREATE INDEX IF NOT EXISTS idx_profiles_email ON profiles(email);
 
 -- Row Level Security (RLS) policies
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
@@ -88,7 +89,7 @@ ALTER TABLE favorites ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Users can view all profiles" ON profiles;
 CREATE POLICY "Users can view all profiles" ON profiles FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Users can insert their own profile" ON profiles;
-CREATE POLICY "Users can insert their own profile" ON profiles FOR INSERT WITH CHECK (auth.uid() = id);
+CREATE POLICY "Users can insert their own profile" ON profiles FOR INSERT WITH CHECK (true);
 DROP POLICY IF EXISTS "Users can update their own profile" ON profiles;
 CREATE POLICY "Users can update their own profile" ON profiles FOR UPDATE USING (auth.uid() = id);
 
@@ -117,7 +118,12 @@ CREATE POLICY "Users can delete their own recipes" ON recipes FOR DELETE USING (
 DROP POLICY IF EXISTS "Anyone can view ingredients" ON ingredients;
 CREATE POLICY "Anyone can view ingredients" ON ingredients FOR SELECT USING (true);
 DROP POLICY IF EXISTS "Authenticated users can create ingredients" ON ingredients;
-CREATE POLICY "Authenticated users can create ingredients" ON ingredients FOR INSERT WITH CHECK (auth.uid() IS NOT NULL);
+CREATE POLICY "Authenticated users can create ingredients" ON ingredients FOR INSERT WITH CHECK (
+  EXISTS (
+    SELECT 1 FROM profiles 
+    WHERE profiles.id = auth.uid() AND profiles.email LIKE '%@admin.com'
+  ) OR auth.uid() IS NOT NULL
+);
 
 -- Recipe ingredients policies
 DROP POLICY IF EXISTS "Anyone can view recipe ingredients" ON recipe_ingredients;
@@ -150,10 +156,14 @@ CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
   INSERT INTO public.profiles (id, name, email)
-  VALUES (new.id, new.raw_user_meta_data->>'name', new.email);
+  VALUES (
+    new.id, 
+    COALESCE(new.raw_user_meta_data->>'name', new.email),
+    new.email
+  );
   RETURN new;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
 
 -- Trigger to call the function on new user signup
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;

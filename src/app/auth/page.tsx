@@ -26,13 +26,30 @@ export default function AuthPage() {
     async function checkSession() {
       try {
         const { supabase } = await import("@/lib/supabase");
-        if (!supabase) return;
-        const { data: { session } } = await supabase.auth.getSession();
-        if (session) {
-          const params = new URLSearchParams(window.location.search);
-          window.location.href = params.get("redirect") || "/dashboard";
+        if (!supabase) {
+          console.error("[Auth] Supabase not configured");
+          return;
         }
-      } catch {}
+        
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+          console.error("[Auth] Error getting session:", error.message);
+          return;
+        }
+        
+        if (session) {
+          console.log("[Auth] User already authenticated, redirecting to dashboard");
+          const params = new URLSearchParams(window.location.search);
+          const redirectTo = params.get("redirect") || "/dashboard";
+          // Don't redirect if we're already being redirected
+          if (!window.location.href.includes(redirectTo)) {
+            window.location.href = redirectTo;
+          }
+        }
+      } catch (err) {
+        console.error("[Auth] Session check error:", err);
+      }
     }
     checkSession();
   }, []);
@@ -95,14 +112,29 @@ export default function AuthPage() {
           }
           throw error;
         }
+        
+        console.log("[Auth] Sign in successful, user:", data.user?.email);
         setSuccess("Connexion réussie !");
-        // Utiliser window.location pour forcer un vrai rechargement
-        // afin que les cookies Supabase soient bien lus par le middleware
+        
+        // Vérifier que la session est bien définie côté client
+        const { data: sessionData } = await supabase.auth.getSession();
+        if (!sessionData.session) {
+          console.warn("[Auth] Session not available after sign in, waiting...");
+          // Attendre que la session soit propagée
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
+        
         const params = new URLSearchParams(window.location.search);
         const redirectTo = params.get("redirect") || "/dashboard";
+        
+        console.log("[Auth] Redirecting to:", redirectTo);
+        
+        // Attendre puis rediriger
         setTimeout(() => {
+          console.log("[Auth] Performing redirect...");
+          // Forcer un hard reload pour que le middleware relise les cookies
           window.location.href = redirectTo;
-        }, 800);
+        }, 1500);
       } else {
         const { data, error } = await supabase.auth.signUp({
           email,
@@ -121,10 +153,13 @@ export default function AuthPage() {
 
         // Si session immédiate (email confirm désactivé) → rediriger direct
         if (data.session) {
+          console.log("[Auth] Account created with immediate session");
           setSuccess("Compte créé ! Redirection...");
           setTimeout(() => {
+            console.log("[Auth] Redirecting to dashboard...");
+            // Forcer rechargement sans cache
             window.location.href = "/dashboard";
-          }, 800);
+          }, 1500);
         } else {
           setSuccess("Compte créé ! Vérifiez votre email pour activer votre compte.");
         }
