@@ -96,7 +96,7 @@ export default function Footer() {
           <div className="flex items-center space-x-2 text-zinc-600 text-xs">
             <span>Inspiré par les saveurs</span>
             <Sparkles className="w-3.5 h-3.5 text-emerald-600 fill-emerald-600" />
-            <span>d'Afrique</span>
+            <span>d&apos;Afrique</span>
           </div>
         </div>
       </div>
