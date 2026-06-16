@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 
 export default function PageLoader() {
   const [visible, setVisible] = useState(false);
@@ -40,12 +41,13 @@ export default function PageLoader() {
 
         {/* Logo */}
         <div className="relative w-20 h-20 animate-[logoScale_1.6s_ease-in-out_infinite]">
-          <Image
+          <OptimizedImage
             src="/Naya_cuisine.png"
             alt="Naya Cuisine"
             fill
             className="object-contain"
             priority
+            loading="eager"
           />
         </div>
 

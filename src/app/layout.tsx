@@ -42,6 +42,11 @@ export default function RootLayout({
 
         {/* ✅ preconnect vers domaines externes pour réduire la latence */}
         <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://cdn.prod.website-files.com" />
+
+        {/* ✅ preload des images hero pour optimiser le LCP */}
+        <link rel="preload" as="image" href="https://cdn.prod.website-files.com/6879fb8cc5b3443d06f6e153/687a6f680f3897c2b21beea0_hero-bg-overlay-p-1600.webp" />
+        <link rel="preload" as="image" href="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&w=1920&q=80" />
 
         {/*
           ✅ Note : pas besoin de preconnect fonts.googleapis.com

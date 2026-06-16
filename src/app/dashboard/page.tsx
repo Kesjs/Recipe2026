@@ -15,6 +15,7 @@ import {
   Home,
 } from "lucide-react";
 import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import Link from "next/link";
 
 import { calculateNutrition } from "@/lib/nutrition";
@@ -48,12 +49,13 @@ function RecipeMiniCard({ recipe, onNavigate }: { recipe: Recipe; onNavigate: (h
     >
       <div className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-zinc-100">
         {recipe.image_url ? (
-          <Image
+          <OptimizedImage
             src={recipe.image_url}
             alt={recipe.title}
             fill
             className="object-cover"
             sizes="64px"
+            loading="lazy"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">

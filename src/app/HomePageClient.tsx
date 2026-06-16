@@ -5,6 +5,7 @@ import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import RecipeCard from "@/components/RecipeCard";
 import Footer from "@/components/Footer";
+import OptimizedImage from "@/components/OptimizedImage";
 import { Recipe } from "@/lib/types";
 import {
   Clock,
@@ -236,11 +237,12 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
         >
           {/* Image de fond fixe — éditoriale, indépendante des recettes */}
           <div className="relative w-full h-[75vh] min-h-[420px] max-h-[680px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl">
-            <Image
+            <OptimizedImage
               src="https://cdn.prod.website-files.com/6879fb8cc5b3443d06f6e153/687a6f680f3897c2b21beea0_hero-bg-overlay-p-1600.webp"
               alt="Table dressée avec des plats africains et du monde"
               fill
               className="object-cover object-center"
+              loading="eager"
               priority
               fetchPriority="high"
               sizes="100vw"
@@ -279,12 +281,13 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                   {/* Thumbnail recette */}
                   <div className="relative w-full h-48">
                     {heroRecipe.image_url ? (
-                      <Image
+                      <OptimizedImage
                         src={heroRecipe.image_url}
                         alt={heroRecipe.title}
                         fill
                         className="object-cover"
                         sizes="320px"
+                        loading="eager"
                       />
                     ) : (
                       <div className="w-full h-full bg-zinc-700 flex items-center justify-center">
@@ -527,7 +530,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
                    chargement sur tous les écrans → ne doit pas bloquer le LCP.
                 ✅ sizes précis : 100vw sur mobile, 50vw sur desktop.
               */}
-              <Image
+              <OptimizedImage
                 src="https://images.unsplash.com/photo-1600790194169-d3affafaf726?auto=format&w=1000&q=80&fit=crop"
                 alt="Ingrédients frais disposés sur un plan de travail en bois"
                 fill

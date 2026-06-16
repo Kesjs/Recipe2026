@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Mail, ArrowLeft, Leaf, Home, AlertCircle, KeyRound, ShieldCheck, Zap, Clock } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import { Playfair_Display } from "next/font/google";
 
 const playfair = Playfair_Display({ subsets: ["latin"] });
@@ -42,12 +43,13 @@ export default function ResetPasswordPage() {
     <div className="min-h-screen bg-zinc-950 text-white relative overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
+        <OptimizedImage
           src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&w=1920&q=80"
           alt="Culinary background"
           fill
           className="object-cover opacity-60"
           priority
+          loading="eager"
           sizes="100vw"
           quality={85}
         />

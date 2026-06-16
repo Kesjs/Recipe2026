@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { Clock, ArrowLeft, Flame, ChevronRight, Quote, Mic, Minus, Plus, AlertCircle, MapPin } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import Navbar from "@/components/Navbar";
 import { calculateNutrition } from "@/lib/nutrition";
 import { Recipe, RecipeIngredient } from "@/lib/types";
@@ -145,12 +146,13 @@ export default function RecipeDetailClient({ initialRecipe }: RecipeDetailClient
       <main id="main-content">
         <header className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] pt-16 sm:pt-20">
           {recipe.image_url ? (
-            <Image
+            <OptimizedImage
               src={recipe.image_url}
               alt={recipe.title}
               fill
               className="object-cover"
               priority
+              loading="eager"
               sizes="100vw"
             />
           ) : (

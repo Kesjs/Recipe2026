@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import { Clock, Flame, Heart, MapPin, ChefHat } from "lucide-react";
 import { Recipe } from "@/lib/types";
 import { calculateNutrition } from "@/lib/nutrition";
@@ -88,13 +89,14 @@ export default function RecipeCard({
             )}
 
             {recipe.image_url ? (
-              <Image
+              <OptimizedImage
                 src={recipe.image_url}
                 alt={recipe.title}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 33vw"
                 priority={priority}
+                loading={priority ? "eager" : "lazy"}
                 onLoadingComplete={() => setIsImageLoading(false)}
               />
             ) : (

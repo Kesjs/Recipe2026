@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import OptimizedImage from "@/components/OptimizedImage";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Playfair_Display } from "next/font/google";
@@ -208,11 +209,12 @@ export default function ActualitesPage() {
             <Link href={`/actualites/${featured.id}`} className="group block">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-white border border-zinc-100 rounded-3xl overflow-hidden hover:shadow-md transition-shadow duration-500">
                 <div className="relative h-64 lg:h-auto min-h-[320px]">
-                  <Image
+                  <OptimizedImage
                     src={featured.image}
                     alt={featured.title}
                     fill
                     priority
+                    loading="eager"
                     className="object-cover group-hover:scale-[1.02] transition-transform duration-700"
                   />
                 </div>
@@ -264,11 +266,12 @@ export default function ActualitesPage() {
                     className="group block bg-white border border-zinc-100 rounded-2xl overflow-hidden hover:shadow-md transition-all duration-300 hover:-translate-y-1"
                   >
                     <div className="relative h-48 overflow-hidden">
-                      <Image
+                      <OptimizedImage
                         src={article.image}
                         alt={article.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        loading="lazy"
                       />
                       <div className="absolute top-3 left-3">
                         <div className="w-9 h-9 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center">
