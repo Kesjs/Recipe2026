@@ -259,7 +259,7 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
               <div className="max-w-lg">
                 
                 <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl text-white leading-[1.05] mb-6 drop-shadow-md">
-                  L'Afrique à table
+                  L&apos;Afrique à table
                 </h1>
                 <p className="text-white/70 text-base md:text-lg leading-relaxed mb-10 max-w-sm">
                   Des recettes africaines au cœur de votre quotidien, complétées par quelques classiques du monde.
