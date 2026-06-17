@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Plus, Trash2, ArrowLeft, Globe, Zap, Flame } from "lucide-react";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
 import IngredientSelector from "@/components/IngredientSelector";
 import SelectField from "@/components/SelectField";
 import { localFoodDictionary } from "@/lib/food-dictionary";
@@ -198,8 +197,6 @@ export default function CreateRecipePage() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Navbar />
-
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link href="/" className="inline-flex items-center text-slate-600 hover:text-slate-900 mb-6">
           <ArrowLeft className="w-4 h-4 mr-2" />
