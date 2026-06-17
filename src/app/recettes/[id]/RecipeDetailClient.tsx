@@ -199,7 +199,9 @@ export default function RecipeDetailClient({ initialRecipe }: RecipeDetailClient
                   </div>
                 </div>
                 <button 
-                  className="bg-[#7D9D8A] hover:bg-[#6a8473] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-black tracking-[0.1em] uppercase text-sm sm:text-base transition-all shadow-lg hover:shadow-[#7D9D8A]/30 flex items-center gap-2 sm:gap-3 group"
+                  onClick={() => setCookingMode(true)}
+                  disabled={instructions.length === 0}
+                  className="bg-[#7D9D8A] hover:bg-[#6a8473] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-black tracking-[0.1em] uppercase text-sm sm:text-base transition-all shadow-lg hover:shadow-[#7D9D8A]/30 flex items-center gap-2 sm:gap-3 group disabled:opacity-40 disabled:cursor-not-allowed active:scale-95"
                   aria-label="Commencer la préparation de cette recette"
                 >
                   Lancer la recette

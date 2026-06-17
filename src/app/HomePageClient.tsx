@@ -214,8 +214,8 @@ export default function HomePageClient({ initialRecipes }: HomePageClientProps) 
   });
 
   const recipes = data?.pages.flat() || [];
-  const heroRecipe = recipes[0];
-  const trendingRecipes = recipes.slice(1);
+  const heroRecipe = recipes.find(r => r.id === 'a4f5d6e7-f8a9-4b0c-2d3e-4f5a6b7c8d9e') || recipes[0];
+  const trendingRecipes = recipes.filter(r => r.id !== 'a4f5d6e7-f8a9-4b0c-2d3e-4f5a6b7c8d9e');
   const heroNutrition = heroRecipe?.recipe_ingredients
     ? calculateNutrition(heroRecipe.recipe_ingredients)
     : null;
